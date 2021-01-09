@@ -23,6 +23,7 @@ namespace EyesOfTheDragon
 
         public SpriteBatch SpriteBatch { get { return _spriteBatch; } }
         public TitleScreen TitleScreen { get; private set; }
+        public StartMenuScreen StartMenuScreen { get; private set; }
 
         public Game1()
         {
@@ -36,6 +37,7 @@ namespace EyesOfTheDragon
             Components.Add(_gameStateManager);
 
             TitleScreen = new TitleScreen(this, _gameStateManager);
+            StartMenuScreen = new StartMenuScreen(this, _gameStateManager);
 
             _gameStateManager.ChangeState(TitleScreen);
         }

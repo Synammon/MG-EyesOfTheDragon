@@ -25,3 +25,10 @@
 /processorParam:TextureFormat=Color
 /build:Backgrounds/titlescreen.png
 
+#begin Fonts/ControlFont.spritefont
+/importer:FontDescriptionImporter
+/processor:FontDescriptionProcessor
+/processorParam:PremultiplyAlpha=True
+/processorParam:TextureFormat=Compressed
+/build:Fonts/ControlFont.spritefont
+
