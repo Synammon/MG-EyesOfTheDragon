@@ -50,7 +50,8 @@ namespace EyesOfTheDragon.GameScreens
                 GameRef.CharacterGeneratorScreen.SelectedGender +
                 GameRef.CharacterGeneratorScreen.SelectedClass);
 
-            Dictionary<AnimationKey, Animation> animations = new Dictionary<AnimationKey, Animation>();
+            Dictionary<AnimationKey, Animation> animations = 
+                new Dictionary<AnimationKey, Animation>();
 
             Animation animation = new Animation(3, 32, 32, 0, 0);
             animations.Add(AnimationKey.Down, animation);
@@ -79,7 +80,7 @@ namespace EyesOfTheDragon.GameScreens
             tilesets.Add(tileset1);
             tilesets.Add(tileset2);
 
-            MapLayer layer = new MapLayer(40, 40);
+            MapLayer layer = new MapLayer(100, 100);
 
             for (int y = 0; y < layer.Height; y++)
             {
@@ -90,27 +91,29 @@ namespace EyesOfTheDragon.GameScreens
                 }
             }
 
-            MapLayer splatter = new MapLayer(40, 40);
+            MapLayer splatter = new MapLayer(100, 100);
             Random random = new Random();
 
-            for (int i = 0; i < 80; i++)
+            for (int i = 0; i < 100; i++)
             {
-                int x = random.Next(0, 40);
-                int y = random.Next(0, 40);
+                int x = random.Next(0, 100);
+                int y = random.Next(0, 100);
                 int index = random.Next(2, 14);
+                
                 Tile tile = new Tile(index, 0);
+            
                 splatter.SetTile(x, y, tile);
             }
-
+            
             splatter.SetTile(1, 0, new Tile(0, 1));
             splatter.SetTile(2, 0, new Tile(2, 1));
             splatter.SetTile(3, 0, new Tile(0, 1));
-
+            
             List<MapLayer> mapLayers = new List<MapLayer>();
-
+            
             mapLayers.Add(layer);
             mapLayers.Add(splatter);
-
+        
             map = new TileMap(tilesets, mapLayers);
         }
 
