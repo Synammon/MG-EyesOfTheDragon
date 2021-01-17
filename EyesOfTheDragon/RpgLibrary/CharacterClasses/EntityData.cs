@@ -9,7 +9,7 @@ namespace RpgLibrary.CharacterClasses
     {
         #region Field Region
 
-        public string ClassName;
+        public string EntityName;
         public int Strength;
         public int Dexterity;
         public int Cunning;
@@ -28,20 +28,72 @@ namespace RpgLibrary.CharacterClasses
         {
         }
 
+        public EntityData(
+            string entityName,
+            int strength,
+            int dexterity,
+            int cunning,
+            int willpower,
+            int magic,
+            int constitution,
+            string health,
+            string stamina,
+            string mana)
+        {
+            EntityName = entityName;
+            Strength = strength;
+            Dexterity = dexterity;
+            Cunning = cunning;
+            Willpower = willpower;
+            Cunning = cunning;
+            Willpower = willpower;
+            Magic = magic;
+            Constitution = constitution;
+            HealthFormula = health;
+            StaminaFormula = stamina;
+            MagicFormula = mana;
+        }
+
         #endregion
 
-        #region Static Method Region
+        #region Method Region
 
-        public static void ToFile(string filename)
+        public override string ToString()
         {
+            string toString = "Name = " + EntityName + ", ";
+
+            toString += "Strength = " + Strength.ToString() + ", ";
+            toString += "Dexterity = " + Dexterity.ToString() + ", ";
+            toString += "Cunning = " + Cunning.ToString() + ", ";
+            toString += "Willpower = " + Willpower.ToString() + ", ";
+            toString += "Magic = " + Magic.ToString() + ", ";
+            toString += "Constitution = " + Constitution.ToString() + ", ";
+            toString += "Health Formula = " + HealthFormula + ", ";
+            toString += "Stamina Formula = " + StaminaFormula + ", ";
+            toString += "Magic Formula = " + MagicFormula;
+
+            return toString;
         }
 
-        public static EntityData FromFile(string filename)
+        public object Clone()
         {
-            EntityData entity = new EntityData();
+            EntityData data = new EntityData
+            {
+                EntityName = EntityName,
+                Strength = Strength,
+                Dexterity = Dexterity,
+                Cunning = Cunning,
+                Willpower = Willpower,
+                Magic = Magic,
+                Constitution = Constitution,
+                HealthFormula = HealthFormula,
+                StaminaFormula = StaminaFormula,
+                MagicFormula = MagicFormula
+            };
 
-            return entity;
+            return data;
         }
+ 
         #endregion
     }
 }

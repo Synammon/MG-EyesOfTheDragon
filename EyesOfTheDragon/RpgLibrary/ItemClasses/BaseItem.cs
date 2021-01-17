@@ -13,7 +13,7 @@ namespace RpgLibrary.ItemClasses
     {
         #region Field Region
         
-        protected List<Type> allowableClasses = new List<Type>();
+        protected List<string> allowableClasses = new List<string>();
         string name;
         string type;
         int price;
@@ -24,7 +24,7 @@ namespace RpgLibrary.ItemClasses
         
         #region Property Region
         
-        public List<Type> AllowableClasses
+        public List<string> AllowableClasses
         {
             get { return allowableClasses; }
             protected set { allowableClasses = value; }
@@ -69,9 +69,9 @@ namespace RpgLibrary.ItemClasses
             string type, 
             int price, 
             float weight, 
-            params Type[] allowableClasses)
+            params string[] allowableClasses)
         {
-            foreach (Type t in allowableClasses)
+            foreach (string t in allowableClasses)
                 AllowableClasses.Add(t);
 
             Name = name;
@@ -87,7 +87,7 @@ namespace RpgLibrary.ItemClasses
 
         public abstract object Clone();
 
-        public virtual bool CanEquip(Type characterType)
+        public virtual bool CanEquip(string characterType)
         {
             return allowableClasses.Contains(characterType);
         }

@@ -2,93 +2,105 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+
 namespace RpgLibrary.CharacterClasses
 {
     public enum EntityGender { Male, Female, NonBinary, Unknown }
-    public abstract class Entity
+    public enum EntityType { Character, NPC, Monster, Creature }
+
+    public sealed class Entity
     {
         #region Vital Field and Property Region
 
-        protected string entityName;
-        protected string entityType;
-        protected EntityGender gender;
+        private string entityName;
+        private string entityClass;
+        private EntityType entityType;
+        private EntityGender gender;
 
         public string EntityName
         {
             get { return entityName; }
+            private set { entityName = value; }
         }
 
-        public string EntityType
+        public string EntityClass
+        {
+            get { return entityClass; }
+            private set { entityClass = value; }
+        }
+
+        public EntityType EntityType
         {
             get { return entityType; }
+            private set { entityType = value; }
         }
 
         public EntityGender Gender
         {
             get { return gender; }
-            protected set { gender = value; }
+            private set { gender = value; }
         }
 
         #endregion
 
         #region Basic Attribute and Property Region
 
-        protected int strength;
-        protected int dexterity;
-        protected int cunning;
-        protected int willpower;
-        protected int magic;
-        protected int constitution;
-        protected int strengthModifier;
-        protected int dexterityModifier;
-        protected int cunningModifier;
-        protected int willpowerModifier;
-        protected int magicModifier;
-        protected int constitutionModifier;
+        private int strength;
+        private int dexterity;
+        private int cunning;
+        private int willpower;
+        private int magic;
+        private int constitution;
+        private int strengthModifier;
+        private int dexterityModifier;
+        private int cunningModifier;
+        private int willpowerModifier;
+        private int magicModifier;
+        private int constitutionModifier;
 
         public int Strength
         {
             get { return strength + strengthModifier; }
-            protected set { strength = value; }
+            private set { strength = value; }
         }
 
         public int Dexterity
         {
             get { return dexterity + dexterityModifier; }
-            protected set { dexterity = value; }
+            private set { dexterity = value; }
         }
 
         public int Cunning
         {
             get { return cunning + cunningModifier; }
-            protected set { cunning = value; }
+            private set { cunning = value; }
         }
 
         public int Willpower
         {
             get { return willpower + willpowerModifier; }
-            protected set { willpower = value; }
+            private set { willpower = value; }
         }
 
         public int Magic
         {
             get { return magic + magicModifier; }
-            protected set { magic = value; }
+            private set { magic = value; }
         }
 
         public int Constitution
         {
             get { return constitution + constitutionModifier; }
-            protected set { constitution = value; }
+            private set { constitution = value; }
         }
 
         #endregion
 
         #region Calculated Attribute Field and Property Region
 
-        protected AttributePair health;
-        protected AttributePair stamina;
-        protected AttributePair mana;
+        private AttributePair health;
+        private AttributePair stamina;
+        private AttributePair mana;
 
         public AttributePair Health
         {
@@ -105,27 +117,27 @@ namespace RpgLibrary.CharacterClasses
             get { return mana; }
         }
 
-        protected int attack;
-        protected int damage;
-        protected int defense;
+        private int attack;
+        private int damage;
+        private int defense;
 
         #endregion
 
         #region Level Field and Property Region
 
-        protected int level;
-        protected long experience;
+        private int level;
+        private long experience;
 
         public int Level
         {
             get { return level; }
-            protected set { level = value; }
+            private set { level = value; }
         }
 
         public long Experience
         {
             get { return experience; }
-            protected set { experience = value; }
+            private set { experience = value; }
         }
 
         #endregion
@@ -145,9 +157,16 @@ namespace RpgLibrary.CharacterClasses
             mana = new AttributePair(0);
         }
 
-        public Entity(EntityData entityData)
+        public Entity(
+            string name, 
+            EntityData entityData, 
+            EntityGender gender, 
+            EntityType  entityType)
         {
-            entityType = entityData.ClassName;
+            EntityName = name;
+            EntityClass = entityData.EntityName;
+            Gender = gender;
+            EntityType = entityType;
             Strength = entityData.Strength;
             Dexterity = entityData.Dexterity;
             Cunning = entityData.Cunning;
@@ -158,6 +177,7 @@ namespace RpgLibrary.CharacterClasses
             stamina = new AttributePair(0);
             mana = new AttributePair(0);
         }
+
         #endregion
     }
 }

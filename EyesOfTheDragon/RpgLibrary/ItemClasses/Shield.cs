@@ -39,7 +39,7 @@ namespace RpgLibrary.ItemClasses
             float weight,
             int defenseValue,
             int defenseModifier,
-            params Type[] allowableClasses)
+            params string[] allowableClasses)
             : base(shieldName, shieldType, price, weight, allowableClasses)
         {
             DefenseValue = defenseValue;
@@ -52,7 +52,7 @@ namespace RpgLibrary.ItemClasses
 
         public override object Clone()
         {
-            Type[] allowedClasses = new Type[allowableClasses.Count];
+            string[] allowedClasses = new string[allowableClasses.Count];
 
             for (int i = 0; i < allowableClasses.Count; i++)
                 allowedClasses[i] = allowableClasses[i];
@@ -75,8 +75,8 @@ namespace RpgLibrary.ItemClasses
             shieldString += DefenseValue.ToString() + ", ";
             shieldString += DefenseModifier.ToString();
 
-            foreach (Type t in allowableClasses)
-                shieldString += ", " + t.Name;
+            foreach (string t in allowableClasses)
+                shieldString += ", " + t;
 
             return shieldString;
         }
