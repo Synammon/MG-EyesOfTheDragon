@@ -29,10 +29,34 @@ namespace RpgEditor
         /// </summary>
         private void InitializeComponent()
         {
-            this.components = new System.ComponentModel.Container();
+            this.SuspendLayout();
+            // 
+            // btnDelete
+            // 
+            this.btnDelete.Location = new System.Drawing.Point(421, 365);
+            // 
+            // btnEdit
+            // 
+            this.btnEdit.Location = new System.Drawing.Point(272, 365);
+            // 
+            // btnAdd
+            // 
+            this.btnAdd.Location = new System.Drawing.Point(124, 365);
+            // 
+            // lbDetails
+            // 
+            this.lbDetails.ItemHeight = 24;
+            this.lbDetails.Size = new System.Drawing.Size(752, 340);
+            // 
+            // FormShield
+            // 
+            this.AutoScaleDimensions = new System.Drawing.SizeF(11F, 24F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 450);
+            this.Name = "FormShield";
             this.Text = "FormShield";
+            this.ResumeLayout(false);
+
         }
 
         #endregion

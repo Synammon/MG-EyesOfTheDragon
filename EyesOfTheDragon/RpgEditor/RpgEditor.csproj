@@ -156,6 +156,9 @@
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="XnaSerializer.cs" />
+    <EmbeddedResource Include="FormArmor.resx">
+      <DependentUpon>FormArmor.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="FormClasses.resx">
       <DependentUpon>FormClasses.cs</DependentUpon>
     </EmbeddedResource>
@@ -167,6 +170,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="FormNewGame.resx">
       <DependentUpon>FormNewGame.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormShield.resx">
+      <DependentUpon>FormShield.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="FormShieldDetail.resx">
       <DependentUpon>FormShieldDetail.cs</DependentUpon>
