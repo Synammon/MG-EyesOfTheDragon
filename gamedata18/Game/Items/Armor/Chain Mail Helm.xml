@@ -1,0 +1,17 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<XnaContent xmlns:ItemClasses="RpgLibrary.ItemClasses">
+  <Asset Type="ItemClasses:ArmorData">
+    <Name>Chain Mail Helm</Name>
+    <Type>Helm</Type>
+    <Price>40</Price>
+    <Weight>8</Weight>
+    <Equipped>false</Equipped>
+    <ArmorLocation>Body</ArmorLocation>
+    <DefenseValue>10</DefenseValue>
+    <DefenseModifier>0</DefenseModifier>
+    <AllowableClasses>
+      <Item>Fighter</Item>
+      <Item>Priest</Item>
+    </AllowableClasses>
+  </Asset>
+</XnaContent>
