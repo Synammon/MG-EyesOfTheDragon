@@ -1,0 +1,16 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<XnaContent xmlns:ItemClasses="RpgLibrary.ItemClasses">
+  <Asset Type="ItemClasses:ChestData">
+    <Name>Gold Chest</Name>
+    <DifficultyLevel>Normal</DifficultyLevel>
+    <IsLocked>true</IsLocked>
+    <IsTrapped>false</IsTrapped>
+    <TrapName Null="true" />
+    <KeyName>Golden Key</KeyName>
+    <KeyType>Golden Key</KeyType>
+    <KeysRequired>1</KeysRequired>
+    <MinGold>200</MinGold>
+    <MaxGold>250</MaxGold>
+    <ItemCollection />
+  </Asset>
+</XnaContent>
