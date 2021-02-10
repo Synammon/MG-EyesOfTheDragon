@@ -48,9 +48,26 @@
             this.charactersToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.chestsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.keysToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.viewToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.displayGridToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.gridColorToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.blackToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.blueToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.greenToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.redToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.yellowToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.whiteToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.brushesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.x1ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.x2ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.x4ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.x8ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.splitContainer1 = new System.Windows.Forms.SplitContainer();
+            this.mapDisplay = new XLevelEditor.MapDisplay();
             this.tabProperties = new System.Windows.Forms.TabControl();
             this.tabTilesets = new System.Windows.Forms.TabPage();
+            this.tbMapLocation = new System.Windows.Forms.TextBox();
+            this.lblMapLocation = new System.Windows.Forms.Label();
             this.lblTilesets = new System.Windows.Forms.Label();
             this.lbTileset = new System.Windows.Forms.ListBox();
             this.pbTilesetPreview = new System.Windows.Forms.PictureBox();
@@ -67,11 +84,7 @@
             this.tabChests = new System.Windows.Forms.TabPage();
             this.tabKeys = new System.Windows.Forms.TabPage();
             this.controlTimer = new System.Windows.Forms.Timer(this.components);
-            this.lblMapLocation = new System.Windows.Forms.Label();
-            this.tbMapLocation = new System.Windows.Forms.TextBox();
-            this.mapDisplay = new XLevelEditor.MapDisplay();
-            this.viewToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.displayGridToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.saveTilesetToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
@@ -97,7 +110,8 @@
             this.charactersToolStripMenuItem,
             this.chestsToolStripMenuItem,
             this.keysToolStripMenuItem,
-            this.viewToolStripMenuItem});
+            this.viewToolStripMenuItem,
+            this.brushesToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
             this.menuStrip1.Padding = new System.Windows.Forms.Padding(7, 2, 0, 2);
@@ -152,7 +166,8 @@
             this.newTilesetToolStripMenuItem,
             this.openTilesetToolStripMenuItem,
             this.loadTilesetToolStripMenuItem,
-            this.removeTilesetToolStripMenuItem});
+            this.removeTilesetToolStripMenuItem,
+            this.saveTilesetToolStripMenuItem});
             this.tilesetToolStripMenuItem.Name = "tilesetToolStripMenuItem";
             this.tilesetToolStripMenuItem.Size = new System.Drawing.Size(77, 29);
             this.tilesetToolStripMenuItem.Text = "&Tileset";
@@ -160,25 +175,25 @@
             // newTilesetToolStripMenuItem
             // 
             this.newTilesetToolStripMenuItem.Name = "newTilesetToolStripMenuItem";
-            this.newTilesetToolStripMenuItem.Size = new System.Drawing.Size(232, 34);
+            this.newTilesetToolStripMenuItem.Size = new System.Drawing.Size(270, 34);
             this.newTilesetToolStripMenuItem.Text = "&New Tileset";
             // 
             // openTilesetToolStripMenuItem
             // 
             this.openTilesetToolStripMenuItem.Name = "openTilesetToolStripMenuItem";
-            this.openTilesetToolStripMenuItem.Size = new System.Drawing.Size(232, 34);
+            this.openTilesetToolStripMenuItem.Size = new System.Drawing.Size(270, 34);
             this.openTilesetToolStripMenuItem.Text = "&Open Tileset";
             // 
             // loadTilesetToolStripMenuItem
             // 
             this.loadTilesetToolStripMenuItem.Name = "loadTilesetToolStripMenuItem";
-            this.loadTilesetToolStripMenuItem.Size = new System.Drawing.Size(232, 34);
+            this.loadTilesetToolStripMenuItem.Size = new System.Drawing.Size(270, 34);
             this.loadTilesetToolStripMenuItem.Text = "&Load Tileset";
             // 
             // removeTilesetToolStripMenuItem
             // 
             this.removeTilesetToolStripMenuItem.Name = "removeTilesetToolStripMenuItem";
-            this.removeTilesetToolStripMenuItem.Size = new System.Drawing.Size(232, 34);
+            this.removeTilesetToolStripMenuItem.Size = new System.Drawing.Size(270, 34);
             this.removeTilesetToolStripMenuItem.Text = "&Remove Tileset";
             // 
             // mapLayerToolStripMenuItem
@@ -227,6 +242,112 @@
             this.keysToolStripMenuItem.Size = new System.Drawing.Size(64, 29);
             this.keysToolStripMenuItem.Text = "&Keys";
             // 
+            // viewToolStripMenuItem
+            // 
+            this.viewToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.displayGridToolStripMenuItem,
+            this.gridColorToolStripMenuItem});
+            this.viewToolStripMenuItem.Name = "viewToolStripMenuItem";
+            this.viewToolStripMenuItem.Size = new System.Drawing.Size(65, 29);
+            this.viewToolStripMenuItem.Text = "View";
+            // 
+            // displayGridToolStripMenuItem
+            // 
+            this.displayGridToolStripMenuItem.Checked = true;
+            this.displayGridToolStripMenuItem.CheckOnClick = true;
+            this.displayGridToolStripMenuItem.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.displayGridToolStripMenuItem.Name = "displayGridToolStripMenuItem";
+            this.displayGridToolStripMenuItem.Size = new System.Drawing.Size(270, 34);
+            this.displayGridToolStripMenuItem.Text = "Display Grid";
+            // 
+            // gridColorToolStripMenuItem
+            // 
+            this.gridColorToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.blackToolStripMenuItem,
+            this.blueToolStripMenuItem,
+            this.greenToolStripMenuItem,
+            this.redToolStripMenuItem,
+            this.yellowToolStripMenuItem,
+            this.whiteToolStripMenuItem});
+            this.gridColorToolStripMenuItem.Name = "gridColorToolStripMenuItem";
+            this.gridColorToolStripMenuItem.Size = new System.Drawing.Size(270, 34);
+            this.gridColorToolStripMenuItem.Text = "&Grid Color";
+            // 
+            // blackToolStripMenuItem
+            // 
+            this.blackToolStripMenuItem.Name = "blackToolStripMenuItem";
+            this.blackToolStripMenuItem.Size = new System.Drawing.Size(270, 34);
+            this.blackToolStripMenuItem.Text = "&Black";
+            // 
+            // blueToolStripMenuItem
+            // 
+            this.blueToolStripMenuItem.Name = "blueToolStripMenuItem";
+            this.blueToolStripMenuItem.Size = new System.Drawing.Size(270, 34);
+            this.blueToolStripMenuItem.Text = "B&lue";
+            // 
+            // greenToolStripMenuItem
+            // 
+            this.greenToolStripMenuItem.Name = "greenToolStripMenuItem";
+            this.greenToolStripMenuItem.Size = new System.Drawing.Size(270, 34);
+            this.greenToolStripMenuItem.Text = "&Green";
+            // 
+            // redToolStripMenuItem
+            // 
+            this.redToolStripMenuItem.Name = "redToolStripMenuItem";
+            this.redToolStripMenuItem.Size = new System.Drawing.Size(270, 34);
+            this.redToolStripMenuItem.Text = "&Red";
+            // 
+            // yellowToolStripMenuItem
+            // 
+            this.yellowToolStripMenuItem.Name = "yellowToolStripMenuItem";
+            this.yellowToolStripMenuItem.Size = new System.Drawing.Size(270, 34);
+            this.yellowToolStripMenuItem.Text = "&Yellow";
+            // 
+            // whiteToolStripMenuItem
+            // 
+            this.whiteToolStripMenuItem.Checked = true;
+            this.whiteToolStripMenuItem.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.whiteToolStripMenuItem.Name = "whiteToolStripMenuItem";
+            this.whiteToolStripMenuItem.Size = new System.Drawing.Size(270, 34);
+            this.whiteToolStripMenuItem.Text = "&White";
+            // 
+            // brushesToolStripMenuItem
+            // 
+            this.brushesToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.x1ToolStripMenuItem,
+            this.x2ToolStripMenuItem,
+            this.x4ToolStripMenuItem,
+            this.x8ToolStripMenuItem});
+            this.brushesToolStripMenuItem.Name = "brushesToolStripMenuItem";
+            this.brushesToolStripMenuItem.Size = new System.Drawing.Size(89, 29);
+            this.brushesToolStripMenuItem.Text = "&Brushes";
+            // 
+            // x1ToolStripMenuItem
+            // 
+            this.x1ToolStripMenuItem.Checked = true;
+            this.x1ToolStripMenuItem.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.x1ToolStripMenuItem.Name = "x1ToolStripMenuItem";
+            this.x1ToolStripMenuItem.Size = new System.Drawing.Size(142, 34);
+            this.x1ToolStripMenuItem.Text = "1x1";
+            // 
+            // x2ToolStripMenuItem
+            // 
+            this.x2ToolStripMenuItem.Name = "x2ToolStripMenuItem";
+            this.x2ToolStripMenuItem.Size = new System.Drawing.Size(142, 34);
+            this.x2ToolStripMenuItem.Text = "2x2";
+            // 
+            // x4ToolStripMenuItem
+            // 
+            this.x4ToolStripMenuItem.Name = "x4ToolStripMenuItem";
+            this.x4ToolStripMenuItem.Size = new System.Drawing.Size(142, 34);
+            this.x4ToolStripMenuItem.Text = "4x4";
+            // 
+            // x8ToolStripMenuItem
+            // 
+            this.x8ToolStripMenuItem.Name = "x8ToolStripMenuItem";
+            this.x8ToolStripMenuItem.Size = new System.Drawing.Size(142, 34);
+            this.x8ToolStripMenuItem.Text = "8x8";
+            // 
             // splitContainer1
             // 
             this.splitContainer1.Dock = System.Windows.Forms.DockStyle.Fill;
@@ -244,6 +365,16 @@
             this.splitContainer1.SplitterDistance = 899;
             this.splitContainer1.SplitterWidth = 5;
             this.splitContainer1.TabIndex = 1;
+            // 
+            // mapDisplay
+            // 
+            this.mapDisplay.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.mapDisplay.Location = new System.Drawing.Point(0, 0);
+            this.mapDisplay.MouseHoverUpdatesOnly = false;
+            this.mapDisplay.Name = "mapDisplay";
+            this.mapDisplay.Size = new System.Drawing.Size(899, 810);
+            this.mapDisplay.TabIndex = 0;
+            this.mapDisplay.Text = "mapDisplay1";
             // 
             // tabProperties
             // 
@@ -273,11 +404,27 @@
             this.tabTilesets.Controls.Add(this.pbTilePreview);
             this.tabTilesets.Location = new System.Drawing.Point(4, 29);
             this.tabTilesets.Name = "tabTilesets";
-            this.tabTilesets.Padding = new System.Windows.Forms.Padding(3, 3, 3, 3);
+            this.tabTilesets.Padding = new System.Windows.Forms.Padding(3);
             this.tabTilesets.Size = new System.Drawing.Size(220, 777);
             this.tabTilesets.TabIndex = 0;
             this.tabTilesets.Text = "Tiles";
             this.tabTilesets.UseVisualStyleBackColor = true;
+            // 
+            // tbMapLocation
+            // 
+            this.tbMapLocation.Location = new System.Drawing.Point(8, 735);
+            this.tbMapLocation.Name = "tbMapLocation";
+            this.tbMapLocation.Size = new System.Drawing.Size(202, 26);
+            this.tbMapLocation.TabIndex = 9;
+            // 
+            // lblMapLocation
+            // 
+            this.lblMapLocation.Location = new System.Drawing.Point(12, 691);
+            this.lblMapLocation.Name = "lblMapLocation";
+            this.lblMapLocation.Size = new System.Drawing.Size(198, 28);
+            this.lblMapLocation.TabIndex = 8;
+            this.lblMapLocation.Text = "Map Location";
+            this.lblMapLocation.TextAlign = System.Drawing.ContentAlignment.TopCenter;
             // 
             // lblTilesets
             // 
@@ -377,7 +524,7 @@
             this.tabLayers.Controls.Add(this.clbLayers);
             this.tabLayers.Location = new System.Drawing.Point(4, 29);
             this.tabLayers.Name = "tabLayers";
-            this.tabLayers.Padding = new System.Windows.Forms.Padding(3, 3, 3, 3);
+            this.tabLayers.Padding = new System.Windows.Forms.Padding(3);
             this.tabLayers.Size = new System.Drawing.Size(220, 777);
             this.tabLayers.TabIndex = 1;
             this.tabLayers.Text = "Map Layers";
@@ -419,48 +566,11 @@
             this.tabKeys.Text = "Keys";
             this.tabKeys.UseVisualStyleBackColor = true;
             // 
-            // lblMapLocation
+            // saveTilesetToolStripMenuItem
             // 
-            this.lblMapLocation.Location = new System.Drawing.Point(12, 691);
-            this.lblMapLocation.Name = "lblMapLocation";
-            this.lblMapLocation.Size = new System.Drawing.Size(198, 28);
-            this.lblMapLocation.TabIndex = 8;
-            this.lblMapLocation.Text = "Map Location";
-            this.lblMapLocation.TextAlign = System.Drawing.ContentAlignment.TopCenter;
-            // 
-            // tbMapLocation
-            // 
-            this.tbMapLocation.Location = new System.Drawing.Point(8, 735);
-            this.tbMapLocation.Name = "tbMapLocation";
-            this.tbMapLocation.Size = new System.Drawing.Size(202, 26);
-            this.tbMapLocation.TabIndex = 9;
-            // 
-            // mapDisplay
-            // 
-            this.mapDisplay.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.mapDisplay.Location = new System.Drawing.Point(0, 0);
-            this.mapDisplay.MouseHoverUpdatesOnly = false;
-            this.mapDisplay.Name = "mapDisplay";
-            this.mapDisplay.Size = new System.Drawing.Size(899, 810);
-            this.mapDisplay.TabIndex = 0;
-            this.mapDisplay.Text = "mapDisplay1";
-            // 
-            // viewToolStripMenuItem
-            // 
-            this.viewToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.displayGridToolStripMenuItem});
-            this.viewToolStripMenuItem.Name = "viewToolStripMenuItem";
-            this.viewToolStripMenuItem.Size = new System.Drawing.Size(65, 29);
-            this.viewToolStripMenuItem.Text = "View";
-            // 
-            // displayGridToolStripMenuItem
-            // 
-            this.displayGridToolStripMenuItem.Checked = true;
-            this.displayGridToolStripMenuItem.CheckOnClick = true;
-            this.displayGridToolStripMenuItem.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.displayGridToolStripMenuItem.Name = "displayGridToolStripMenuItem";
-            this.displayGridToolStripMenuItem.Size = new System.Drawing.Size(270, 34);
-            this.displayGridToolStripMenuItem.Text = "Display Grid";
+            this.saveTilesetToolStripMenuItem.Name = "saveTilesetToolStripMenuItem";
+            this.saveTilesetToolStripMenuItem.Size = new System.Drawing.Size(270, 34);
+            this.saveTilesetToolStripMenuItem.Text = "&Save Tileset";
             // 
             // FormMain
             // 
@@ -538,5 +648,18 @@
         private System.Windows.Forms.Label lblMapLocation;
         private System.Windows.Forms.ToolStripMenuItem viewToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem displayGridToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem brushesToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem x1ToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem x2ToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem x4ToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem x8ToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem gridColorToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem blackToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem blueToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem greenToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem redToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem yellowToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem whiteToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem saveTilesetToolStripMenuItem;
     }
 }

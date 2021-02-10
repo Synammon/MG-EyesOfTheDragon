@@ -17,17 +17,32 @@ namespace XLevelEditor
         Texture2D grid;
         Texture2D cursor;
         MouseState mouseState;
+        private Texture2D shadow;
+        private Vector2 shadowPosition;
 
         protected override void Initialize()
         {
+            shadow = new Texture2D(GraphicsDevice, 20, 20, false, SurfaceFormat.Color);
+
+            Color[] data = new Color[shadow.Width * shadow.Height];
+            Color tint = Color.LightSteelBlue;
+
+            tint.A = 25;
+
+            for (int i = 0; i < shadow.Width * shadow.Height; i++)
+                data[i] = tint;
+
+            shadow.SetData<Color>(data);
+
             try
             {
                 using (Stream stream = new FileStream(@"Content\grid.png", FileMode.Open,
-                  FileAccess.Read))
+                    FileAccess.Read))
                 {
                     grid = Texture2D.FromStream(GraphicsDevice, stream);
                     stream.Close();
                 }
+    
                 using (Stream stream = new FileStream(@"Content\cursor.png", FileMode.Open,
                     FileAccess.Read))
                 {
@@ -54,25 +69,37 @@ namespace XLevelEditor
         {
             base.Draw();
 
-            if (FormMain.map == null)
-                return;
-
-            Editor.spriteBatch.Begin(
-                SpriteSortMode.Deferred,
-                BlendState.AlphaBlend,
-                SamplerState.PointClamp,
-                null,
-                null,
-                null,
-                FormMain.camera.Transformation);
+            shadowPosition = new Vector2(mouseState.Position.X, mouseState.Position.Y) +
+                FormMain.camera.Position;
+            Point p = Engine.VectorToCell(shadowPosition);
 
             for (int i = 0; i < FormMain.layers.Count; i++)
+            {
+                Editor.spriteBatch.Begin(
+                    SpriteSortMode.Deferred,
+                    BlendState.AlphaBlend,
+                    SamplerState.PointClamp,
+                    null,
+                    null,
+                    null,
+                    FormMain.camera.Transformation);
+
                 FormMain.layers[i].Draw(Editor.spriteBatch, FormMain.camera, FormMain.tileSets);
-                
-            Editor.spriteBatch.End();
+
+                Rectangle destination = new Rectangle(
+                    (int)p.X * Engine.TileWidth,
+                    (int)p.Y * Engine.TileHeight,
+                    FormMain.brushWidth * Engine.TileWidth,
+                    FormMain.brushWidth * Engine.TileHeight);
+                Color tint = Color.White;
+                tint.A = 1;
+                Editor.spriteBatch.Draw(shadow, destination, tint);
+                Editor.spriteBatch.End();
+            }
 
             DrawDisplay();
         }
+
         private void DrawDisplay()
         {
             if (FormMain.layers.Count == 0)
@@ -96,11 +123,14 @@ namespace XLevelEditor
                 for (int y = 0; y < maxY; y++)
                 {
                     destination.Y = y * Engine.TileHeight;
-                
+
                     for (int x = 0; x < maxX; x++)
-                        Editor.spriteBatch.Draw(grid, destination, Color.White);
-                    
+                    {
+                        destination.X = x * Engine.TileWidth;
+                        Editor.spriteBatch.Draw(grid, destination, FormMain.gridColor);
+                    }
                 }
+
                 Editor.spriteBatch.End();
             }
 
