@@ -62,7 +62,7 @@ namespace RpgLibrary.EffectClasses
                 amount = weakness.Apply(amount);
             }
 
-            foreach (Resistance resistance in entity.Resistances.Where(x => x.ResistanceType == damageType)
+            foreach (Resistance resistance in entity.Resistances.Where(x => x.ResistanceType == damageType))
             {
                 amount = resistance.Apply(amount);
             }
