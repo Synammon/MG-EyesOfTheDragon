@@ -125,21 +125,20 @@ namespace EyesOfTheDragon.GameScreens
             loadListBox.HasFocus = true;
         }
 
+        void exitLinkLabel_Selected(object sender, EventArgs e)
+        {
+            Transition(ChangeType.Pop, null);
+        }
+
         void loadListBox_Selected(object sender, EventArgs e)
         {
             loadLinkLabel.HasFocus = true;
-            loadListBox.HasFocus = false;
-            
             ControlManager.AcceptInput = true;
-            StateManager.ChangeState(GameRef.GamePlayScreen);
+            
+            Transition(ChangeType.Change, GameRef.GamePlayScreen);
         
             CreatePlayer();
             CreateWorld();
-        }
-  
-        void exitLinkLabel_Selected(object sender, EventArgs e)
-        {
-            StateManager.PopState();
         }
 
         private void CreatePlayer()

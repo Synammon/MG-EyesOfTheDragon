@@ -118,19 +118,13 @@ namespace EyesOfTheDragon.GameScreens
         private void menuItem_Selected(object sender, EventArgs e)
         {
             if (sender == startGame)
-            {
-                StateManager.PushState(GameRef.CharacterGeneratorScreen);
-            }
+                Transition(ChangeType.Push, GameRef.CharacterGeneratorScreen);
 
             if (sender == loadGame)
-            {
-                // StateManager.PushState(GameRef.GamePlayScreen);
-            }
+                Transition(ChangeType.Push, GameRef.LoadGameScreen);
 
             if (sender == exitGame)
-            {
                 GameRef.Exit();
-            }
         }
 
         public override void Update(GameTime gameTime)

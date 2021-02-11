@@ -65,14 +65,14 @@ namespace EyesOfTheDragon.GameScreens
 
             GameRef.SpriteBatch.End();
         }
-        
+
         #endregion
-        
+
         #region Title Screen Methods
-        
+
         private void startLabel_Selected(object sender, EventArgs e)
         {
-            StateManager.PushState(GameRef.StartMenuScreen);
+            Transition(ChangeType.Push, GameRef.StartMenuScreen);
         }
 
         #endregion

@@ -15,7 +15,7 @@ namespace MGRpgLibrary.SpriteClasses
         Texture2D texture;
         public Vector2 Position;
         Vector2 velocity;
-        float speed = 2.0f;
+        float speed = 200.0f;
 
         #endregion
 
@@ -46,7 +46,7 @@ namespace MGRpgLibrary.SpriteClasses
         public float Speed
         {
             get { return speed; }
-            set { speed = MathHelper.Clamp(speed, 1.0f, 16.0f); }
+            set { speed = MathHelper.Clamp(speed, 1.0f, 400.0f); }
         }
 
         public Vector2 Velocity

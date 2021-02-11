@@ -29,6 +29,5 @@
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\MGRpgLibrary\MGRpgLibrary.csproj" />
-    <ProjectReference Include="..\RpgLibrary\RpgLibrary.csproj" />
   </ItemGroup>
 </Project>

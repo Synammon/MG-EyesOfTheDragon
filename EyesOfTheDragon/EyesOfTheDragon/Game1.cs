@@ -9,6 +9,15 @@ namespace EyesOfTheDragon
 {
     public class Game1 : Game
     {
+        #region Frames Per Second Field Region
+     
+        private float fps;
+        private float updateInterval = 1.0f;
+        private float timeSinceLastUpdate = 0.0f;
+        private float frameCount = 0;
+        
+        #endregion
+
         private GraphicsDeviceManager _graphics;
         private SpriteBatch _spriteBatch;
         private GameStateManager _gameStateManager;
@@ -28,6 +37,7 @@ namespace EyesOfTheDragon
         public GamePlayScreen GamePlayScreen { get; private set; }
         public CharacterGeneratorScreen CharacterGeneratorScreen { get; private set; }
         public SkillScreen SkillScreen { get; private set; }
+        public LoadGameScreen LoadGameScreen { get; private set; }
 
         public Game1()
         {
@@ -50,8 +60,12 @@ namespace EyesOfTheDragon
             GamePlayScreen = new GamePlayScreen(this, _gameStateManager);
             CharacterGeneratorScreen = new CharacterGeneratorScreen(this, _gameStateManager);
             SkillScreen = new SkillScreen(this, _gameStateManager);
+            LoadGameScreen = new LoadGameScreen(this, _gameStateManager);
 
             _gameStateManager.ChangeState(TitleScreen);
+
+            IsFixedTimeStep = false;
+            _graphics.SynchronizeWithVerticalRetrace = false;
         }
 
         protected override void Initialize()
@@ -91,9 +105,22 @@ namespace EyesOfTheDragon
         {
             GraphicsDevice.Clear(Color.CornflowerBlue);
 
-            // TODO: Add your drawing code here
-
             base.Draw(gameTime);
+
+            float elapsed = (float)gameTime.ElapsedGameTime.TotalSeconds;
+            frameCount++;
+            timeSinceLastUpdate += elapsed;
+
+            if (timeSinceLastUpdate > updateInterval)
+            {
+                fps = frameCount / timeSinceLastUpdate;
+                
+                System.Diagnostics.Debug.WriteLine("FPS: " + fps.ToString());
+                this.Window.Title = "FPS: " + fps.ToString();
+                
+                frameCount = 0;
+                timeSinceLastUpdate -= updateInterval;
+            }
         }
     }
 }

@@ -5,6 +5,8 @@ using System.Text;
 
 namespace MGRpgLibrary
 {
+    public enum ChangeType { Change, Pop, Push }
+
     public class GameStateManager : GameComponent
     {
         #region Event Region

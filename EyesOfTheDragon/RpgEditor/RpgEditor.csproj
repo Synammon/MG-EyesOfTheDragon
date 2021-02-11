@@ -236,12 +236,6 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\RpgLibrary\RpgLibrary.csproj">
-      <Project>{20993f18-0f14-4162-a273-1bf0dfe18011}</Project>
-      <Name>RpgLibrary</Name>
-    </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
     <Content Include="CppNet.dll" />
     <Content Include="libmojoshader_64.dll" />
     <Content Include="mgfxc.dll" />
@@ -251,6 +245,12 @@
     <Content Include="SharpDX.D3DCompiler.xml" />
     <Content Include="SharpDX.dll" />
     <Content Include="SharpDX.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\MGRpgLibrary\MGRpgLibrary.csproj">
+      <Project>{e2dedc21-472b-4db5-b562-bd1de37bf95b}</Project>
+      <Name>MGRpgLibrary</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="..\packages\AssimpNet.4.1.0\build\AssimpNet.targets" Condition="Exists('..\packages\AssimpNet.4.1.0\build\AssimpNet.targets')" />

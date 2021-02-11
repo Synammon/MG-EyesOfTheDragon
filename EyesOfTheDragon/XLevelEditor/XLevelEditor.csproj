@@ -198,10 +198,6 @@
       <Project>{e2dedc21-472b-4db5-b562-bd1de37bf95b}</Project>
       <Name>MGRpgLibrary</Name>
     </ProjectReference>
-    <ProjectReference Include="..\RpgLibrary\RpgLibrary.csproj">
-      <Project>{20993f18-0f14-4162-a273-1bf0dfe18011}</Project>
-      <Name>RpgLibrary</Name>
-    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">

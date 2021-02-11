@@ -52,18 +52,19 @@ namespace EyesOfTheDragon.Components
         }
 
         #endregion
-        
+
         #region Method Region
-        
+
         public void Update(GameTime gameTime)
         {
             camera.Update(gameTime);
             Sprite.Update(gameTime);
-
+    
             if (InputHandler.KeyReleased(Keys.PageUp) ||
                 InputHandler.ButtonReleased(Buttons.LeftShoulder, PlayerIndex.One))
             {
                 camera.ZoomIn();
+            
                 if (camera.CameraMode == CameraMode.Follow)
                     camera.LockToSprite(Sprite);
             }
@@ -71,12 +72,13 @@ namespace EyesOfTheDragon.Components
                 InputHandler.ButtonReleased(Buttons.RightShoulder, PlayerIndex.One))
             {
                 camera.ZoomOut();
+                
                 if (camera.CameraMode == CameraMode.Follow)
                     camera.LockToSprite(Sprite);
             }
-            
-            Vector2 motion = new Vector2();
 
+            Vector2 motion = new Vector2();
+            
             if (InputHandler.KeyDown(Keys.W) ||
                 InputHandler.ButtonDown(Buttons.LeftThumbstickUp, PlayerIndex.One))
             {
@@ -99,18 +101,19 @@ namespace EyesOfTheDragon.Components
             else if (InputHandler.KeyDown(Keys.D) ||
                 InputHandler.ButtonDown(Buttons.LeftThumbstickRight, PlayerIndex.One))
             {
-                    Sprite.CurrentAnimation = AnimationKey.Right;
+                Sprite.CurrentAnimation = AnimationKey.Right;
                 motion.X = 1;
             }
-
+            
             if (motion != Vector2.Zero)
             {
-                motion.Normalize();
-
                 Sprite.IsAnimating = true;
-                Sprite.Position += motion * Sprite.Speed;
-                Sprite.LockToMap();
+                
+                motion.Normalize();
             
+                Sprite.Position += motion * Sprite.Speed * (float)gameTime.ElapsedGameTime.TotalSeconds;
+                Sprite.LockToMap();
+                
                 if (camera.CameraMode == CameraMode.Follow)
                     camera.LockToSprite(Sprite);
             }
@@ -123,11 +126,11 @@ namespace EyesOfTheDragon.Components
                 InputHandler.ButtonReleased(Buttons.RightStick, PlayerIndex.One))
             {
                 camera.ToggleCameraMode();
-            
+                
                 if (camera.CameraMode == CameraMode.Follow)
                     camera.LockToSprite(Sprite);
             }
-    
+
             if (camera.CameraMode != CameraMode.Follow)
             {
                 if (InputHandler.KeyReleased(Keys.C) ||

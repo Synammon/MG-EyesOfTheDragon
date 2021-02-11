@@ -15,6 +15,7 @@ using RpgLibrary.ItemClasses;
 using EyesOfTheDragon.Components;
 using RpgLibrary.CharacterClasses;
 using MGRpgLibrary.CharacterClasses;
+using RpgLibrary.SkillClasses;
 
 namespace EyesOfTheDragon.GameScreens
 {
@@ -223,9 +224,11 @@ namespace EyesOfTheDragon.GameScreens
             CreatePlayer();
             CreateWorld();
 
-            GameRef.SkillScreen.SkillPoints = 25;
+            GameRef.SkillScreen.SkillPoints = 10;
 
-            StateManager.ChangeState(GameRef.SkillScreen);
+            Transition(ChangeType.Change, GameRef.SkillScreen);
+            
+            GameRef.SkillScreen.SetTarget(GamePlayScreen.Player.Character);
         }
 
         private void CreatePlayer()
@@ -269,6 +272,13 @@ namespace EyesOfTheDragon.GameScreens
                 DataManager.EntityData[classSelector.SelectedItem],
                 g,
                 EntityType.Character);
+
+            foreach (string s in DataManager.SkillData.Keys)
+            {
+                Skill skill = Skill.FromSkillData(DataManager.SkillData[s]);
+                entity.Skills.Add(s, skill);
+            }
+
             Character character = new Character(entity, sprite);
             GamePlayScreen.Player = new Player(GameRef, character);
         }

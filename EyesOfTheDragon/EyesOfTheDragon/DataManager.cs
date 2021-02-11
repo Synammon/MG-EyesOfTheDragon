@@ -152,7 +152,7 @@ namespace EyesOfTheDragon.Components
 
         public static void ReadSkillData(ContentManager Content)
         {
-            string[] filenames = Directory.GetFiles(@"Content\Skills", "*.xnb");
+            string[] filenames = Directory.GetFiles(@"Content\Game\Skills", "*.xnb");
 
             foreach (string name in filenames)
             {
@@ -168,3 +168,4 @@ namespace EyesOfTheDragon.Components
         #endregion
     }
 }
+
