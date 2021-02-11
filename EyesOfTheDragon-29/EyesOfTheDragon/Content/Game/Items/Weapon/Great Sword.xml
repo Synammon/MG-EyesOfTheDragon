@@ -1,0 +1,18 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<XnaContent xmlns:ItemClasses="RpgLibrary.ItemClasses">
+  <Asset Type="ItemClasses:WeaponData">
+    <Name>Great Sword</Name>
+    <Type>Slashing</Type>
+    <Price>80</Price>
+    <Weight>25</Weight>
+    <Equipped>false</Equipped>
+    <NumberHands>Both</NumberHands>
+    <AttackValue>12</AttackValue>
+    <AttackModifier>0</AttackModifier>
+    <DamageValue>16</DamageValue>
+    <DamageModifier>0</DamageModifier>
+    <AllowableClasses>
+      <Item>Fighter</Item>
+    </AllowableClasses>
+  </Asset>
+</XnaContent>

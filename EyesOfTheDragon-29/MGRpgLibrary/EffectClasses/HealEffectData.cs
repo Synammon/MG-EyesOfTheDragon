@@ -2,18 +2,16 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+
 namespace RpgLibrary.EffectClasses
 {
-    public enum DamageType { Weapon, Poison, Disease, Fire, Water, Air, Earth }
+    public enum HealType { Health, Mana, Stamina }
 
-    public enum AttackType { Health, Mana, Stamina }
-
-    public class DamageEffectData : BaseEffectData
+    public class HealEffectData : BaseEffectData
     {
         #region Field Region
 
-        public DamageType DamageType;
-        public AttackType AttackType;
+        public HealType HealType;
         public DieType DieType;
         public int NumberOfDice;
         public int Modifier;

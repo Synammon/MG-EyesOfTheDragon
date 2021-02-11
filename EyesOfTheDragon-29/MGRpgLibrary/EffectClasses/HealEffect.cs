@@ -3,39 +3,36 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using RpgLibrary.CharacterClasses;
+
 namespace RpgLibrary.EffectClasses
 {
-    public class DamageEffect : BaseEffect
+    public class HealEffect : BaseEffect
     {
         #region Field Region
 
-        DamageType damageType;
-        AttackType attackType;
+        HealType healType;
         DieType dieType;
         int numberOfDice;
         int modifier;
 
         #endregion
-
         #region Property Region
         #endregion
 
         #region Constructor Region
 
-        private DamageEffect()
+        private HealEffect()
         {
         }
 
         #endregion
-
         #region Method Region
 
-        public static DamageEffect FromDamageEffectData(DamageEffectData data)
+        public static HealEffect FromHealEffectData(HealEffectData data)
         {
-            DamageEffect effect = new DamageEffect
+            HealEffect effect = new HealEffect
             {
-                damageType = data.DamageType,
-                attackType = data.AttackType,
+                healType = data.HealType,
                 dieType = data.DieType,
                 numberOfDice = data.NumberOfDice,
                 modifier = data.Modifier
@@ -53,33 +50,21 @@ namespace RpgLibrary.EffectClasses
             int amount = modifier;
 
             for (int i = 0; i < numberOfDice; i++)
-            {
                 amount += Mechanics.RollDie(dieType);
-            }
-
-            foreach (Weakness weakness in entity.Weaknesses.Where(x => x.WeaknessType == damageType))
-            {
-                amount = weakness.Apply(amount);
-            }
-
-            foreach (Resistance resistance in entity.Resistances.Where(x => x.ResistanceType == damageType)
-            {
-                amount = resistance.Apply(amount);
-            }
 
             if (amount < 1)
                 amount = 1;
 
-            switch (attackType)
+            switch (healType)
             {
-                case AttackType.Health:
-                    entity.Health.Damage((ushort)amount);
+                case HealType.Health:
+                    entity.Health.Heal((ushort)amount);
                     break;
-                case AttackType.Mana:
-                    entity.Mana.Damage((ushort)amount);
+                case HealType.Mana:
+                    entity.Mana.Heal((ushort)amount);
                     break;
-                case AttackType.Stamina:
-                    entity.Stamina.Damage((ushort)amount);
+                case HealType.Stamina:
+                    entity.Stamina.Heal((ushort)amount);
                     break;
             }
         }

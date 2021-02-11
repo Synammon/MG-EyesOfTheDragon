@@ -2,28 +2,31 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+
 namespace RpgLibrary.EffectClasses
 {
-    public enum DamageType { Weapon, Poison, Disease, Fire, Water, Air, Earth }
-
-    public enum AttackType { Health, Mana, Stamina }
-
-    public class DamageEffectData : BaseEffectData
+    public class BaseEffectDataManager
     {
         #region Field Region
-
-        public DamageType DamageType;
-        public AttackType AttackType;
-        public DieType DieType;
-        public int NumberOfDice;
-        public int Modifier;
+        readonly Dictionary<string, BaseEffectData> effectData;
 
         #endregion
 
         #region Property Region
-        #endregion
 
+        public Dictionary<string, BaseEffectData> EffectData
+        {
+            get { return effectData; }
+        }
+
+        #endregion
         #region Constructor Region
+
+        public BaseEffectDataManager()
+        {
+            effectData = new Dictionary<string, BaseEffectData>();
+        }
+
         #endregion
 
         #region Method Region
