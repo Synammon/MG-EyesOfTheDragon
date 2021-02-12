@@ -1,0 +1,15 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<XnaContent xmlns:ItemClasses="RpgLibrary.ItemClasses">
+  <Asset Type="ItemClasses:ShieldData">
+    <Name>Heavy Tower Shield</Name>
+    <Type>Large</Type>
+    <Price>125</Price>
+    <Weight>20</Weight>
+    <Equipped>false</Equipped>
+    <DefenseValue>30</DefenseValue>
+    <DefenseModifier>0</DefenseModifier>
+    <AllowableClasses>
+      <Item>Fighter</Item>
+    </AllowableClasses>
+  </Asset>
+</XnaContent>
