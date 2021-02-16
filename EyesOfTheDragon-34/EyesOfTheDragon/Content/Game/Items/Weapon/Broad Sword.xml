@@ -1,0 +1,27 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<XnaContent xmlns:ItemClasses="RpgLibrary.ItemClasses">
+  <Asset Type="ItemClasses:WeaponData">
+    <Name>Broad Sword</Name>
+    <Type>Health</Type>
+    <Price>60</Price>
+    <Weight>18</Weight>
+    <Equipped>false</Equipped>
+    <NumberHands>Main</NumberHands>
+    <AttackValue>12</AttackValue>
+    <AttackModifier>0</AttackModifier>
+    <DamageEffectData>
+      <Item>
+        <Name Null="true" />
+        <DamageType>Slashing</DamageType>
+        <AttackType>Health</AttackType>
+        <DieType>D12</DieType>
+        <NumberOfDice>1</NumberOfDice>
+        <Modifier>0</Modifier>
+      </Item>
+    </DamageEffectData>
+    <AllowableClasses>
+      <Item>Fighter</Item>
+      <Item>Rogue</Item>
+    </AllowableClasses>
+  </Asset>
+</XnaContent>
