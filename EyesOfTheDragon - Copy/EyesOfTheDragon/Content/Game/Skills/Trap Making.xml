@@ -1,0 +1,8 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<XnaContent xmlns:SkillClasses="RpgLibrary.SkillClasses">
+  <Asset Type="SkillClasses:SkillData">
+    <Name>Trap Making</Name>
+    <PrimaryAttribute>Dexterity</PrimaryAttribute>
+    <ClassModifiers />
+  </Asset>
+</XnaContent>
