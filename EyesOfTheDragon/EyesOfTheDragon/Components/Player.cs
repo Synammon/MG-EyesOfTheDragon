@@ -148,6 +148,7 @@ namespace EyesOfTheDragon.Components
             
             Vector2 distance = motion * Sprite.Speed *
                 (float)gameTime.ElapsedGameTime.TotalSeconds;
+
             Vector2 next = distance + Sprite.Position;
     
             Rectangle playerRect = new Rectangle(

@@ -1,9 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
+using RpgLibrary.WorldClasses;
 
 namespace MGRpgLibrary.TileEngine
 {
@@ -89,10 +92,19 @@ namespace MGRpgLibrary.TileEngine
             mapHeight = baseLayer.Height;
         }
 
+        private TileMap()
+        {
+            tilesets = new List<Tileset>();
+
+            collisionLayer = new CollisionLayer();
+            animatedTileLayer = new AnimatedTileLayer();
+            mapLayers = new List<ILayer>();
+        }
+
         #endregion
-        
+
         #region Method Region
-        
+
         public void AddLayer(ILayer layer)
         {
             if (layer is MapLayer)
@@ -107,6 +119,11 @@ namespace MGRpgLibrary.TileEngine
         public void AddTileset(Tileset tileset)
         {
             tilesets.Add(tileset);
+        }
+
+        public void AddAnimatedTileset(AnimatedTileset tileset)
+        {
+            animatedSet = tileset;
         }
 
         public void Update(GameTime gameTime)
@@ -128,6 +145,55 @@ namespace MGRpgLibrary.TileEngine
             
             if (animatedSet != null)
                 animatedTileLayer.Draw(spriteBatch, animatedSet);
+        }
+
+        public static TileMap FromMapData(MapData mapData, ContentManager content)
+        {
+            TileMap map = new TileMap();
+
+            foreach (RpgLibrary.WorldClasses.TilesetData data in mapData.Tilesets)
+            {
+                Texture2D texture = content.Load<Texture2D>(@"Tilesets\" +
+                    Path.GetFileNameWithoutExtension(data.TilesetImageName));
+
+                map.tilesets.Add(
+                    new Tileset(
+                    texture,
+                    data.TilesWide,
+                    data.TilesHigh,
+                    data.TileWidthInPixels,
+                    data.TileHeightInPixels));
+            }
+
+            Texture2D aniamtedTexture = content.Load<Texture2D>(@"Tilesets\" +
+                Path.GetFileNameWithoutExtension(mapData.AnimatedTileset.TilesetImageName));
+            
+            map.animatedSet = new AnimatedTileset(
+                aniamtedTexture,
+                mapData.AnimatedTileset.FramesAcross,
+                mapData.AnimatedTileset.TilesHigh,
+                mapData.AnimatedTileset.TileWidthInPixels,
+                mapData.AnimatedTileset.TileHeightInPixels);
+
+            mapWidth = mapData.Layers[0].Width;
+            mapHeight = mapData.Layers[0].Height;
+
+            foreach (MapLayerData data in mapData.Layers)
+            {
+                map.AddLayer(MapLayer.FromMapLayerData(data));
+            }
+
+            foreach (var collision in mapData.Collisions.Collisions)
+            {
+                map.collisionLayer.Collisions.Add(collision.Key, collision.Value);
+            }
+
+            foreach (var tile in mapData.AnimatedTiles.AnimatedTiles)
+            {
+                map.animatedTileLayer.AnimatedTiles.Add(tile.Key, tile.Value);
+            }
+
+            return map;
         }
 
         #endregion

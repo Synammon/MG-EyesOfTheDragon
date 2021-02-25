@@ -411,6 +411,16 @@
 /processor:PassThroughProcessor
 /build:Game/Keys/Rusty Key.xml
 
+#begin Game/Levels/Maps/Village.xml
+/importer:XmlImporter
+/processor:PassThroughProcessor
+/build:Game/Levels/Maps/Village.xml
+
+#begin Game/Levels/Starting Level.xml
+/importer:XmlImporter
+/processor:PassThroughProcessor
+/build:Game/Levels/Starting Level.xml
+
 #begin Game/Skills/Bartering.xml
 /importer:XmlImporter
 /processor:PassThroughProcessor

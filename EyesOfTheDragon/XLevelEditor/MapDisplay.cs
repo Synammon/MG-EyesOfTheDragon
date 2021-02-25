@@ -91,13 +91,63 @@ namespace XLevelEditor
                     (int)p.Y * Engine.TileHeight,
                     FormMain.brushWidth * Engine.TileWidth,
                     FormMain.brushWidth * Engine.TileHeight);
+                
+
                 Color tint = Color.White;
                 tint.A = 1;
                 Editor.spriteBatch.Draw(shadow, destination, tint);
                 Editor.spriteBatch.End();
             }
 
+            Editor.spriteBatch.Begin(
+                SpriteSortMode.Deferred,
+                BlendState.AlphaBlend,
+                SamplerState.PointClamp,
+                null,
+                null,
+                null,
+                FormMain.camera.Transformation);
+
+            if (FormMain.animatedSet != null && FormMain.animatedLayer.AnimatedTiles.Count > 0)
+                FormMain.animatedLayer.Draw(Editor.spriteBatch, FormMain.animatedSet);
+
+            if (FormMain.collisionLayer.Collisions.Count > 0)
+                DrawCollisions();
+
+            Editor.spriteBatch.End();
+
             DrawDisplay();
+        }
+
+        private void DrawCollisions()
+        {
+            Color lowAlpha = Color.White;
+            
+            Texture2D collisionShadow = new Texture2D(GraphicsDevice, 32, 32, false,
+                SurfaceFormat.Color);
+            
+            Color[] data = new Color[collisionShadow.Width * collisionShadow.Height];
+        
+            Color tint = Color.White;
+            
+            for (int i = 0; i < collisionShadow.Width * collisionShadow.Height; i++)
+                data[i] = tint;
+            
+            collisionShadow.SetData<Color>(data);
+
+            foreach (Point p in FormMain.collisionLayer.Collisions.Keys)
+            {
+                Rectangle r = new Rectangle(p.X * Engine.TileWidth, p.Y * Engine.TileHeight,
+                    Engine.TileWidth, Engine.TileHeight);
+
+                if (FormMain.collisionLayer.Collisions[p] == CollisionType.Impassable)
+                {
+                    lowAlpha = Color.Red;
+                    lowAlpha.A = 50;
+                }
+
+                Editor.spriteBatch.Draw(collisionShadow, r, lowAlpha);
+            }
         }
 
         private void DrawDisplay()

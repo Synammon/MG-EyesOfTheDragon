@@ -17,6 +17,7 @@ using RpgLibrary.CharacterClasses;
 using MGRpgLibrary.CharacterClasses;
 using RpgLibrary.SkillClasses;
 using MGRpgLibrary.ConversationComponents;
+using System.IO;
 
 namespace EyesOfTheDragon.GameScreens
 {
@@ -224,13 +225,68 @@ namespace EyesOfTheDragon.GameScreens
             InputHandler.Flush();
 
             CreatePlayer();
-            CreateWorld();
+            LoadWorld();
 
             GameRef.SkillScreen.SkillPoints = 10;
 
             Transition(ChangeType.Change, GameRef.SkillScreen);
             
             GameRef.SkillScreen.SetTarget(GamePlayScreen.Player.Character);
+        }
+
+        private void LoadWorld()
+        {
+            RpgLibrary.WorldClasses.LevelData levelData = 
+                Game.Content.Load<RpgLibrary.WorldClasses.LevelData>(@"Game\Levels\Starting Level");
+
+            RpgLibrary.WorldClasses.MapData mapData = 
+                Game.Content.Load<RpgLibrary.WorldClasses.MapData>(@"Game\Levels\Maps\" + levelData.MapName);
+
+            TileMap map = TileMap.FromMapData(mapData, Game.Content);
+
+            Level level = new Level(map);
+
+            ChestData chestData = Game.Content.Load<ChestData>(@"Game\Chests\Plain Chest");
+
+            Chest chest = new Chest(chestData);
+
+            BaseSprite chestSprite = new BaseSprite(
+                containers,
+                new Rectangle(0, 0, 32, 32),
+                new Point(10, 10));
+
+            ItemSprite itemSprite = new ItemSprite(
+                chest,
+                chestSprite);
+
+            level.Chests.Add(itemSprite);
+
+            World world = new World(GameRef, GameRef.ScreenRectangle);
+
+            world.Levels.Add(level);
+            world.CurrentLevel = 0;
+
+            AnimatedSprite s = new AnimatedSprite(
+                GameRef.Content.Load<Texture2D>(@"SpriteSheets\Eliza"),
+                AnimationManager.Instance.Animations);
+
+            s.Position = new Vector2(0 * Engine.TileWidth, 5 * Engine.TileHeight);
+
+            EntityData ed = new EntityData("Eliza", 10, 10, 10, 10, 10, 10, "20|CON|12", "16|WIL|16",
+                "0|0|0");
+
+            Entity e = new Entity("Eliza", ed, EntityGender.Female, EntityType.NPC);
+
+            NonPlayerCharacter npc = new NonPlayerCharacter(e, s);
+
+            npc.SetConversation("eliza1");
+            world.Levels[world.CurrentLevel].Characters.Add(npc);
+
+            GamePlayScreen.World = world;
+
+            CreateConversation();
+
+            ((NonPlayerCharacter)world.Levels[world.CurrentLevel].Characters[0]).SetConversation("eliza1");
         }
 
         private void CreatePlayer()
@@ -320,51 +376,6 @@ namespace EyesOfTheDragon.GameScreens
             map.CollisionLayer.Collisions.Add(new Point(1, 0), CollisionType.Impassable);
             map.CollisionLayer.Collisions.Add(new Point(3, 0), CollisionType.Impassable);
             map.AnimatedTileLayer.AnimatedTiles.Add(new Point(5, 0), new AnimatedTile(0, 8));
-
-            Level level = new Level(map);
-
-            ChestData chestData = Game.Content.Load<ChestData>(@"Game\Chests\Plain Chest");
-
-            Chest chest = new Chest(chestData);
-
-            BaseSprite chestSprite = new BaseSprite(
-                containers,
-                new Rectangle(0, 0, 32, 32),
-                new Point(10, 10));
-                ItemSprite itemSprite = new ItemSprite(
-                chest,
-                chestSprite);
-            
-            level.Chests.Add(itemSprite);
-            
-            World world = new World(GameRef, GameRef.ScreenRectangle);
-            
-            world.Levels.Add(level);
-            world.CurrentLevel = 0;
-            
-            AnimatedSprite s = new AnimatedSprite(
-            
-            GameRef.Content.Load<Texture2D>(@"SpriteSheets\Eliza"),
-            
-            AnimationManager.Instance.Animations);
-            
-            s.Position = new Vector2(5 * Engine.TileWidth, 5 * Engine.TileHeight);
-    
-            EntityData ed = new EntityData("Eliza", 10, 10, 10, 10, 10, 10, "20|CON|12", "16|WIL|16",
-                "0|0|0");
-
-            Entity e = new Entity("Eliza", ed, EntityGender.Female, EntityType.NPC);
-
-            NonPlayerCharacter npc = new NonPlayerCharacter(e, s);
-
-            npc.SetConversation("eliza1");
-            world.Levels[world.CurrentLevel].Characters.Add(npc);
-
-            GamePlayScreen.World = world;
-
-            CreateConversation();
-
-            ((NonPlayerCharacter)world.Levels[world.CurrentLevel].Characters[0]).SetConversation("eliza1");
         }
 
         private void CreateConversation()
