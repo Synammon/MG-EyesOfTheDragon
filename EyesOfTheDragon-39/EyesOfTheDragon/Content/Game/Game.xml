@@ -1,0 +1,7 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<XnaContent xmlns:RpgLibrary="RpgLibrary">
+  <Asset Type="RpgLibrary:RolePlayingGame">
+    <Name>Eyes Of The Dragon</Name>
+    <Description>Game for the Eyes of the Dragon MonoGame 4.0 RPG tutorial series.</Description>
+  </Asset>
+</XnaContent>
