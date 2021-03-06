@@ -1,7 +1,0 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
-<XnaContent xmlns:ItemClasses="RpgLibrary.ItemClasses">
-  <Asset Type="ItemClasses:KeyData">
-    <Name>Golden Key</Name>
-    <Type>Golden Key</Type>
-  </Asset>
-</XnaContent>
