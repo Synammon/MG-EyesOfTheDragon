@@ -15,116 +15,6 @@
 
 #---------------------------------- Content ---------------------------------#
 
-#begin ../../../gamedata14/Game/Items/Armor/Chain Mail Boots.xml
-/importer:XmlImporter
-/processor:PassThroughProcessor
-/build:../../../gamedata14/Game/Items/Armor/Chain Mail Boots.xml;Game/Items/Armor/Chain Mail Boots.xml
-
-#begin ../../../gamedata14/Game/Items/Armor/Chain Mail Gloves.xml
-/importer:XmlImporter
-/processor:PassThroughProcessor
-/build:../../../gamedata14/Game/Items/Armor/Chain Mail Gloves.xml;Game/Items/Armor/Chain Mail Gloves.xml
-
-#begin ../../../gamedata14/Game/Items/Armor/Chain Mail Helm.xml
-/importer:XmlImporter
-/processor:PassThroughProcessor
-/build:../../../gamedata14/Game/Items/Armor/Chain Mail Helm.xml;Game/Items/Armor/Chain Mail Helm.xml
-
-#begin ../../../gamedata14/Game/Items/Armor/Chain Mail.xml
-/importer:XmlImporter
-/processor:PassThroughProcessor
-/build:../../../gamedata14/Game/Items/Armor/Chain Mail.xml;Game/Items/Armor/Chain Mail.xml
-
-#begin ../../../gamedata14/Game/Items/Armor/Leather Armor.xml
-/importer:XmlImporter
-/processor:PassThroughProcessor
-/build:../../../gamedata14/Game/Items/Armor/Leather Armor.xml;Game/Items/Armor/Leather Armor.xml
-
-#begin ../../../gamedata14/Game/Items/Armor/Leather Boots.xml
-/importer:XmlImporter
-/processor:PassThroughProcessor
-/build:../../../gamedata14/Game/Items/Armor/Leather Boots.xml;Game/Items/Armor/Leather Boots.xml
-
-#begin ../../../gamedata14/Game/Items/Armor/Leather Gloves.xml
-/importer:XmlImporter
-/processor:PassThroughProcessor
-/build:../../../gamedata14/Game/Items/Armor/Leather Gloves.xml;Game/Items/Armor/Leather Gloves.xml
-
-#begin ../../../gamedata14/Game/Items/Armor/Leather Helm.xml
-/importer:XmlImporter
-/processor:PassThroughProcessor
-/build:../../../gamedata14/Game/Items/Armor/Leather Helm.xml;Game/Items/Armor/Leather Helm.xml
-
-#begin ../../../gamedata14/Game/Items/Armor/Light Robes.xml
-/importer:XmlImporter
-/processor:PassThroughProcessor
-/build:../../../gamedata14/Game/Items/Armor/Light Robes.xml;Game/Items/Armor/Light Robes.xml
-
-#begin ../../../gamedata14/Game/Items/Armor/Medium Robes.xml
-/importer:XmlImporter
-/processor:PassThroughProcessor
-/build:../../../gamedata14/Game/Items/Armor/Medium Robes.xml;Game/Items/Armor/Medium Robes.xml
-
-#begin ../../../gamedata14/Game/Items/Armor/Studded Leather Armor.xml
-/importer:XmlImporter
-/processor:PassThroughProcessor
-/build:../../../gamedata14/Game/Items/Armor/Studded Leather Armor.xml;Game/Items/Armor/Studded Leather Armor.xml
-
-#begin ../../../gamedata14/Game/Items/Armor/Studded Leather Boots.xml
-/importer:XmlImporter
-/processor:PassThroughProcessor
-/build:../../../gamedata14/Game/Items/Armor/Studded Leather Boots.xml;Game/Items/Armor/Studded Leather Boots.xml
-
-#begin ../../../gamedata14/Game/Items/Armor/Studded Leather Gloves.xml
-/importer:XmlImporter
-/processor:PassThroughProcessor
-/build:../../../gamedata14/Game/Items/Armor/Studded Leather Gloves.xml;Game/Items/Armor/Studded Leather Gloves.xml
-
-#begin ../../../gamedata14/Game/Items/Armor/Studded Leather Helm.xml
-/importer:XmlImporter
-/processor:PassThroughProcessor
-/build:../../../gamedata14/Game/Items/Armor/Studded Leather Helm.xml;Game/Items/Armor/Studded Leather Helm.xml
-
-#begin ../../../gamedata14/Game/Items/Shield/Heavy Tower Shield.xml
-/importer:XmlImporter
-/processor:PassThroughProcessor
-/build:../../../gamedata14/Game/Items/Shield/Heavy Tower Shield.xml;Game/Items/Shield/Heavy Tower Shield.xml
-
-#begin ../../../gamedata14/Game/Items/Shield/Large Kite Shield.xml
-/importer:XmlImporter
-/processor:PassThroughProcessor
-/build:../../../gamedata14/Game/Items/Shield/Large Kite Shield.xml;Game/Items/Shield/Large Kite Shield.xml
-
-#begin ../../../gamedata14/Game/Items/Shield/Large Metal Shield.xml
-/importer:XmlImporter
-/processor:PassThroughProcessor
-/build:../../../gamedata14/Game/Items/Shield/Large Metal Shield.xml;Game/Items/Shield/Large Metal Shield.xml
-
-#begin ../../../gamedata14/Game/Items/Shield/Large Wooden Shield.xml
-/importer:XmlImporter
-/processor:PassThroughProcessor
-/build:../../../gamedata14/Game/Items/Shield/Large Wooden Shield.xml;Game/Items/Shield/Large Wooden Shield.xml
-
-#begin ../../../gamedata14/Game/Items/Shield/Medium Metal Shield.xml
-/importer:XmlImporter
-/processor:PassThroughProcessor
-/build:../../../gamedata14/Game/Items/Shield/Medium Metal Shield.xml;Game/Items/Shield/Medium Metal Shield.xml
-
-#begin ../../../gamedata14/Game/Items/Shield/Medium Wooden Shield.xml
-/importer:XmlImporter
-/processor:PassThroughProcessor
-/build:../../../gamedata14/Game/Items/Shield/Medium Wooden Shield.xml;Game/Items/Shield/Medium Wooden Shield.xml
-
-#begin ../../../gamedata14/Game/Items/Shield/Small Metal Shield.xml
-/importer:XmlImporter
-/processor:PassThroughProcessor
-/build:../../../gamedata14/Game/Items/Shield/Small Metal Shield.xml;Game/Items/Shield/Small Metal Shield.xml
-
-#begin ../../../gamedata14/Game/Items/Shield/Small Wooded Shield.xml
-/importer:XmlImporter
-/processor:PassThroughProcessor
-/build:../../../gamedata14/Game/Items/Shield/Small Wooded Shield.xml;Game/Items/Shield/Small Wooded Shield.xml
-
 #begin Backgrounds/titlescreen.png
 /importer:TextureImporter
 /processor:TextureProcessor
@@ -206,10 +96,25 @@
 /processor:PassThroughProcessor
 /build:Game/Items/Armor/Chain Mail Boots.xml
 
+#begin Game/Items/Armor/Chain Mail Boots.xml
+/importer:XmlImporter
+/processor:PassThroughProcessor
+/build:Game/Items/Armor/Chain Mail Boots.xml
+
 #begin Game/Items/Armor/Chain Mail Gloves.xml
 /importer:XmlImporter
 /processor:PassThroughProcessor
 /build:Game/Items/Armor/Chain Mail Gloves.xml
+
+#begin Game/Items/Armor/Chain Mail Gloves.xml
+/importer:XmlImporter
+/processor:PassThroughProcessor
+/build:Game/Items/Armor/Chain Mail Gloves.xml
+
+#begin Game/Items/Armor/Chain Mail Helm.xml
+/importer:XmlImporter
+/processor:PassThroughProcessor
+/build:Game/Items/Armor/Chain Mail Helm.xml
 
 #begin Game/Items/Armor/Chain Mail Helm.xml
 /importer:XmlImporter
@@ -221,10 +126,25 @@
 /processor:PassThroughProcessor
 /build:Game/Items/Armor/Chain Mail.xml
 
+#begin Game/Items/Armor/Chain Mail.xml
+/importer:XmlImporter
+/processor:PassThroughProcessor
+/build:Game/Items/Armor/Chain Mail.xml
+
 #begin Game/Items/Armor/Leather Armor.xml
 /importer:XmlImporter
 /processor:PassThroughProcessor
 /build:Game/Items/Armor/Leather Armor.xml
+
+#begin Game/Items/Armor/Leather Armor.xml
+/importer:XmlImporter
+/processor:PassThroughProcessor
+/build:Game/Items/Armor/Leather Armor.xml
+
+#begin Game/Items/Armor/Leather Boots.xml
+/importer:XmlImporter
+/processor:PassThroughProcessor
+/build:Game/Items/Armor/Leather Boots.xml
 
 #begin Game/Items/Armor/Leather Boots.xml
 /importer:XmlImporter
@@ -236,10 +156,25 @@
 /processor:PassThroughProcessor
 /build:Game/Items/Armor/Leather Gloves.xml
 
+#begin Game/Items/Armor/Leather Gloves.xml
+/importer:XmlImporter
+/processor:PassThroughProcessor
+/build:Game/Items/Armor/Leather Gloves.xml
+
 #begin Game/Items/Armor/Leather Helm.xml
 /importer:XmlImporter
 /processor:PassThroughProcessor
 /build:Game/Items/Armor/Leather Helm.xml
+
+#begin Game/Items/Armor/Leather Helm.xml
+/importer:XmlImporter
+/processor:PassThroughProcessor
+/build:Game/Items/Armor/Leather Helm.xml
+
+#begin Game/Items/Armor/Light Robes.xml
+/importer:XmlImporter
+/processor:PassThroughProcessor
+/build:Game/Items/Armor/Light Robes.xml
 
 #begin Game/Items/Armor/Light Robes.xml
 /importer:XmlImporter
@@ -251,10 +186,25 @@
 /processor:PassThroughProcessor
 /build:Game/Items/Armor/Medium Robes.xml
 
+#begin Game/Items/Armor/Medium Robes.xml
+/importer:XmlImporter
+/processor:PassThroughProcessor
+/build:Game/Items/Armor/Medium Robes.xml
+
 #begin Game/Items/Armor/Studded Leather Armor.xml
 /importer:XmlImporter
 /processor:PassThroughProcessor
 /build:Game/Items/Armor/Studded Leather Armor.xml
+
+#begin Game/Items/Armor/Studded Leather Armor.xml
+/importer:XmlImporter
+/processor:PassThroughProcessor
+/build:Game/Items/Armor/Studded Leather Armor.xml
+
+#begin Game/Items/Armor/Studded Leather Boots.xml
+/importer:XmlImporter
+/processor:PassThroughProcessor
+/build:Game/Items/Armor/Studded Leather Boots.xml
 
 #begin Game/Items/Armor/Studded Leather Boots.xml
 /importer:XmlImporter
@@ -266,10 +216,25 @@
 /processor:PassThroughProcessor
 /build:Game/Items/Armor/Studded Leather Gloves.xml
 
+#begin Game/Items/Armor/Studded Leather Gloves.xml
+/importer:XmlImporter
+/processor:PassThroughProcessor
+/build:Game/Items/Armor/Studded Leather Gloves.xml
+
 #begin Game/Items/Armor/Studded Leather Helm.xml
 /importer:XmlImporter
 /processor:PassThroughProcessor
 /build:Game/Items/Armor/Studded Leather Helm.xml
+
+#begin Game/Items/Armor/Studded Leather Helm.xml
+/importer:XmlImporter
+/processor:PassThroughProcessor
+/build:Game/Items/Armor/Studded Leather Helm.xml
+
+#begin Game/Items/Shield/Heavy Tower Shield.xml
+/importer:XmlImporter
+/processor:PassThroughProcessor
+/build:Game/Items/Shield/Heavy Tower Shield.xml
 
 #begin Game/Items/Shield/Heavy Tower Shield.xml
 /importer:XmlImporter
@@ -281,10 +246,25 @@
 /processor:PassThroughProcessor
 /build:Game/Items/Shield/Large Kite Shield.xml
 
+#begin Game/Items/Shield/Large Kite Shield.xml
+/importer:XmlImporter
+/processor:PassThroughProcessor
+/build:Game/Items/Shield/Large Kite Shield.xml
+
 #begin Game/Items/Shield/Large Metal Shield.xml
 /importer:XmlImporter
 /processor:PassThroughProcessor
 /build:Game/Items/Shield/Large Metal Shield.xml
+
+#begin Game/Items/Shield/Large Metal Shield.xml
+/importer:XmlImporter
+/processor:PassThroughProcessor
+/build:Game/Items/Shield/Large Metal Shield.xml
+
+#begin Game/Items/Shield/Large Wooden Shield.xml
+/importer:XmlImporter
+/processor:PassThroughProcessor
+/build:Game/Items/Shield/Large Wooden Shield.xml
 
 #begin Game/Items/Shield/Large Wooden Shield.xml
 /importer:XmlImporter
@@ -296,6 +276,16 @@
 /processor:PassThroughProcessor
 /build:Game/Items/Shield/Medium Metal Shield.xml
 
+#begin Game/Items/Shield/Medium Metal Shield.xml
+/importer:XmlImporter
+/processor:PassThroughProcessor
+/build:Game/Items/Shield/Medium Metal Shield.xml
+
+#begin Game/Items/Shield/Medium Wooden Shield.xml
+/importer:XmlImporter
+/processor:PassThroughProcessor
+/build:Game/Items/Shield/Medium Wooden Shield.xml
+
 #begin Game/Items/Shield/Medium Wooden Shield.xml
 /importer:XmlImporter
 /processor:PassThroughProcessor
@@ -305,6 +295,16 @@
 /importer:XmlImporter
 /processor:PassThroughProcessor
 /build:Game/Items/Shield/Small Metal Shield.xml
+
+#begin Game/Items/Shield/Small Metal Shield.xml
+/importer:XmlImporter
+/processor:PassThroughProcessor
+/build:Game/Items/Shield/Small Metal Shield.xml
+
+#begin Game/Items/Shield/Small Wooded Shield.xml
+/importer:XmlImporter
+/processor:PassThroughProcessor
+/build:Game/Items/Shield/Small Wooded Shield.xml
 
 #begin Game/Items/Shield/Small Wooded Shield.xml
 /importer:XmlImporter
