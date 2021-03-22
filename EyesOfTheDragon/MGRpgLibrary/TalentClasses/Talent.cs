@@ -16,6 +16,7 @@ namespace RpgLibrary.TalentClasses
         int levelRequirement;
         TalentType talentType;
         int activationCost;
+        int coolDown;
         List<string> effects;
 
         #endregion
@@ -57,6 +58,11 @@ namespace RpgLibrary.TalentClasses
             get { return activationCost; }
         }
 
+        public int CoolDown
+        {
+            get { return coolDown; }
+        }
+
         public List<string> Effects
         {
             get { return effects; }
@@ -85,7 +91,8 @@ namespace RpgLibrary.TalentClasses
                 name = data.Name,
                 levelRequirement = data.LevelRequirement,
                 talentType = data.TalentType,
-                activationCost = data.ActivationCost
+                activationCost = data.ActivationCost,
+                coolDown = data.CoolDown
             };
 
             foreach (string s in data.AllowedClasses)

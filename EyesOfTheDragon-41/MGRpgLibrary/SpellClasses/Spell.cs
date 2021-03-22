@@ -17,6 +17,7 @@ namespace RpgLibrary.SpellClasses
         int levelRequirement;
         SpellType spellType;
         int activationCost;
+        int coolDown;
         List<string> effects;
 
         #endregion
@@ -58,6 +59,11 @@ namespace RpgLibrary.SpellClasses
             get { return activationCost; }
         }
 
+        public int CoolDown
+        {
+            get { return coolDown; }
+        }
+
         public List<string> Effects
         {
             get { return effects; }
@@ -81,9 +87,14 @@ namespace RpgLibrary.SpellClasses
 
         public static Spell FromSpellData(SpellData data)
         {
-            Spell spell = new Spell();
-
-            spell.name = data.Name;
+            Spell spell = new Spell
+            {
+                name = data.Name,
+                levelRequirement = data.LevelRequirement,
+                spellType = data.SpellType,
+                activationCost = data.ActivationCost,
+                coolDown = data.CoolDown
+            };
 
             foreach (string s in data.AllowedClasses)
                 spell.allowedClasses.Add(s.ToLower());
@@ -95,10 +106,6 @@ namespace RpgLibrary.SpellClasses
 
             foreach (string s in data.SpellPrerequisites)
                 spell.SpellPrerequisites.Add(s);
-
-            spell.levelRequirement = data.LevelRequirement;
-            spell.spellType = data.SpellType;
-            spell.activationCost = data.ActivationCost;
 
             foreach (string s in data.Effects)
                 spell.Effects.Add(s);
