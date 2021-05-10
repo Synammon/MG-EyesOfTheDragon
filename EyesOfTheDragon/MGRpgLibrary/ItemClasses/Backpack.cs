@@ -1,4 +1,5 @@
-﻿using System;
+﻿using RpgLibrary.ItemClasses;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -37,6 +38,25 @@ namespace MGRpgLibrary.ItemClasses
         #endregion
 
         #region Method Region
+
+        public GameItem GetItem(string name)
+        {
+            GameItem item = items.Find(x => x.Item.Name == name);
+
+            if (item != null)
+            {
+                items.Remove(item);
+            }
+
+            return item;
+        }
+
+        public BaseItem PeekItem(string name)
+        {
+            GameItem item = items.Find(x => x.Item.Name == name);
+
+            return item.Item;
+        }
 
         public void AddItem(GameItem gameItem)
         {

@@ -40,7 +40,7 @@ namespace EyesOfTheDragon
         public LoadGameScreen LoadGameScreen { get; private set; }
 
         public ConversationScreen ConversationScreen { get; private set; }
-
+        public ShopState ShopScreen { get; }
         public Game1()
         {
             _graphics = new GraphicsDeviceManager(this);
@@ -49,7 +49,8 @@ namespace EyesOfTheDragon
                 0,
                 ScreenWidth,
                 ScreenHeight);
-            
+            IsMouseVisible = true;
+
             Content.RootDirectory = "Content";
             
             Components.Add(new InputHandler(this));
@@ -64,6 +65,7 @@ namespace EyesOfTheDragon
             SkillScreen = new SkillScreen(this, _gameStateManager);
             LoadGameScreen = new LoadGameScreen(this, _gameStateManager);
             ConversationScreen = new ConversationScreen(this, _gameStateManager);
+            ShopScreen = new ShopState(this, _gameStateManager);
 
             _gameStateManager.ChangeState(TitleScreen);
 
@@ -92,6 +94,8 @@ namespace EyesOfTheDragon
             DataManager.ReadChestData(Content);
             DataManager.ReadKeyData(Content);
             DataManager.ReadSkillData(Content);
+
+            FontManager.AddFont("testfont", Content.Load<SpriteFont>("Fonts/scenefont"));
         }
 
         protected override void Update(GameTime gameTime)

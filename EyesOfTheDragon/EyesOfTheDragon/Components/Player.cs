@@ -10,6 +10,7 @@ using MGRpgLibrary.TileEngine;
 using MGRpgLibrary.SpriteClasses;
 using MGRpgLibrary.CharacterClasses;
 using EyesOfTheDragon.GameScreens;
+using MGRpgLibrary.ItemClasses;
 
 namespace EyesOfTheDragon.Components
 {
@@ -20,6 +21,7 @@ namespace EyesOfTheDragon.Components
         Camera camera;
         Game1 gameRef;
         readonly Character character;
+        Backpack backpack = new Backpack();
 
         #endregion
 
@@ -40,6 +42,10 @@ namespace EyesOfTheDragon.Components
         {
             get { return character; }
         }
+
+        public Backpack Backpack { get => backpack; set => backpack = value; }
+
+        public int Gold { get; set; }
 
         #endregion
 

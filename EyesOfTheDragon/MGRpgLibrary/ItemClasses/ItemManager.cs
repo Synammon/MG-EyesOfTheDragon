@@ -9,25 +9,25 @@ namespace RpgLibrary.ItemClasses
     {
         #region Fields Region
 
-        Dictionary<string, Weapon> weapons = new Dictionary<string, Weapon>();
-        Dictionary<string, Armor> armors = new Dictionary<string, Armor>();
-        Dictionary<string, Shield> shields = new Dictionary<string, Shield>();
+        static readonly Dictionary<string, Weapon> weapons = new Dictionary<string, Weapon>();
+        static readonly Dictionary<string, Armor> armors = new Dictionary<string, Armor>();
+        static readonly Dictionary<string, Shield> shields = new Dictionary<string, Shield>();
 
         #endregion
 
         #region Keys Property Region
 
-        public Dictionary<string, Weapon>.KeyCollection WeaponKeys
+        public static Dictionary<string, Weapon>.KeyCollection WeaponKeys
         {
             get { return weapons.Keys; }
         }
 
-        public Dictionary<string, Armor>.KeyCollection ArmorKeys
+        public static Dictionary<string, Armor>.KeyCollection ArmorKeys
         {
             get { return armors.Keys; }
         }
 
-        public Dictionary<string, Shield>.KeyCollection ShieldKeys
+        public static Dictionary<string, Shield>.KeyCollection ShieldKeys
         {
             get { return shields.Keys; }
         }
@@ -43,7 +43,7 @@ namespace RpgLibrary.ItemClasses
 
         #region Weapon Methods
 
-        public void AddWeapon(Weapon weapon)
+        public static void AddWeapon(Weapon weapon)
         {
             if (!weapons.ContainsKey(weapon.Name))
             {
@@ -51,7 +51,7 @@ namespace RpgLibrary.ItemClasses
             }
         }
 
-        public Weapon GetWeapon(string name)
+        public static Weapon GetWeapon(string name)
         {
             if (weapons.ContainsKey(name))
             {
@@ -61,7 +61,7 @@ namespace RpgLibrary.ItemClasses
             return null;
         }
 
-        public bool ContainsWeapon(string name)
+        public static bool ContainsWeapon(string name)
         {
             return weapons.ContainsKey(name);
         }
@@ -70,7 +70,7 @@ namespace RpgLibrary.ItemClasses
 
         #region Armor Methods
 
-        public void AddArmor(Armor armor)
+        public static void AddArmor(Armor armor)
         {
             if (!armors.ContainsKey(armor.Name))
             {
@@ -78,7 +78,7 @@ namespace RpgLibrary.ItemClasses
             }
         }
 
-        public Armor GetArmor(string name)
+        public static Armor GetArmor(string name)
         {
             if (armors.ContainsKey(name))
             {
@@ -88,7 +88,7 @@ namespace RpgLibrary.ItemClasses
             return null;
         }
 
-        public bool ContainsArmor(string name)
+        public static bool ContainsArmor(string name)
         {
             return armors.ContainsKey(name);
         }
@@ -97,7 +97,7 @@ namespace RpgLibrary.ItemClasses
 
         #region Shield Methods
 
-        public void AddShield(Shield shield)
+        public static void AddShield(Shield shield)
         {
             if (!shields.ContainsKey(shield.Name))
             {
@@ -105,7 +105,7 @@ namespace RpgLibrary.ItemClasses
             }
         }
 
-        public Shield GetShield(string name)
+        public static Shield GetShield(string name)
         {
             if (shields.ContainsKey(name))
             {
@@ -115,7 +115,7 @@ namespace RpgLibrary.ItemClasses
             return null;
         }
 
-        public bool ContainsShield(string name)
+        public static bool ContainsShield(string name)
         {
             return shields.ContainsKey(name);
         }

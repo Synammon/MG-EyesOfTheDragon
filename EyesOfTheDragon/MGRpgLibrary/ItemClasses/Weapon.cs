@@ -62,11 +62,20 @@ namespace RpgLibrary.ItemClasses
             AttackModifier = attackModifier;
             DamageEffects = damageEffectData;
         }
-        
+
+        public Weapon(WeaponData weaponData)
+            : base(weaponData.Name, weaponData.Type, weaponData.Price, weaponData.Weight, weaponData.AllowableClasses)
+        {
+            NumberHands = weaponData.NumberHands;
+            AttackValue = weaponData.AttackValue;
+            AttackModifier = weaponData.AttackModifier;
+            DamageEffects = weaponData.DamageEffectData;
+        }
+
         #endregion
-        
+
         #region Abstract Method Region
-        
+
         public override object Clone()
         {
             string[] allowedClasses = new string[allowableClasses.Count];

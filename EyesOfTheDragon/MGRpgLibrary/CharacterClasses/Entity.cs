@@ -10,7 +10,7 @@ using System.Text;
 namespace RpgLibrary.CharacterClasses
 {
     public enum EntityGender { Male, Female, NonBinary, Unknown }
-    public enum EntityType { Character, NPC, Monster, Creature }
+    public enum EntityType { Character, NPC, Monster, Creature, Merchant }
 
     public sealed class Entity
     {

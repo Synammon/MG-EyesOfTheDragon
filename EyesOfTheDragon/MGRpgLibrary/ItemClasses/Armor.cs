@@ -54,6 +54,14 @@ namespace RpgLibrary.ItemClasses
             DefenseModifier = defenseModifier;
         }
 
+        public Armor(ArmorData armorData)
+            : base(armorData.Name, armorData.Type, armorData.Price, armorData.Weight, armorData.AllowableClasses)
+        {
+            Location = armorData.ArmorLocation;
+            DefenseValue = armorData.DefenseValue;
+            DefenseModifier = armorData.DefenseModifier;
+        }
+
         #endregion
 
         #region Abstract Method Region

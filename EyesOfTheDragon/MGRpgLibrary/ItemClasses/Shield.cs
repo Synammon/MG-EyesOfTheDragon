@@ -46,6 +46,13 @@ namespace RpgLibrary.ItemClasses
             DefenseModifier = defenseModifier;
         }
 
+        public Shield(ShieldData shieldData)
+            : base(shieldData.Name, shieldData.Type, shieldData.Price, shieldData.Weight, shieldData.AllowableClasses)
+        {
+            DefenseValue = shieldData.DefenseValue;
+            DefenseModifier = shieldData.DefenseModifier;
+        }
+
         #endregion
 
         #region Abstract Method Region

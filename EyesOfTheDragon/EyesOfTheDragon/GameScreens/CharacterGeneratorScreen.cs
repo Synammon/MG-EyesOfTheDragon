@@ -242,6 +242,43 @@ namespace EyesOfTheDragon.GameScreens
             RpgLibrary.WorldClasses.MapData mapData = 
                 Game.Content.Load<RpgLibrary.WorldClasses.MapData>(@"Game\Levels\Maps\" + levelData.MapName);
 
+
+            string[] fileNames = Directory.GetFiles(
+                Path.Combine("Content/Game/Items", "Armor"),
+                "*.xnb");
+
+            foreach (string a in fileNames)
+            {
+                string path = "Game/Items/Armor/" + Path.GetFileNameWithoutExtension(a);
+
+                ArmorData armorData = Game.Content.Load<ArmorData>(path);
+                ItemManager.AddArmor(new Armor(armorData));
+            }
+
+            fileNames = Directory.GetFiles(
+                Path.Combine("Content/Game/Items", "Shield"),
+                "*.xnb");
+
+            foreach (string a in fileNames)
+            {
+                string path = "Game/Items/Shield/" + Path.GetFileNameWithoutExtension(a);
+
+                ShieldData shieldData = Game.Content.Load<ShieldData>(path);
+                ItemManager.AddShield(new Shield(shieldData));
+            }
+
+            fileNames = Directory.GetFiles(
+                Path.Combine("Content/Game/Items", "Weapon"),
+                "*.xnb");
+
+            foreach (string a in fileNames)
+            {
+                string path = "Game/Items/Weapon/" + Path.GetFileNameWithoutExtension(a);
+
+                WeaponData weaponData = Game.Content.Load<WeaponData>(path);
+                ItemManager.AddWeapon(new Weapon(weaponData));
+            }
+
             CharacterLayerData charData =
                 Game.Content.Load<CharacterLayerData>(@"Game\Levels\Chars\Starting Level");
             CharacterLayer characterLayer = new CharacterLayer();
@@ -312,13 +349,29 @@ namespace EyesOfTheDragon.GameScreens
             NonPlayerCharacter npc = new NonPlayerCharacter(e, s);
 
             npc.SetConversation("eliza1");
-            world.Levels[world.CurrentLevel].Characters.Add(npc);
+            //world.Levels[world.CurrentLevel].Characters.Add(npc);
 
+            s = new AnimatedSprite(
+                GameRef.Content.Load<Texture2D>(@"SpriteSheets\Eliza"),
+                AnimationManager.Instance.Animations);
+            s.Position = new Vector2(10 * Engine.TileWidth, 0);
+
+            ed = new EntityData("Barbra", 2, 10, 10, 10, 10, 10, 10, "20|CON|12", "16|WIL|16", "0|0|0");
+
+            e = new Entity("Barbra", ed, EntityGender.Female, EntityType.Merchant);
+
+            Merchant m = new Merchant(e, s);
+            Texture2D items = Game.Content.Load<Texture2D>("ObjectSprites/roguelikeitems");
+            m.Backpack.AddItem(new GameItem(ItemManager.GetWeapon("Long Sword"), items, new Rectangle(0, 0, 16, 16)));
+            m.Backpack.AddItem(new GameItem(ItemManager.GetWeapon("Short Sword"), items, new Rectangle(16, 0, 16, 16)));
+
+            world.Levels[world.CurrentLevel].Characters.Add(m);
+            ((CharacterLayer)world.Levels[world.CurrentLevel].Map.Layers.Find(x => x is CharacterLayer)).Characters.Add(new Point(10, 0), m);
             GamePlayScreen.World = world;
 
             CreateConversation();
 
-            ((NonPlayerCharacter)world.Levels[world.CurrentLevel].Characters[0]).SetConversation("eliza1");
+            // ((NonPlayerCharacter)world.Levels[world.CurrentLevel].Characters[0]).SetConversation("eliza1");
         }
 
         private void CreatePlayer()
@@ -357,6 +410,7 @@ namespace EyesOfTheDragon.GameScreens
 
             Character character = new Character(entity, sprite);
             GamePlayScreen.Player = new Player(GameRef, character);
+            GamePlayScreen.Player.Gold = 200;
         }
 
         private void CreateWorld()

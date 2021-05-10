@@ -89,6 +89,19 @@ namespace MGRpgLibrary.CharacterClasses
 
         #endregion
 
+        #region Money Region
+
+        private int _gold;
+
+        public int Gold { get => _gold; }
+
+        public void UpdateGold(int amount)
+        {
+            _gold += amount;
+        }
+
+        #endregion
+
         #region Constructor Region
 
         public Character(Entity entity, AnimatedSprite sprite)

@@ -96,6 +96,11 @@ namespace EyesOfTheDragon.GameScreens
                                     GameRef.ConversationScreen.StartConversation();
                                 }
                             }
+                            else if (distance < Character.SpeakingRadius && c is Merchant)
+                            {
+                                StateManager.PushState(GameRef.ShopScreen);
+                                GameRef.ShopScreen.SetMerchant(c as Merchant);
+                            }
                         }
                     }
                 }
