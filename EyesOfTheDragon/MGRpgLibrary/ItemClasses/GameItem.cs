@@ -13,7 +13,7 @@ namespace MGRpgLibrary.ItemClasses
         #region Field Region
 
         public Vector2 Position;
-        private Texture2D image;
+        private string image;
         private Rectangle? sourceRectangle;
         private readonly BaseItem baseItem;
         private Type type;
@@ -22,7 +22,7 @@ namespace MGRpgLibrary.ItemClasses
 
         #region Property Region
 
-        public Texture2D Image
+        public string Image
         {
             get { return image; }
         }
@@ -47,7 +47,7 @@ namespace MGRpgLibrary.ItemClasses
 
         #region Constructor Region
 
-        public GameItem(BaseItem item, Texture2D texture, Rectangle? source)
+        public GameItem(BaseItem item, string texture, Rectangle? source)
         {
             baseItem = item;
             image = texture;
@@ -61,7 +61,12 @@ namespace MGRpgLibrary.ItemClasses
 
         public void Draw(SpriteBatch spriteBatch)
         {
-            spriteBatch.Draw(image, Position, sourceRectangle, Color.White);
+            spriteBatch.Draw(TextureManager.GetTexture(image), Position, sourceRectangle, Color.White);
+        }
+
+        public void Draw(SpriteBatch spriteBatch, Rectangle destination)
+        {
+            spriteBatch.Draw(TextureManager.GetTexture(Image), destination, sourceRectangle, Color.White);
         }
 
         #endregion

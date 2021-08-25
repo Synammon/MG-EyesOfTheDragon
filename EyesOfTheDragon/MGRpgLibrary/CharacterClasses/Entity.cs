@@ -1,4 +1,5 @@
-﻿using RpgLibrary.EffectClasses;
+﻿using MGRpgLibrary.ItemClasses;
+using RpgLibrary.EffectClasses;
 using RpgLibrary.SkillClasses;
 using RpgLibrary.SpellClasses;
 using RpgLibrary.TalentClasses;
@@ -12,7 +13,7 @@ namespace RpgLibrary.CharacterClasses
     public enum EntityGender { Male, Female, NonBinary, Unknown }
     public enum EntityType { Character, NPC, Monster, Creature, Merchant }
 
-    public sealed class Entity
+    public class Entity
     {
         #region Vital Field and Property Region
 
@@ -68,7 +69,7 @@ namespace RpgLibrary.CharacterClasses
 
     #region Basic Attribute and Property Region
 
-    private int strength;
+        private int strength;
         private int dexterity;
         private int cunning;
         private int willpower;
@@ -220,6 +221,59 @@ namespace RpgLibrary.CharacterClasses
 
         #endregion
 
+        #region Item Region
+
+        // Armor fields
+        protected GameItem head;
+        protected GameItem body;
+        protected GameItem hands;
+        protected GameItem feet;
+
+        // Weapon/Shield fields
+        protected GameItem mainHand;
+        protected GameItem offHand;
+        protected int handsFree;
+
+
+        // Armor properties
+        public GameItem Head
+        {
+            get { return head; }
+        }
+
+        public GameItem Body
+        {
+            get { return body; }
+        }
+
+        public GameItem Hands
+        {
+            get { return hands; }
+        }
+
+        public GameItem Feet
+        {
+            get { return feet; }
+        }
+
+        // Weapon/Shield properties
+
+        public GameItem MainHand
+        {
+            get { return mainHand; }
+        }
+
+        public GameItem OffHand
+        {
+            get { return offHand; }
+        }
+
+        public int HandsFree
+        {
+            get { return handsFree; }
+        }
+
+        #endregion
         #region Constructor Region
 
         private Entity()

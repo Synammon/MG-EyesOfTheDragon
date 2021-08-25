@@ -92,17 +92,22 @@ namespace EyesOfTheDragon.GameScreens
                         InputHandler.KeyReleased(Keys.Enter) ||
                         (InputHandler.CheckMouseReleased(MouseButton.Left) && mouseOver))
                     {
-                        if (selected >= 0 &&
+                        if (selected != -1 &&
                             GamePlayScreen.Player.Gold >=
                             merchant.Backpack.PeekItem(
                                 merchant.Backpack.Items[selected].Item.Name).Price)
                         {
-                            GamePlayScreen.Player.Backpack.AddItem(
-                                merchant.Backpack.GetItem(
-                                    merchant.Backpack.Items[selected].Item.Name));
+                            if (selected >= merchant.Backpack.Items.Count)
+                            {
+                                return;
+                            }
+
                             GamePlayScreen.Player.Gold -=
                                 merchant.Backpack.PeekItem(
                                     merchant.Backpack.Items[selected].Item.Name).Price;
+                            GamePlayScreen.Player.Backpack.AddItem(
+                                merchant.Backpack.GetItem(
+                                    merchant.Backpack.Items[selected].Item.Name));
                         }
                     }
                     break;

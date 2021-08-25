@@ -38,9 +38,10 @@ namespace EyesOfTheDragon
         public CharacterGeneratorScreen CharacterGeneratorScreen { get; private set; }
         public SkillScreen SkillScreen { get; private set; }
         public LoadGameScreen LoadGameScreen { get; private set; }
-
+        public InventoryScreen InventoryScreen { get; private set; }
         public ConversationScreen ConversationScreen { get; private set; }
         public ShopState ShopScreen { get; }
+
         public Game1()
         {
             _graphics = new GraphicsDeviceManager(this);
@@ -58,6 +59,8 @@ namespace EyesOfTheDragon
             _gameStateManager = new GameStateManager(this);
             Components.Add(_gameStateManager);
 
+            _ = new TextureManager();
+
             TitleScreen = new TitleScreen(this, _gameStateManager);
             StartMenuScreen = new StartMenuScreen(this, _gameStateManager);
             GamePlayScreen = new GamePlayScreen(this, _gameStateManager);
@@ -66,6 +69,7 @@ namespace EyesOfTheDragon
             LoadGameScreen = new LoadGameScreen(this, _gameStateManager);
             ConversationScreen = new ConversationScreen(this, _gameStateManager);
             ShopScreen = new ShopState(this, _gameStateManager);
+            InventoryScreen = new InventoryScreen(this, _gameStateManager);
 
             _gameStateManager.ChangeState(TitleScreen);
 
@@ -96,11 +100,12 @@ namespace EyesOfTheDragon
             DataManager.ReadSkillData(Content);
 
             FontManager.AddFont("testfont", Content.Load<SpriteFont>("Fonts/scenefont"));
+            TextureManager.AddTexture("FullSheet", Content.Load<Texture2D>("GUI/ProjectUtumno_full"));
         }
 
         protected override void Update(GameTime gameTime)
         {
-            if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.Escape))
+            if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.F10))
                 Exit();
 
             // TODO: Add your update logic here

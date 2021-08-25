@@ -106,6 +106,11 @@ namespace EyesOfTheDragon.GameScreens
                 }
             }
 
+            if (InputHandler.KeyReleased(Keys.I))
+            {
+                StateManager.PushState(GameRef.InventoryScreen);
+            }
+
             base.Update(gameTime);
         }
 

@@ -362,8 +362,8 @@ namespace EyesOfTheDragon.GameScreens
 
             Merchant m = new Merchant(e, s);
             Texture2D items = Game.Content.Load<Texture2D>("ObjectSprites/roguelikeitems");
-            m.Backpack.AddItem(new GameItem(ItemManager.GetWeapon("Long Sword"), items, new Rectangle(0, 0, 16, 16)));
-            m.Backpack.AddItem(new GameItem(ItemManager.GetWeapon("Short Sword"), items, new Rectangle(16, 0, 16, 16)));
+            m.Backpack.AddItem(new GameItem(ItemManager.GetWeapon("Long Sword"), "FullSheet", new Rectangle(1696, 1408, 32, 32)));
+            m.Backpack.AddItem(new GameItem(ItemManager.GetWeapon("Short Sword"), "FullSheet", new Rectangle(800, 1504, 32, 32)));
 
             world.Levels[world.CurrentLevel].Characters.Add(m);
             ((CharacterLayer)world.Levels[world.CurrentLevel].Map.Layers.Find(x => x is CharacterLayer)).Characters.Add(new Point(10, 0), m);
@@ -423,7 +423,8 @@ namespace EyesOfTheDragon.GameScreens
             Tileset tileset2 = new Tileset(tilesetTexture, 8, 8, 32, 32);
 
             tilesetTexture = Game.Content.Load<Texture2D>(@"Tilesets\fire-tiles");
-
+            TextureManager.AddTexture("FullSheet", Game.Content.Load<Texture2D>(@"GUI\ProjectUtumno_full"));
+            TextureManager.AddTexture("SuppSheet", Game.Content.Load<Texture2D>(@"GUI\ProjectUtumno_supplemental"));
             AnimatedTileset animatedSet = new AnimatedTileset(tilesetTexture, 8, 1, 64, 64);
             MapLayer layer = new MapLayer(100, 100);
 

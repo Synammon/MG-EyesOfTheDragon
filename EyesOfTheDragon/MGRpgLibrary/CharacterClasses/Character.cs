@@ -49,44 +49,6 @@ namespace MGRpgLibrary.CharacterClasses
             get { return sprite; }
         }
 
-        // Armor properties
-        public GameItem Head
-        {
-            get { return head; }
-        }
-
-        public GameItem Body
-        {
-            get { return body; }
-        }
-
-        public GameItem Hands
-        {
-            get { return hands; }
-        }
-
-        public GameItem Feet
-        {
-            get { return feet; }
-        }
-
-        // Weapon/Shield properties
-
-        public GameItem MainHand
-        {
-            get { return mainHand; }
-        }
-
-        public GameItem OffHand
-        {
-            get { return offHand; }
-        }
-
-        public int HandsFree
-        {
-            get { return handsFree; }
-        }
-
         #endregion
 
         #region Money Region
