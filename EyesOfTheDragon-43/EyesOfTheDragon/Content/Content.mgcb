@@ -1,0 +1,606 @@
+
+#----------------------------- Global Properties ----------------------------#
+
+/outputDir:bin/$(Platform)
+/intermediateDir:obj/$(Platform)
+/platform:DesktopGL
+/config:
+/profile:HiDef
+/compress:True
+
+#-------------------------------- References --------------------------------#
+
+/reference:..\..\MGRpgLibrary\bin\Debug\netstandard2.0\MGRpgLibrary.dll
+/reference:..\..\RpgLibrary\bin\Debug\netstandard2.0\RpgLibrary.dll
+
+#---------------------------------- Content ---------------------------------#
+
+#begin Backgrounds/titlescreen.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:Backgrounds/titlescreen.png
+
+#begin Fonts/ControlFont.spritefont
+/importer:FontDescriptionImporter
+/processor:FontDescriptionProcessor
+/processorParam:PremultiplyAlpha=True
+/processorParam:TextureFormat=Compressed
+/build:Fonts/ControlFont.spritefont
+
+#begin Fonts/scenefont.spritefont
+/importer:FontDescriptionImporter
+/processor:FontDescriptionProcessor
+/processorParam:PremultiplyAlpha=True
+/processorParam:TextureFormat=Compressed
+/build:Fonts/scenefont.spritefont
+
+#begin Game/Chests/Big Gold Chest.xml
+/importer:XmlImporter
+/processor:PassThroughProcessor
+/build:Game/Chests/Big Gold Chest.xml
+
+#begin Game/Chests/Broken Crate.xml
+/importer:XmlImporter
+/processor:PassThroughProcessor
+/build:Game/Chests/Broken Crate.xml
+
+#begin Game/Chests/Gold Chest.xml
+/importer:XmlImporter
+/processor:PassThroughProcessor
+/build:Game/Chests/Gold Chest.xml
+
+#begin Game/Chests/Plain Chest.xml
+/importer:XmlImporter
+/processor:PassThroughProcessor
+/build:Game/Chests/Plain Chest.xml
+
+#begin Game/Chests/Rusty Chest.xml
+/importer:XmlImporter
+/processor:PassThroughProcessor
+/build:Game/Chests/Rusty Chest.xml
+
+#begin Game/Classes/Fighter.xml
+/importer:XmlImporter
+/processor:PassThroughProcessor
+/build:Game/Classes/Fighter.xml
+
+#begin Game/Classes/Priest.xml
+/importer:XmlImporter
+/processor:PassThroughProcessor
+/build:Game/Classes/Priest.xml
+
+#begin Game/Classes/Rogue.xml
+/importer:XmlImporter
+/processor:PassThroughProcessor
+/build:Game/Classes/Rogue.xml
+
+#begin Game/Classes/Wizard.xml
+/importer:XmlImporter
+/processor:PassThroughProcessor
+/build:Game/Classes/Wizard.xml
+
+#begin Game/Game.xml
+/importer:XmlImporter
+/processor:PassThroughProcessor
+/build:Game/Game.xml
+
+#begin Game/Items/Armor/Chain Mail Boots.xml
+/importer:XmlImporter
+/processor:PassThroughProcessor
+/build:Game/Items/Armor/Chain Mail Boots.xml
+
+#begin Game/Items/Armor/Chain Mail Gloves.xml
+/importer:XmlImporter
+/processor:PassThroughProcessor
+/build:Game/Items/Armor/Chain Mail Gloves.xml
+
+#begin Game/Items/Armor/Chain Mail Helm.xml
+/importer:XmlImporter
+/processor:PassThroughProcessor
+/build:Game/Items/Armor/Chain Mail Helm.xml
+
+#begin Game/Items/Armor/Chain Mail.xml
+/importer:XmlImporter
+/processor:PassThroughProcessor
+/build:Game/Items/Armor/Chain Mail.xml
+
+#begin Game/Items/Armor/Leather Armor.xml
+/importer:XmlImporter
+/processor:PassThroughProcessor
+/build:Game/Items/Armor/Leather Armor.xml
+
+#begin Game/Items/Armor/Leather Boots.xml
+/importer:XmlImporter
+/processor:PassThroughProcessor
+/build:Game/Items/Armor/Leather Boots.xml
+
+#begin Game/Items/Armor/Leather Gloves.xml
+/importer:XmlImporter
+/processor:PassThroughProcessor
+/build:Game/Items/Armor/Leather Gloves.xml
+
+#begin Game/Items/Armor/Leather Helm.xml
+/importer:XmlImporter
+/processor:PassThroughProcessor
+/build:Game/Items/Armor/Leather Helm.xml
+
+#begin Game/Items/Armor/Light Robes.xml
+/importer:XmlImporter
+/processor:PassThroughProcessor
+/build:Game/Items/Armor/Light Robes.xml
+
+#begin Game/Items/Armor/Medium Robes.xml
+/importer:XmlImporter
+/processor:PassThroughProcessor
+/build:Game/Items/Armor/Medium Robes.xml
+
+#begin Game/Items/Armor/Studded Leather Armor.xml
+/importer:XmlImporter
+/processor:PassThroughProcessor
+/build:Game/Items/Armor/Studded Leather Armor.xml
+
+#begin Game/Items/Armor/Studded Leather Boots.xml
+/importer:XmlImporter
+/processor:PassThroughProcessor
+/build:Game/Items/Armor/Studded Leather Boots.xml
+
+#begin Game/Items/Armor/Studded Leather Gloves.xml
+/importer:XmlImporter
+/processor:PassThroughProcessor
+/build:Game/Items/Armor/Studded Leather Gloves.xml
+
+#begin Game/Items/Armor/Studded Leather Helm.xml
+/importer:XmlImporter
+/processor:PassThroughProcessor
+/build:Game/Items/Armor/Studded Leather Helm.xml
+
+#begin Game/Items/Shield/Heavy Tower Shield.xml
+/importer:XmlImporter
+/processor:PassThroughProcessor
+/build:Game/Items/Shield/Heavy Tower Shield.xml
+
+#begin Game/Items/Shield/Large Kite Shield.xml
+/importer:XmlImporter
+/processor:PassThroughProcessor
+/build:Game/Items/Shield/Large Kite Shield.xml
+
+#begin Game/Items/Shield/Large Metal Shield.xml
+/importer:XmlImporter
+/processor:PassThroughProcessor
+/build:Game/Items/Shield/Large Metal Shield.xml
+
+#begin Game/Items/Shield/Large Wooden Shield.xml
+/importer:XmlImporter
+/processor:PassThroughProcessor
+/build:Game/Items/Shield/Large Wooden Shield.xml
+
+#begin Game/Items/Shield/Medium Metal Shield.xml
+/importer:XmlImporter
+/processor:PassThroughProcessor
+/build:Game/Items/Shield/Medium Metal Shield.xml
+
+#begin Game/Items/Shield/Medium Wooden Shield.xml
+/importer:XmlImporter
+/processor:PassThroughProcessor
+/build:Game/Items/Shield/Medium Wooden Shield.xml
+
+#begin Game/Items/Shield/Small Metal Shield.xml
+/importer:XmlImporter
+/processor:PassThroughProcessor
+/build:Game/Items/Shield/Small Metal Shield.xml
+
+#begin Game/Items/Shield/Small Wooded Shield.xml
+/importer:XmlImporter
+/processor:PassThroughProcessor
+/build:Game/Items/Shield/Small Wooded Shield.xml
+
+#begin Game/Items/Weapon/Acolyte Staff.xml
+/importer:XmlImporter
+/processor:PassThroughProcessor
+/build:Game/Items/Weapon/Acolyte Staff.xml
+
+#begin Game/Items/Weapon/Apprentice Staff.xml
+/importer:XmlImporter
+/processor:PassThroughProcessor
+/build:Game/Items/Weapon/Apprentice Staff.xml
+
+#begin Game/Items/Weapon/Battle Axe.xml
+/importer:XmlImporter
+/processor:PassThroughProcessor
+/build:Game/Items/Weapon/Battle Axe.xml
+
+#begin Game/Items/Weapon/Broad Sword.xml
+/importer:XmlImporter
+/processor:PassThroughProcessor
+/build:Game/Items/Weapon/Broad Sword.xml
+
+#begin Game/Items/Weapon/Club.xml
+/importer:XmlImporter
+/processor:PassThroughProcessor
+/build:Game/Items/Weapon/Club.xml
+
+#begin Game/Items/Weapon/Dagger.xml
+/importer:XmlImporter
+/processor:PassThroughProcessor
+/build:Game/Items/Weapon/Dagger.xml
+
+#begin Game/Items/Weapon/Flail.xml
+/importer:XmlImporter
+/processor:PassThroughProcessor
+/build:Game/Items/Weapon/Flail.xml
+
+#begin Game/Items/Weapon/Great Sword.xml
+/importer:XmlImporter
+/processor:PassThroughProcessor
+/build:Game/Items/Weapon/Great Sword.xml
+
+#begin Game/Items/Weapon/Halberd.xml
+/importer:XmlImporter
+/processor:PassThroughProcessor
+/build:Game/Items/Weapon/Halberd.xml
+
+#begin Game/Items/Weapon/Long Sword.xml
+/importer:XmlImporter
+/processor:PassThroughProcessor
+/build:Game/Items/Weapon/Long Sword.xml
+
+#begin Game/Items/Weapon/Mace.xml
+/importer:XmlImporter
+/processor:PassThroughProcessor
+/build:Game/Items/Weapon/Mace.xml
+
+#begin Game/Items/Weapon/Maul.xml
+/importer:XmlImporter
+/processor:PassThroughProcessor
+/build:Game/Items/Weapon/Maul.xml
+
+#begin Game/Items/Weapon/Short Sword.xml
+/importer:XmlImporter
+/processor:PassThroughProcessor
+/build:Game/Items/Weapon/Short Sword.xml
+
+#begin Game/Items/Weapon/War Axe.xml
+/importer:XmlImporter
+/processor:PassThroughProcessor
+/build:Game/Items/Weapon/War Axe.xml
+
+#begin Game/Keys/Golden Key.xml
+/importer:XmlImporter
+/processor:PassThroughProcessor
+/build:Game/Keys/Golden Key.xml
+
+#begin Game/Keys/Rusty Key.xml
+/importer:XmlImporter
+/processor:PassThroughProcessor
+/build:Game/Keys/Rusty Key.xml
+
+#begin Game/Levels/Chars/Starting Level.xml
+/importer:XmlImporter
+/processor:PassThroughProcessor
+/build:Game/Levels/Chars/Starting Level.xml
+
+#begin Game/Levels/Maps/Village.xml
+/importer:XmlImporter
+/processor:PassThroughProcessor
+/build:Game/Levels/Maps/Village.xml
+
+#begin Game/Levels/Starting Level.xml
+/importer:XmlImporter
+/processor:PassThroughProcessor
+/build:Game/Levels/Starting Level.xml
+
+#begin Game/Skills/Bartering.xml
+/importer:XmlImporter
+/processor:PassThroughProcessor
+/build:Game/Skills/Bartering.xml
+
+#begin Game/Skills/Herbalism.xml
+/importer:XmlImporter
+/processor:PassThroughProcessor
+/build:Game/Skills/Herbalism.xml
+
+#begin Game/Skills/Poison Making.xml
+/importer:XmlImporter
+/processor:PassThroughProcessor
+/build:Game/Skills/Poison Making.xml
+
+#begin Game/Skills/Trap Making.xml
+/importer:XmlImporter
+/processor:PassThroughProcessor
+/build:Game/Skills/Trap Making.xml
+
+#begin GameScenes/basic_scene.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:GameScenes/basic_scene.png
+
+#begin GUI/inventory-gui.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:GUI/inventory-gui.png
+
+#begin GUI/leftarrowUp.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:GUI/leftarrowUp.png
+
+#begin GUI/listBoxImage.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:GUI/listBoxImage.png
+
+#begin GUI/ProjectUtumno_full.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:GUI/ProjectUtumno_full.png
+
+#begin GUI/ProjectUtumno_full.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:GUI/ProjectUtumno_full.png
+
+#begin GUI/ProjectUtumno_supplemental.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:GUI/ProjectUtumno_supplemental.png
+
+#begin GUI/ProjectUtumno_supplemental.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:GUI/ProjectUtumno_supplemental.png
+
+#begin GUI/rightarrowUp.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:GUI/rightarrowUp.png
+
+#begin GUI/StopBar.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:GUI/StopBar.png
+
+#begin ObjectSprites/containers.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:ObjectSprites/containers.png
+
+#begin ObjectSprites/roguelikeitems.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:ObjectSprites/roguelikeitems.png
+
+#begin PlayerSprites/femalefighter.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:PlayerSprites/femalefighter.png
+
+#begin PlayerSprites/femalepriest.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:PlayerSprites/femalepriest.png
+
+#begin PlayerSprites/femalerogue.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:PlayerSprites/femalerogue.png
+
+#begin PlayerSprites/femalewizard.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:PlayerSprites/femalewizard.png
+
+#begin PlayerSprites/malefighter.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:PlayerSprites/malefighter.png
+
+#begin PlayerSprites/malepriest.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:PlayerSprites/malepriest.png
+
+#begin PlayerSprites/malerogue.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:PlayerSprites/malerogue.png
+
+#begin PlayerSprites/malewizard.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:PlayerSprites/malewizard.png
+
+#begin SpriteSheets/Eliza.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:SpriteSheets/Eliza.png
+
+#begin Tilesets/fire-tiles.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:Tilesets/fire-tiles.png
+
+#begin Tilesets/tileset1.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:Tilesets/tileset1.png
+
+#begin Tilesets/tileset2.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:Tilesets/tileset2.png
+

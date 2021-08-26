@@ -57,7 +57,7 @@ namespace RpgLibrary.ItemClasses
         public bool IsEquiped
         {
             get { return equipped; }
-            protected set { equipped = value; }
+            set { equipped = value; }
         }
 
         #endregion

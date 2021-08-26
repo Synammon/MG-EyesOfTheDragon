@@ -1,5 +1,6 @@
 ﻿using MGRpgLibrary.ItemClasses;
 using RpgLibrary.EffectClasses;
+using RpgLibrary.ItemClasses;
 using RpgLibrary.SkillClasses;
 using RpgLibrary.SpellClasses;
 using RpgLibrary.TalentClasses;
@@ -376,6 +377,101 @@ namespace RpgLibrary.CharacterClasses
 
             foreach (Modifier modifier in talentModifiers)
                 modifier.Update(elapsedTime);
+        }
+
+        public void Equip(GameItem item)
+        {
+            if (!item.Item.AllowableClasses.Contains(EntityClass))
+            {
+                return;
+            }
+
+            if (item.Item is Weapon weapon)
+            {
+                if (mainHand == null)
+                {
+                    mainHand = item;
+                    item.Item.IsEquiped = true;
+                }
+                else
+                {
+                    if (mainHand != item)
+                    {
+                        mainHand.Item.IsEquiped = false;
+                        mainHand = item;
+                        mainHand.Item.IsEquiped = true;
+                    }
+                    else
+                    {
+                        mainHand = null;
+                        item.Item.IsEquiped = false;
+                    }
+                }
+
+                if (weapon.NumberHands == ItemClasses.Hands.Both && offHand != null)
+                {
+                    offHand.Item.IsEquiped = false;
+                    offHand = null;
+                }
+            }
+
+            if (item.Item is Shield shield)
+            {
+                if (offHand != null)
+                {
+                    offHand.Item.IsEquiped = false;
+                }
+
+                offHand = item;
+                offHand.Item.IsEquiped = true;
+            }
+
+            if (item.Item is Armor armor)
+            {
+                if (armor.Location == ArmorLocation.Body)
+                {
+                    if (body != null)
+                    {
+                        body.Item.IsEquiped = false;
+                    }
+
+                    body = item;
+                    body.Item.IsEquiped = true;
+                }
+
+                if (armor.Location == ArmorLocation.Head)
+                {
+                    if (head != null)
+                    {
+                        head.Item.IsEquiped = false;
+                    }
+
+                    head = item;
+                    head.Item.IsEquiped = true;
+                }
+
+                if (armor.Location == ArmorLocation.Hands)
+                {
+                    if (hands != null)
+                    {
+                        hands.Item.IsEquiped = false;
+                    }
+
+                    hands = item;
+                    hands.Item.IsEquiped = true;
+                }
+
+                if (armor.Location == ArmorLocation.Head)
+                {
+                    if (feet != null)
+                    {
+                        feet.Item.IsEquiped = false;
+                    }
+
+                    feet = item;
+                    feet.Item.IsEquiped = true;
+                }
+            }
         }
 
         #endregion
