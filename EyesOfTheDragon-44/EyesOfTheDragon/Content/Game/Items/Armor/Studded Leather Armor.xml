@@ -1,0 +1,18 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<XnaContent xmlns:ItemClasses="RpgLibrary.ItemClasses">
+  <Asset Type="ItemClasses:ArmorData">
+    <Name>Studded Leather Armor</Name>
+    <Type>Armor</Type>
+    <Price>30</Price>
+    <Weight>0</Weight>
+    <Equipped>false</Equipped>
+    <ArmorLocation>Body</ArmorLocation>
+    <DefenseValue>14</DefenseValue>
+    <DefenseModifier>0</DefenseModifier>
+    <AllowableClasses>
+      <Item>Fighter</Item>
+      <Item>Rogue</Item>
+      <Item>Priest</Item>
+    </AllowableClasses>
+  </Asset>
+</XnaContent>
