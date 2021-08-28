@@ -474,6 +474,59 @@ namespace RpgLibrary.CharacterClasses
             }
         }
 
+        public void ApplyDamage(GameItem mainHand)
+        {
+            int defense = 0;
+
+            if (offHand != null && offHand.Item is Shield shield)
+            {
+                defense += shield.DefenseValue;
+            }
+
+            if (head != null && head.Item is Armor armor)
+            {
+                defense += armor.DefenseValue;
+            }
+
+            if (body != null && body.Item is Armor bodyArmor)
+            {
+                defense += bodyArmor.DefenseValue;
+            }
+
+            if (hands != null && hands.Item is Armor handArmor)
+            {
+                defense += handArmor.DefenseValue;
+            }
+
+            if (feet != null && feet.Item is Armor footArmor)
+            {
+                defense += footArmor.DefenseValue;
+            }
+
+            int attack = 0;
+
+            if (mainHand != null && mainHand.Item is Weapon weapon)
+            {
+                attack = weapon.AttackValue + weapon.AttackModifier;
+
+                if (attack > defense)
+                {
+                    ushort damage = 0;
+
+                    foreach (DamageEffectData e in weapon.DamageEffects)
+                    {
+                        for (int i = 0; i < e.NumberOfDice; i++)
+                        {
+                            damage += (ushort)Mechanics.RollDie(e.DieType);
+                        }
+                    }
+
+                    Health.Damage(damage);
+                }
+            }
+        }
+
+
         #endregion
     }
 }

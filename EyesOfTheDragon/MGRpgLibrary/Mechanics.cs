@@ -14,6 +14,51 @@ namespace RpgLibrary
 
         static Random random = new Random();
 
+        public static int GetModifier(int value)
+        {
+            if (value <= 3)
+            {
+                return -4;
+            }
+
+            if (value <= 5)
+            {
+                return -2;
+            }
+
+            if (value <= 8)
+            {
+                return -1;
+            }
+
+            if (value > 8 && value <= 12)
+            {
+                return 0;
+            }
+
+            if (value <= 14)
+            {
+                return 1;
+            }
+
+            if (value <= 16)
+            {
+                return 2;
+            }
+
+            if (value <= 18)
+            {
+                return 3;
+            }
+
+            if (value <= 20)
+            {
+                return 4;
+            }
+
+            return 5;
+        }
+
         #endregion
 
         #region Property Region

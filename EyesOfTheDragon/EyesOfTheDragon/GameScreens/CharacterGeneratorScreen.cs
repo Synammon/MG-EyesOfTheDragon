@@ -18,6 +18,7 @@ using MGRpgLibrary.CharacterClasses;
 using RpgLibrary.SkillClasses;
 using MGRpgLibrary.ConversationComponents;
 using System.IO;
+using MGRpgLibrary.Mobs;
 
 namespace EyesOfTheDragon.GameScreens
 {
@@ -282,6 +283,7 @@ namespace EyesOfTheDragon.GameScreens
             CharacterLayerData charData =
                 Game.Content.Load<CharacterLayerData>(@"Game\Levels\Chars\Starting Level");
             CharacterLayer characterLayer = new CharacterLayer();
+            MobLayer mobLayer = new MobLayer();
 
             TileMap map = TileMap.FromMapData(mapData, Game.Content);
 
@@ -312,6 +314,7 @@ namespace EyesOfTheDragon.GameScreens
             }
 
             map.AddLayer(characterLayer);
+            map.AddLayer(mobLayer);
 
             Level level = new Level(map);
 
@@ -369,7 +372,17 @@ namespace EyesOfTheDragon.GameScreens
             ((CharacterLayer)world.Levels[world.CurrentLevel].Map.Layers.Find(x => x is CharacterLayer)).Characters.Add(new Point(10, 0), m);
             GamePlayScreen.World = world;
 
-            CreateConversation();
+            ed = new EntityData("Bandit", 1, 10, 12, 12, 10, 10, 10, "20|CON|10", "12|WIL|12", "0|0|0");
+
+            e = new Entity("Bandit", ed, EntityGender.Male, EntityType.Monster);
+
+            s = new AnimatedSprite(
+                GameRef.Content.Load<Texture2D>(@"PlayerSprites/malerogue"),
+                AnimationManager.Instance.Animations);
+
+            Mob mob = new Bandit(e, s);
+            ((MobLayer)world.Levels[world.CurrentLevel].Map.Layers.Find(x => x is MobLayer)).Mobs.Add(new Rectangle(0, 512, 32, 32), mob);
+            mob.Entity.Equip(new GameItem(ItemManager.GetWeapon("Short Sword"), "FullSheet", new Rectangle(800, 1504, 32, 32)));
 
             // ((NonPlayerCharacter)world.Levels[world.CurrentLevel].Characters[0]).SetConversation("eliza1");
         }
