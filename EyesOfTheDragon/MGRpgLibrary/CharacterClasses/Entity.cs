@@ -381,7 +381,7 @@ namespace RpgLibrary.CharacterClasses
 
         public void Equip(GameItem item)
         {
-            if (!item.Item.AllowableClasses.Contains(EntityClass))
+            if (!item.Item.AllowableClasses.Contains(EntityClass) && EntityType != EntityType.Monster)
             {
                 return;
             }
@@ -525,7 +525,6 @@ namespace RpgLibrary.CharacterClasses
                 }
             }
         }
-
 
         #endregion
     }

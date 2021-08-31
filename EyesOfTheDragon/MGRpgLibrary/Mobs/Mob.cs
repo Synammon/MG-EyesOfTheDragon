@@ -89,7 +89,8 @@ namespace MGRpgLibrary.Mobs
 
         #region Abstract Method Region
 
-        public abstract void Attack(Entity target);
+        public abstract void Attack(Entity source);
+        public abstract void DoAttack(Entity target);
 
         #endregion
     }

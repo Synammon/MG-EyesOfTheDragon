@@ -81,16 +81,44 @@ namespace EyesOfTheDragon.GameScreens
         {
             _scene.Update(gameTime, PlayerIndex.One);
 
+            if (GamePlayScreen.Player.Character.Entity.Health.CurrentValue <= 0)
+            {
+                StateManager.ChangeState(GameRef.GameOverScreen);
+            }
+
             if (InputHandler.KeyReleased(Microsoft.Xna.Framework.Input.Keys.Space))
             {
                 switch (_scene.SelectedIndex)
                 {
                     case 0:
-                        _mob.Attack(GamePlayScreen.Player.Character.Entity);
+                        if (GamePlayScreen.Player.Character.Entity.Dexterity >= _mob.Entity.Dexterity)
+                        {
+                            _mob.Attack(GamePlayScreen.Player.Character.Entity);
+
+                            if (_mob.Entity.Health.CurrentValue <= 0)
+                            {
+                                StateManager.PopState();
+                                return;
+                            }
+
+                            _mob.DoAttack(GamePlayScreen.Player.Character.Entity);
+                        }
+                        else
+                        {
+                            _mob.DoAttack(GamePlayScreen.Player.Character.Entity);
+                            _mob.Attack(GamePlayScreen.Player.Character.Entity);
+
+                            if (_mob.Entity.Health.CurrentValue <= 0)
+                            {
+                                StateManager.PopState();
+                                return;
+                            }
+                        }
                         break;
                     case 2:
                         Vector2 center = GamePlayScreen.Player.Sprite.Center;
                         Vector2 mobCenter = _mob.Sprite.Center;
+
                         if (center.Y < mobCenter.Y)
                         {
                             GamePlayScreen.Player.Sprite.Position.Y -= 8;
@@ -107,6 +135,8 @@ namespace EyesOfTheDragon.GameScreens
                         {
                             GamePlayScreen.Player.Sprite.Position.X += 8;
                         }
+
+                        StateManager.PopState();
                         break;
                 }
             }

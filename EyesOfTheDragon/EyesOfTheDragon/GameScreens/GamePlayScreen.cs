@@ -109,6 +109,11 @@ namespace EyesOfTheDragon.GameScreens
 
             MobLayer mobLayer = World.Levels[World.CurrentLevel].Map.Layers.Find(x => x is MobLayer) as MobLayer;
 
+            foreach (var mob in mobLayer.Mobs.Where(kv => kv.Value.Entity.Health.CurrentValue <= 0).ToList())
+            {
+                mobLayer.Mobs.Remove(mob.Key);
+            }
+
             foreach (Rectangle r in mobLayer.Mobs.Keys)
             {
                 float distance = Vector2.Distance(mobLayer.Mobs[r].Sprite.Center, player.Sprite.Center);

@@ -14,7 +14,15 @@ namespace MGRpgLibrary.Mobs
         {
         }
 
-        public override void Attack(Entity target)
+        public override void Attack(Entity source)
+        {
+            if (Mechanics.RollDie(DieType.D20) >= 10 + Mechanics.GetModifier(entity.Dexterity))
+            {
+                entity.ApplyDamage(source.MainHand);
+            }
+        }
+
+        public override void DoAttack(Entity target)
         {
             if (Mechanics.RollDie(DieType.D20) >= 10 + Mechanics.GetModifier(target.Dexterity))
             {
