@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using RpgLibrary.CharacterClasses;
+using RpgLibrary.EffectClasses;
+
 namespace RpgLibrary.TalentClasses
 {
     public class Talent
@@ -17,7 +19,7 @@ namespace RpgLibrary.TalentClasses
         TalentType talentType;
         int activationCost;
         int coolDown;
-        List<string> effects;
+        List<BaseEffect> effects;
 
         #endregion
 
@@ -63,7 +65,7 @@ namespace RpgLibrary.TalentClasses
             get { return coolDown; }
         }
 
-        public List<string> Effects
+        public List<BaseEffect> Effects
         {
             get { return effects; }
         }
@@ -77,7 +79,7 @@ namespace RpgLibrary.TalentClasses
             allowedClasses = new List<string>();
             attributeRequirements = new Dictionary<string, int>();
             talentPrerequisites = new List<string>();
-            effects = new List<string>();
+            effects = new List<BaseEffect>();
         }
 
         #endregion
@@ -106,7 +108,7 @@ namespace RpgLibrary.TalentClasses
             foreach (string s in data.TalentPrerequisites)
                 talent.talentPrerequisites.Add(s);
 
-            foreach (string s in data.Effects)
+            foreach (BaseEffect s in data.Effects)
                 talent.Effects.Add(s);
             return talent;
 

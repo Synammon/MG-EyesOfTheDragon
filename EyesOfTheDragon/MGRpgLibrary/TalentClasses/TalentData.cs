@@ -1,4 +1,5 @@
-﻿using System;
+﻿using RpgLibrary.EffectClasses;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -19,7 +20,7 @@ namespace RpgLibrary.TalentClasses
         public TalentType TalentType;
         public int ActivationCost;
         public int CoolDown;
-        public string[] Effects;
+        public List<BaseEffect> Effects = new List<BaseEffect>();
 
         #endregion
 
@@ -58,8 +59,8 @@ namespace RpgLibrary.TalentClasses
             toString += ", " + ActivationCost.ToString();
             toString += ", " + CoolDown.ToString();
 
-            foreach (string s in Effects)
-                toString += ", " + s;
+            foreach (BaseEffect s in Effects)
+                toString += ", " + s.ToString();
 
             return toString;
         }

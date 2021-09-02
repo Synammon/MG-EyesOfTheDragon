@@ -12,7 +12,8 @@
     <DamageEffectData>
       <Item>
         <Name Null="true" />
-        <DamageType>Piercing</DamageType>
+		  <TargetType>Enemy</TargetType>
+		  <DamageType>Piercing</DamageType>
         <AttackType>Health</AttackType>
         <DieType>D6</DieType>
         <NumberOfDice>1</NumberOfDice>

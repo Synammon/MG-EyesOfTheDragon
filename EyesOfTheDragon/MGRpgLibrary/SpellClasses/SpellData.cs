@@ -1,4 +1,5 @@
-﻿using System;
+﻿using RpgLibrary.EffectClasses;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -6,6 +7,7 @@ using System.Text;
 namespace RpgLibrary.SpellClasses
 {
     public enum SpellType { Passive, Sustained, Activated }
+    public enum TargetType { Self, Enemy, Special }
 
     public class SpellData
     {
@@ -19,7 +21,7 @@ namespace RpgLibrary.SpellClasses
         public SpellType SpellType;
         public int ActivationCost;
         public int CoolDown;
-        public string[] Effects;
+        public List<BaseEffect> Effects;
 
         #endregion
 
@@ -31,6 +33,7 @@ namespace RpgLibrary.SpellClasses
         public SpellData()
         {
             AttributeRequirements = new Dictionary<string, int>();
+            Effects = new List<BaseEffect>();
         }
 
         #endregion
@@ -58,8 +61,8 @@ namespace RpgLibrary.SpellClasses
             toString += ", " + ActivationCost.ToString();
             toString += ", " + CoolDown.ToString();
 
-            foreach (string s in Effects)
-                toString += ", " + s;
+            foreach (BaseEffect e in Effects)
+                toString += ", " + e.ToString();
 
             return toString;
         }

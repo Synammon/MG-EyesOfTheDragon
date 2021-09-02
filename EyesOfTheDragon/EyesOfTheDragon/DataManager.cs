@@ -67,6 +67,16 @@ namespace EyesOfTheDragon.Components
             get { return skills; }
         }
 
+        public static SpellDataManager SpellData
+        {
+            get { return SpellDataManager; }
+        }
+
+        public static TalentDataManager TalentData
+        {
+            get { return TalentDataManager; }
+        }
+
         #endregion
 
         #region Constructor Region

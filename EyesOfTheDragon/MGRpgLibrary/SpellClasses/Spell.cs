@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using RpgLibrary.CharacterClasses;
+using RpgLibrary.EffectClasses;
 
 namespace RpgLibrary.SpellClasses
 {
@@ -18,7 +19,7 @@ namespace RpgLibrary.SpellClasses
         SpellType spellType;
         int activationCost;
         int coolDown;
-        List<string> effects;
+        List<BaseEffect> effects;
 
         #endregion
 
@@ -64,7 +65,7 @@ namespace RpgLibrary.SpellClasses
             get { return coolDown; }
         }
 
-        public List<string> Effects
+        public List<BaseEffect> Effects
         {
             get { return effects; }
         }
@@ -78,7 +79,7 @@ namespace RpgLibrary.SpellClasses
             allowedClasses = new List<string>();
             attributeRequirements = new Dictionary<string, int>();
             spellPrerequisites = new List<string>();
-            effects = new List<string>();
+            effects = new List<BaseEffect>();
         }
 
         #endregion
@@ -107,7 +108,7 @@ namespace RpgLibrary.SpellClasses
             foreach (string s in data.SpellPrerequisites)
                 spell.SpellPrerequisites.Add(s);
 
-            foreach (string s in data.Effects)
+            foreach (BaseEffect s in data.Effects)
                 spell.Effects.Add(s);
 
             return spell;

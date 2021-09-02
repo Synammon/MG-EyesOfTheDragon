@@ -1,4 +1,5 @@
-﻿using System;
+﻿using RpgLibrary.SpellClasses;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -10,6 +11,7 @@ namespace RpgLibrary.EffectClasses
         #region Field Region
 
         public string Name;
+        public TargetType TargetType;
 
         #endregion
 

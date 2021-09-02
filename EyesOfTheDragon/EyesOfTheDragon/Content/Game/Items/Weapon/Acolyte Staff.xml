@@ -12,6 +12,7 @@
     <DamageEffectData>
       <Item>
         <Name Null="true" />
+        <TargetType>Enemy</TargetType>
         <DamageType>Magic</DamageType>
         <AttackType>Health</AttackType>
         <DieType>D8</DieType>

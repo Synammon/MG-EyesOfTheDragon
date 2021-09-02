@@ -12,7 +12,8 @@
     <DamageEffectData>
       <Item>
         <Name Null="true" />
-        <DamageType>Crushing</DamageType>
+		  <TargetType>Enemy</TargetType>
+		  <DamageType>Crushing</DamageType>
         <AttackType>Health</AttackType>
         <DieType>D8</DieType>
         <NumberOfDice>1</NumberOfDice>

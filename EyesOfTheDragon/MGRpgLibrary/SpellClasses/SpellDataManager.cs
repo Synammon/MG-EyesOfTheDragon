@@ -49,17 +49,19 @@ namespace RpgLibrary.SpellClasses
                 AttributeRequirements = new Dictionary<string, int>() { { "Magic", 10 } }
             };
 
-            DamageEffectData effect = new DamageEffectData
+            BaseEffect effect = DamageEffect.FromDamageEffectData(new DamageEffectData
             {
                 Name = "Spark Jolt",
+                TargetType = TargetType.Enemy,
                 AttackType = AttackType.Health,
                 DamageType = DamageType.Air,
                 DieType = DieType.D6,
                 NumberOfDice = 3,
                 Modifier = 2
-            };
+            });
 
-            data.Effects = new string[] { effect.ToString() };
+            data.Effects.Add(effect);
+
             spellData.Add("Spark Jolt", data);
 
             data = new SpellData()
@@ -73,16 +75,17 @@ namespace RpgLibrary.SpellClasses
                 AttributeRequirements = new Dictionary<string, int>() { { "Magic", 10 } }
             };
 
-            HealEffectData healEffect = new HealEffectData()
+            BaseEffect healEffect = HealEffect.FromHealEffectData(new HealEffectData
             {
                 Name = "Mend",
+                TargetType = TargetType.Self,
                 HealType = HealType.Health,
                 DieType = DieType.D8,
                 NumberOfDice = 2,
                 Modifier = 2
-            };
+            });
 
-            data.Effects = new string[] { healEffect.ToString() };
+            data.Effects.Add(healEffect);
             spellData.Add("Mend", data);
         }
 

@@ -12,7 +12,8 @@
     <DamageEffectData>
       <Item>
         <Name Null="true" />
-        <DamageType>Fire</DamageType>
+		  <TargetType>Enemy</TargetType>
+		  <DamageType>Fire</DamageType>
         <AttackType>Health</AttackType>
         <DieType>D6</DieType>
         <NumberOfDice>1</NumberOfDice>

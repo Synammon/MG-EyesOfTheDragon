@@ -43,11 +43,11 @@ namespace RpgLibrary.TalentClasses
                 LevelRequirement = 1,
                 TalentType = TalentType.Activated,
                 ActivationCost = 5,
-                AllowedClasses = new string[] { "Warrior" },
+                AllowedClasses = new string[] { "Fighter" },
                 AttributeRequirements = new Dictionary<string, int>() { { "Strength", 10 } }
             };
 
-            DamageEffectData effect = new DamageEffectData
+            DamageEffect effect = DamageEffect.FromDamageEffectData(new DamageEffectData
             {
                 AttackType = AttackType.Health,
                 DamageType = DamageType.Crushing,
@@ -55,9 +55,9 @@ namespace RpgLibrary.TalentClasses
                 Modifier = 2,
                 Name = "Bash",
                 NumberOfDice = 2
-            };
+            });
 
-            data.Effects = new string[] { effect.ToString() };
+            data.Effects.Add(effect);
 
             talentData.Add("Bash", data);
 
@@ -72,7 +72,7 @@ namespace RpgLibrary.TalentClasses
                 AttributeRequirements = new Dictionary<string, int>() { { "Dexterity", 10 } }
             };
 
-            effect = new DamageEffectData()
+            effect = DamageEffect.FromDamageEffectData(new DamageEffectData()
             {
                 AttackType = AttackType.Health,
                 DamageType = DamageType.Piercing,
@@ -80,9 +80,9 @@ namespace RpgLibrary.TalentClasses
                 Modifier = 2,
                 Name = "Below The Belt",
                 NumberOfDice = 3
-            };
+            });
 
-            data.Effects = new string[] { effect.ToString() };
+            data.Effects.Add(effect);
 
             talentData.Add("Below The Belt", data);
         }

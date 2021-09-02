@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using RpgLibrary.CharacterClasses;
+using RpgLibrary.SpellClasses;
+
 namespace RpgLibrary.EffectClasses
 {
     public abstract class BaseEffect
@@ -10,6 +12,7 @@ namespace RpgLibrary.EffectClasses
         #region Field Region
 
         protected string name;
+        public TargetType TargetType;
 
         #endregion
 
