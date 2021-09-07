@@ -24,6 +24,10 @@ namespace EyesOfTheDragon.GameScreens
         private GameScene _scene;
         private readonly List<string> _actions = new List<string>();
         private int _action;
+        private Texture2D _hudTexture;
+        private Texture2D _healthBorderTexture;
+        private Texture2D _healthTexture;
+        private double _queueTimer;
 
         public CombatScreen(Game game, GameStateManager manager) : base(game, manager)
         {
@@ -82,11 +86,53 @@ namespace EyesOfTheDragon.GameScreens
             _actionTexture = new Texture2D(GraphicsDevice, 200, 720);
             _actionTexture.SetData(data);
 
+            data = new Color[1280 * 40];
+
+            for (int i = 0; i < 1280 * 40; i++)
+            {
+                data[i] = Color.Black;
+            }
+
+            _hudTexture = new Texture2D(GraphicsDevice, 1280, 40);
+            _hudTexture.SetData(data);
+
+            data = new Color[502 * 12];
+
+            for (int i = 0; i < 502 * 12; i++)
+            {
+                data[i] = Color.Gray;
+            }
+
+            _healthBorderTexture = new Texture2D(GraphicsDevice, 502, 12);
+            _healthBorderTexture.SetData(data);
+
+            data = new Color[500 * 10];
+
+            for (int i = 0; i < 500 * 10; i++)
+            {
+                data[i] = Color.White;
+            }
+
+            _healthTexture = new Texture2D(GraphicsDevice, 500, 10);
+            _healthTexture.SetData(data);
+
             base.LoadContent();
         }
 
         public override void Update(GameTime gameTime)
         {
+            _queueTimer += gameTime.ElapsedGameTime.TotalSeconds;
+
+            if (_queueTimer > 2)
+            {
+                if (GameState._descriptions.Count > 0)
+                {
+                    GameState._descriptions.Dequeue();
+                }
+
+                _queueTimer = 0;
+            }
+
             if (!_displayActionTexture)
             {
                 _scene.Update(gameTime, PlayerIndex.One);
@@ -102,8 +148,10 @@ namespace EyesOfTheDragon.GameScreens
                 switch (_scene.SelectedIndex)
                 {
                     case 0:
+                        _queueTimer = 0;
                         if (GamePlayScreen.Player.Character.Entity.Dexterity >= _mob.Entity.Dexterity)
                         {
+                            _descriptions.Enqueue($"You attack the {_mob.Entity.EntityClass}.");
                             _mob.Attack(GamePlayScreen.Player.Character.Entity);
 
                             if (_mob.Entity.Health.CurrentValue <= 0)
@@ -112,11 +160,14 @@ namespace EyesOfTheDragon.GameScreens
                                 return;
                             }
 
+                            _descriptions.Enqueue($"The {_mob.Entity.EntityClass} attacks you.");
                             _mob.DoAttack(GamePlayScreen.Player.Character.Entity);
                         }
                         else
                         {
+                            _descriptions.Enqueue($"The {_mob.Entity.EntityClass} attacks you.");
                             _mob.DoAttack(GamePlayScreen.Player.Character.Entity);
+                            _descriptions.Enqueue($"You attack the {_mob.Entity.EntityClass}.");
                             _mob.Attack(GamePlayScreen.Player.Character.Entity);
 
                             if (_mob.Entity.Health.CurrentValue <= 0)
@@ -283,7 +334,12 @@ namespace EyesOfTheDragon.GameScreens
                 }
             }
 
-            _mob.DoAttack(entity);
+            _displayActionTexture = false;
+
+            if (_mob.Entity.Health.CurrentValue > 0)
+            {
+                _mob.DoAttack(entity);
+            }
         }
 
         public override void Draw(GameTime gameTime)
@@ -295,7 +351,31 @@ namespace EyesOfTheDragon.GameScreens
 
             GameRef.SpriteBatch.Begin();
 
-            GameRef.SpriteBatch.Draw(_menuTexture, new Rectangle(0, 720 - _menuTexture.Height, _menuTexture.Width, _menuTexture.Height), Color.White);
+            Rectangle menuDest = new Rectangle(0, 720 - _menuTexture.Height, _menuTexture.Width, _menuTexture.Height);
+            Rectangle hudDest = new Rectangle(0, menuDest.Top - _hudTexture.Height, _hudTexture.Width, _hudTexture.Height);
+
+            GameRef.SpriteBatch.Draw(_menuTexture, menuDest, Color.White);
+            GameRef.SpriteBatch.Draw(_hudTexture, hudDest, Color.White);
+
+            Rectangle dest = new Rectangle(10, hudDest.Top + 12, _healthBorderTexture.Width, _healthBorderTexture.Height);
+            GameRef.SpriteBatch.Draw(_healthBorderTexture, dest, Color.White);
+            
+            dest.X += 5;
+            dest.Y += 2;
+            dest.Height -= 5;
+            dest.Width = (int)(dest.Width * ((float)GamePlayScreen.Player.Character.Entity.Health.CurrentValue / GamePlayScreen.Player.Character.Entity.Health.MaximumValue)) - 10;
+
+            GameRef.SpriteBatch.Draw(_healthTexture, dest, Color.Red);
+
+            dest = new Rectangle(Game1.ScreenWidth - _healthBorderTexture.Width - 10, hudDest.Top + 12, _healthBorderTexture.Width, _healthBorderTexture.Height);
+            GameRef.SpriteBatch.Draw(_healthBorderTexture, dest, Color.White);
+
+            dest.X += 5;
+            dest.Y += 2;
+            dest.Height -= 5;
+            dest.Width = (int)(dest.Width * ((float)_mob.Entity.Health.CurrentValue / _mob.Entity.Health.MaximumValue)) - 10;
+
+            GameRef.SpriteBatch.Draw(_healthTexture, dest, Color.Red);
 
             _scene.Draw(gameTime, GameRef.SpriteBatch);
 
@@ -303,7 +383,6 @@ namespace EyesOfTheDragon.GameScreens
             {
                 GameRef.SpriteBatch.Draw(_actionTexture, new Rectangle(_actionTexture.Width, 0, _actionTexture.Width, _actionTexture.Height), Color.White);
                 Vector2 position = new Vector2(_actionTexture.Width + 50, 5);
-
 
                 int count = 0;
 
@@ -324,7 +403,24 @@ namespace EyesOfTheDragon.GameScreens
                 }
             }
 
+            if (_descriptions.Count > 0)
+            {
+                string text = _descriptions.Peek();
+
+                GameRef.SpriteBatch.DrawString(
+                    FontManager.GetFont("testfont"),
+                    text,
+                    new Vector2(10, Game1.ScreenHeight - FontManager.GetFont("testfont").LineSpacing),
+                    Color.White);
+            }
+
             GameRef.SpriteBatch.End();
+        }
+
+        protected override void Show()
+        {
+            _queueTimer = 0;
+            base.Show();
         }
     }
 }

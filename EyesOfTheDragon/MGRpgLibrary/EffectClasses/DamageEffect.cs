@@ -34,11 +34,13 @@ namespace RpgLibrary.EffectClasses
         {
             DamageEffect effect = new DamageEffect
             {
+                name = data.Name,
                 damageType = data.DamageType,
                 attackType = data.AttackType,
                 dieType = data.DieType,
                 numberOfDice = data.NumberOfDice,
-                modifier = data.Modifier
+                modifier = data.Modifier,
+                TargetType = data.TargetType
             };
 
             return effect;

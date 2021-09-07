@@ -44,11 +44,12 @@ namespace RpgLibrary.TalentClasses
                 TalentType = TalentType.Activated,
                 ActivationCost = 5,
                 AllowedClasses = new string[] { "Fighter" },
-                AttributeRequirements = new Dictionary<string, int>() { { "Strength", 10 } }
+                AttributeRequirements = new Dictionary<string, int>() { { "Strength", 10 } }                
             };
 
             DamageEffect effect = DamageEffect.FromDamageEffectData(new DamageEffectData
             {
+                TargetType = SpellClasses.TargetType.Enemy,
                 AttackType = AttackType.Health,
                 DamageType = DamageType.Crushing,
                 DieType = DieType.D8,
@@ -74,6 +75,7 @@ namespace RpgLibrary.TalentClasses
 
             effect = DamageEffect.FromDamageEffectData(new DamageEffectData()
             {
+                TargetType = SpellClasses.TargetType.Enemy,
                 AttackType = AttackType.Health,
                 DamageType = DamageType.Piercing,
                 DieType = DieType.D4,

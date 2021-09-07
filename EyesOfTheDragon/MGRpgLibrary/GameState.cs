@@ -15,6 +15,7 @@ namespace MGRpgLibrary
         #region Fields and Properties
 
         List<GameComponent> childComponents;
+        protected readonly static Queue<string> _descriptions = new Queue<string>();
 
         public List<GameComponent> Components
         {

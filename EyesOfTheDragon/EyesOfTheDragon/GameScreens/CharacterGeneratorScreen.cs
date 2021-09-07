@@ -291,7 +291,7 @@ namespace EyesOfTheDragon.GameScreens
             {
                 Character character;
 
-                if (c.Value is NonPlayerCharacterData)
+                if (c.Value is NonPlayerCharacterData data)
                 {
                     Entity entity = new Entity(c.Value.Name, c.Value.EntityData, c.Value.Gender, EntityType.NPC);
 
@@ -306,7 +306,7 @@ namespace EyesOfTheDragon.GameScreens
                         character = new NonPlayerCharacter(entity, sprite);
 
                         ((NonPlayerCharacter)character).SetConversation(
-                            ((NonPlayerCharacterData)c.Value).CurrentConversation);
+                            data.CurrentConversation);
                     }
 
                     characterLayer.Characters.Add(c.Key, character);
@@ -340,9 +340,10 @@ namespace EyesOfTheDragon.GameScreens
 
             AnimatedSprite s = new AnimatedSprite(
                 GameRef.Content.Load<Texture2D>(@"SpriteSheets\Eliza"),
-                AnimationManager.Instance.Animations);
-
-            s.Position = new Vector2(0 * Engine.TileWidth, 5 * Engine.TileHeight);
+                AnimationManager.Instance.Animations)
+            {
+                Position = new Vector2(0 * Engine.TileWidth, 5 * Engine.TileHeight)
+            };
 
             EntityData ed = new EntityData("Eliza", 1, 10, 10, 10, 10, 10, 10, "20|CON|12", "16|WIL|16",
                 "0|0|0");
@@ -356,8 +357,10 @@ namespace EyesOfTheDragon.GameScreens
 
             s = new AnimatedSprite(
                 GameRef.Content.Load<Texture2D>(@"SpriteSheets\Eliza"),
-                AnimationManager.Instance.Animations);
-            s.Position = new Vector2(10 * Engine.TileWidth, 0);
+                AnimationManager.Instance.Animations)
+            {
+                Position = new Vector2(10 * Engine.TileWidth, 0)
+            };
 
             ed = new EntityData("Barbra", 2, 10, 10, 10, 10, 10, 10, "20|CON|12", "16|WIL|16", "0|0|0");
 
@@ -367,7 +370,13 @@ namespace EyesOfTheDragon.GameScreens
             Texture2D items = Game.Content.Load<Texture2D>("ObjectSprites/roguelikeitems");
             m.Backpack.AddItem(new GameItem(ItemManager.GetWeapon("Long Sword"), "FullSheet", new Rectangle(1696, 1408, 32, 32)));
             m.Backpack.AddItem(new GameItem(ItemManager.GetWeapon("Short Sword"), "FullSheet", new Rectangle(800, 1504, 32, 32)));
-
+            m.Backpack.AddItem(new GameItem(ItemManager.GetWeapon("Apprentice Staff"), "FullSheet", new Rectangle(224, 1408, 32, 32)));
+            m.Backpack.AddItem(new GameItem(ItemManager.GetWeapon("Acolyte Staff"), "FullSheet", new Rectangle(256, 1408, 32, 32)));
+            m.Backpack.AddItem(new GameItem(ItemManager.GetArmor("Leather Armor"), "FullSheet", new Rectangle(1248, 1216, 32, 32)));
+            m.Backpack.AddItem(new GameItem(ItemManager.GetArmor("Chain Mail"), "FullSheet", new Rectangle(1472, 1184, 32, 32)));
+            m.Backpack.AddItem(new GameItem(ItemManager.GetArmor("Studded Leather Armor"), "FullSheet", new Rectangle(1984, 1120, 32, 32)));
+            m.Backpack.AddItem(new GameItem(ItemManager.GetArmor("Light Robes"), "FullSheet", new Rectangle(992, 1216, 32, 32)));
+            m.Backpack.AddItem(new GameItem(ItemManager.GetArmor("Medium Robes"), "FullSheet", new Rectangle(1024, 1216, 32, 32)));
             world.Levels[world.CurrentLevel].Characters.Add(m);
             ((CharacterLayer)world.Levels[world.CurrentLevel].Map.Layers.Find(x => x is CharacterLayer)).Characters.Add(new Point(10, 0), m);
             GamePlayScreen.World = world;
@@ -422,8 +431,10 @@ namespace EyesOfTheDragon.GameScreens
             }
 
             Character character = new Character(entity, sprite);
-            GamePlayScreen.Player = new Player(GameRef, character);
-            GamePlayScreen.Player.Gold = 200;
+            GamePlayScreen.Player = new Player(GameRef, character)
+            {
+                Gold = 200
+            };
         }
 
         private void CreateWorld()
