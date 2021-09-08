@@ -157,6 +157,13 @@ namespace EyesOfTheDragon.GameScreens
                             if (_mob.Entity.Health.CurrentValue <= 0)
                             {
                                 StateManager.PopState();
+                                StateManager.PushState(GameRef.LootScreen);
+
+                                foreach (var i in _mob.Drops)
+                                {
+                                    GameRef.LootScreen.Items.Add(i);
+                                }
+
                                 return;
                             }
 
@@ -173,6 +180,13 @@ namespace EyesOfTheDragon.GameScreens
                             if (_mob.Entity.Health.CurrentValue <= 0)
                             {
                                 StateManager.PopState();
+                                StateManager.PushState(GameRef.LootScreen);
+
+                                foreach (var i in _mob.Drops)
+                                {
+                                    GameRef.LootScreen.Items.Add(i);
+                                }
+
                                 return;
                             }
                         }
@@ -267,6 +281,7 @@ namespace EyesOfTheDragon.GameScreens
                     }
                 }
             }
+            
 
             base.Update(gameTime);
         }
@@ -339,6 +354,17 @@ namespace EyesOfTheDragon.GameScreens
             if (_mob.Entity.Health.CurrentValue > 0)
             {
                 _mob.DoAttack(entity);
+            }
+
+            if (_mob.Entity.Health.CurrentValue <= 0)
+            {
+                StateManager.PopState();
+                StateManager.PushState(GameRef.LootScreen);
+
+                foreach (var i in _mob.Drops)
+                {
+                    GameRef.LootScreen.Items.Add(i);
+                }
             }
         }
 

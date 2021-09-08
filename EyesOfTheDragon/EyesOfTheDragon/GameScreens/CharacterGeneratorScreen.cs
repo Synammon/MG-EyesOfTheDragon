@@ -390,8 +390,11 @@ namespace EyesOfTheDragon.GameScreens
                 AnimationManager.Instance.Animations);
 
             Mob mob = new Bandit(e, s);
+            
             ((MobLayer)world.Levels[world.CurrentLevel].Map.Layers.Find(x => x is MobLayer)).Mobs.Add(new Rectangle(0, 512, 32, 32), mob);
+            
             mob.Entity.Equip(new GameItem(ItemManager.GetWeapon("Short Sword"), "FullSheet", new Rectangle(800, 1504, 32, 32)));
+            mob.Drops.Add(new GameItem(ItemManager.GetWeapon("Short Sword"), "FullSheet", new Rectangle(800, 1504, 32, 32)));
 
             // ((NonPlayerCharacter)world.Levels[world.CurrentLevel].Characters[0]).SetConversation("eliza1");
         }

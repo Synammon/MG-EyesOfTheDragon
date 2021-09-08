@@ -44,6 +44,7 @@ namespace EyesOfTheDragon
         public CombatScreen CombatScreen { get; private set; }
 
         public GameOverScreen GameOverScreen { get; private set; }
+        public LootScreen LootScreen { get; private set; }
 
         public Game1()
         {
@@ -75,6 +76,7 @@ namespace EyesOfTheDragon
             InventoryScreen = new InventoryScreen(this, _gameStateManager);
             CombatScreen = new CombatScreen(this, _gameStateManager);
             GameOverScreen = new GameOverScreen(this, _gameStateManager);
+            LootScreen = new LootScreen(this, _gameStateManager);
 
             _gameStateManager.ChangeState(TitleScreen);
 
