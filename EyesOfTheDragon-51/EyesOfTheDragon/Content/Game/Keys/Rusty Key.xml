@@ -1,0 +1,7 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<XnaContent xmlns:ItemClasses="RpgLibrary.ItemClasses">
+  <Asset Type="ItemClasses:KeyData">
+    <Name>Rusty Key</Name>
+    <Type></Type>
+  </Asset>
+</XnaContent>

@@ -4,6 +4,9 @@ using Microsoft.Xna.Framework.Input;
 using MGRpgLibrary;
 using EyesOfTheDragon.Components;
 using EyesOfTheDragon.GameScreens;
+using RpgLibrary.ItemClasses;
+using MGRpgLibrary.ItemClasses;
+using System.IO;
 
 namespace EyesOfTheDragon
 {
@@ -108,6 +111,51 @@ namespace EyesOfTheDragon
 
             FontManager.AddFont("testfont", Content.Load<SpriteFont>("Fonts/scenefont"));
             TextureManager.AddTexture("FullSheet", Content.Load<Texture2D>("GUI/ProjectUtumno_full"));
+            string[] fileNames = Directory.GetFiles(
+                Path.Combine("Content/Game/Items", "Armor"),
+                "*.xnb");
+
+            foreach (string a in fileNames)
+            {
+                string path = "Game/Items/Armor/" + Path.GetFileNameWithoutExtension(a);
+
+                ArmorData armorData = Content.Load<ArmorData>(path);
+                ItemManager.AddArmor(new Armor(armorData));
+            }
+
+            fileNames = Directory.GetFiles(
+                Path.Combine("Content/Game/Items", "Shield"),
+                "*.xnb");
+
+            foreach (string a in fileNames)
+            {
+                string path = "Game/Items/Shield/" + Path.GetFileNameWithoutExtension(a);
+
+                ShieldData shieldData = Content.Load<ShieldData>(path);
+                ItemManager.AddShield(new Shield(shieldData));
+            }
+
+            fileNames = Directory.GetFiles(
+                Path.Combine("Content/Game/Items", "Weapon"),
+                "*.xnb");
+
+            foreach (string a in fileNames)
+            {
+                string path = "Game/Items/Weapon/" + Path.GetFileNameWithoutExtension(a);
+
+                WeaponData weaponData = Content.Load<WeaponData>(path);
+                ItemManager.AddWeapon(new Weapon(weaponData));
+            }
+
+            GameItemManager.AddItem("Long Sword", new GameItem(ItemManager.GetWeapon("Long Sword"), "FullSheet", new Rectangle(1696, 1408, 32, 32)));
+            GameItemManager.AddItem("Short Sword", new GameItem(ItemManager.GetWeapon("Short Sword"), "FullSheet", new Rectangle(800, 1504, 32, 32)));
+            GameItemManager.AddItem("Apprentice Staff", new GameItem(ItemManager.GetWeapon("Apprentice Staff"), "FullSheet", new Rectangle(224, 1408, 32, 32)));
+            GameItemManager.AddItem("Acolyte Staff", new GameItem(ItemManager.GetWeapon("Acolyte Staff"), "FullSheet", new Rectangle(256, 1408, 32, 32)));
+            GameItemManager.AddItem("Leather Armor", new GameItem(ItemManager.GetArmor("Leather Armor"), "FullSheet", new Rectangle(1248, 1216, 32, 32)));
+            GameItemManager.AddItem("Chain Mail", new GameItem(ItemManager.GetArmor("Chain Mail"), "FullSheet", new Rectangle(1472, 1184, 32, 32)));
+            GameItemManager.AddItem("Studded Leather Armor", new GameItem(ItemManager.GetArmor("Studded Leather Armor"), "FullSheet", new Rectangle(1984, 1120, 32, 32)));
+            GameItemManager.AddItem("Light Robes", new GameItem(ItemManager.GetArmor("Light Robes"), "FullSheet", new Rectangle(992, 1216, 32, 32)));
+            GameItemManager.AddItem("Medium Robes", new GameItem(ItemManager.GetArmor("Medium Robes"), "FullSheet", new Rectangle(1024, 1216, 32, 32)));
         }
 
         protected override void Update(GameTime gameTime)

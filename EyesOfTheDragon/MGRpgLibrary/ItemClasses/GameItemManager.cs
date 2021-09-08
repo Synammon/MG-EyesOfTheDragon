@@ -8,18 +8,18 @@ using RpgLibrary.ItemClasses;
 
 namespace MGRpgLibrary.ItemClasses
 {
-    public class GameItemManager
+    public static class GameItemManager
     {
         #region Field Region
 
-        readonly Dictionary<string, GameItem> gameItems = new Dictionary<string, GameItem>();
+        static readonly Dictionary<string, GameItem> gameItems = new Dictionary<string, GameItem>();
         static SpriteFont spriteFont;
 
         #endregion
 
         #region Property Region
 
-        public Dictionary<string, GameItem> GameItems
+        public static Dictionary<string, GameItem> GameItems
         {
             get { return gameItems; }
         }
@@ -33,15 +33,28 @@ namespace MGRpgLibrary.ItemClasses
         #endregion
 
         #region Constructor Region
-
-        public GameItemManager(SpriteFont spriteFont)
-        {
-            SpriteFont = spriteFont;
-        }
-
         #endregion
 
         #region Method Region
+
+        public static void AddItem(string name, GameItem item)
+        {
+            if (!GameItems.ContainsKey(name))
+            {
+                GameItems.Add(name, item);
+            }
+        }
+
+        public static GameItem GetItem(string name)
+        {
+            if (GameItems.ContainsKey(name))
+            {
+                return (GameItem)GameItems[name].Clone();
+            }
+
+            return null;
+        }
+
         #endregion
 
         #region Virtual Method region

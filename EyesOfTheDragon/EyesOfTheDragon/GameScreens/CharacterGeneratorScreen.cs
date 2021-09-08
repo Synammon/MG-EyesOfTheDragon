@@ -243,43 +243,6 @@ namespace EyesOfTheDragon.GameScreens
             RpgLibrary.WorldClasses.MapData mapData = 
                 Game.Content.Load<RpgLibrary.WorldClasses.MapData>(@"Game\Levels\Maps\" + levelData.MapName);
 
-
-            string[] fileNames = Directory.GetFiles(
-                Path.Combine("Content/Game/Items", "Armor"),
-                "*.xnb");
-
-            foreach (string a in fileNames)
-            {
-                string path = "Game/Items/Armor/" + Path.GetFileNameWithoutExtension(a);
-
-                ArmorData armorData = Game.Content.Load<ArmorData>(path);
-                ItemManager.AddArmor(new Armor(armorData));
-            }
-
-            fileNames = Directory.GetFiles(
-                Path.Combine("Content/Game/Items", "Shield"),
-                "*.xnb");
-
-            foreach (string a in fileNames)
-            {
-                string path = "Game/Items/Shield/" + Path.GetFileNameWithoutExtension(a);
-
-                ShieldData shieldData = Game.Content.Load<ShieldData>(path);
-                ItemManager.AddShield(new Shield(shieldData));
-            }
-
-            fileNames = Directory.GetFiles(
-                Path.Combine("Content/Game/Items", "Weapon"),
-                "*.xnb");
-
-            foreach (string a in fileNames)
-            {
-                string path = "Game/Items/Weapon/" + Path.GetFileNameWithoutExtension(a);
-
-                WeaponData weaponData = Game.Content.Load<WeaponData>(path);
-                ItemManager.AddWeapon(new Weapon(weaponData));
-            }
-
             CharacterLayerData charData =
                 Game.Content.Load<CharacterLayerData>(@"Game\Levels\Chars\Starting Level");
             CharacterLayer characterLayer = new CharacterLayer();
@@ -368,15 +331,15 @@ namespace EyesOfTheDragon.GameScreens
 
             Merchant m = new Merchant(e, s);
             Texture2D items = Game.Content.Load<Texture2D>("ObjectSprites/roguelikeitems");
-            m.Backpack.AddItem(new GameItem(ItemManager.GetWeapon("Long Sword"), "FullSheet", new Rectangle(1696, 1408, 32, 32)));
-            m.Backpack.AddItem(new GameItem(ItemManager.GetWeapon("Short Sword"), "FullSheet", new Rectangle(800, 1504, 32, 32)));
-            m.Backpack.AddItem(new GameItem(ItemManager.GetWeapon("Apprentice Staff"), "FullSheet", new Rectangle(224, 1408, 32, 32)));
-            m.Backpack.AddItem(new GameItem(ItemManager.GetWeapon("Acolyte Staff"), "FullSheet", new Rectangle(256, 1408, 32, 32)));
-            m.Backpack.AddItem(new GameItem(ItemManager.GetArmor("Leather Armor"), "FullSheet", new Rectangle(1248, 1216, 32, 32)));
-            m.Backpack.AddItem(new GameItem(ItemManager.GetArmor("Chain Mail"), "FullSheet", new Rectangle(1472, 1184, 32, 32)));
-            m.Backpack.AddItem(new GameItem(ItemManager.GetArmor("Studded Leather Armor"), "FullSheet", new Rectangle(1984, 1120, 32, 32)));
-            m.Backpack.AddItem(new GameItem(ItemManager.GetArmor("Light Robes"), "FullSheet", new Rectangle(992, 1216, 32, 32)));
-            m.Backpack.AddItem(new GameItem(ItemManager.GetArmor("Medium Robes"), "FullSheet", new Rectangle(1024, 1216, 32, 32)));
+            m.Backpack.AddItem(GameItemManager.GetItem("Long Sword"));
+            m.Backpack.AddItem(GameItemManager.GetItem("Short Sword"));
+            m.Backpack.AddItem(GameItemManager.GetItem("Apprentice Staff"));
+            m.Backpack.AddItem(GameItemManager.GetItem("Acolyte Staff"));
+            m.Backpack.AddItem(GameItemManager.GetItem("Leather Armor"));
+            m.Backpack.AddItem(GameItemManager.GetItem("Chain Mail"));
+            m.Backpack.AddItem(GameItemManager.GetItem("Studded Leather Armor"));
+            m.Backpack.AddItem(GameItemManager.GetItem("Light Robes"));
+            m.Backpack.AddItem(GameItemManager.GetItem("Medium Robes"));
             world.Levels[world.CurrentLevel].Characters.Add(m);
             ((CharacterLayer)world.Levels[world.CurrentLevel].Map.Layers.Find(x => x is CharacterLayer)).Characters.Add(new Point(10, 0), m);
             GamePlayScreen.World = world;
@@ -393,10 +356,8 @@ namespace EyesOfTheDragon.GameScreens
             
             ((MobLayer)world.Levels[world.CurrentLevel].Map.Layers.Find(x => x is MobLayer)).Mobs.Add(new Rectangle(0, 512, 32, 32), mob);
             
-            mob.Entity.Equip(new GameItem(ItemManager.GetWeapon("Short Sword"), "FullSheet", new Rectangle(800, 1504, 32, 32)));
-            mob.Drops.Add(new GameItem(ItemManager.GetWeapon("Short Sword"), "FullSheet", new Rectangle(800, 1504, 32, 32)));
-
-            // ((NonPlayerCharacter)world.Levels[world.CurrentLevel].Characters[0]).SetConversation("eliza1");
+            mob.Entity.Equip(GameItemManager.GetItem("Short Sword"));
+            mob.Drops.Add(GameItemManager.GetItem("Short Sword"));
         }
 
         private void CreatePlayer()

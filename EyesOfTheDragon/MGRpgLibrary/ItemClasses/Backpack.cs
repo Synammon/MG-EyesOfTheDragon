@@ -41,7 +41,7 @@ namespace MGRpgLibrary.ItemClasses
 
         public GameItem GetItem(string name)
         {
-            GameItem item = items.Find(x => x.Item.Name == name);
+            GameItem item = (GameItem)items.Find(x => x.Item.Name == name).Clone();
 
             if (item != null)
             {
@@ -53,14 +53,14 @@ namespace MGRpgLibrary.ItemClasses
 
         public BaseItem PeekItem(string name)
         {
-            GameItem item = items.Find(x => x.Item.Name == name);
+            GameItem item = (GameItem)items.Find(x => x.Item.Name == name).Clone();
 
             return item.Item;
         }
 
         public void AddItem(GameItem gameItem)
         {
-            items.Add(gameItem);
+            items.Add((GameItem)gameItem.Clone());
         }
 
         public void RemoveItem(GameItem gameItem)

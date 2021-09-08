@@ -8,14 +8,14 @@ using RpgLibrary.ItemClasses;
 
 namespace MGRpgLibrary.ItemClasses
 {
-    public class GameItem
+    public class GameItem : ICloneable
     {
         #region Field Region
 
         public Vector2 Position;
         private string image;
         private Rectangle? sourceRectangle;
-        private readonly BaseItem baseItem;
+        private BaseItem baseItem;
         private Type type;
 
         #endregion
@@ -47,6 +47,11 @@ namespace MGRpgLibrary.ItemClasses
 
         #region Constructor Region
 
+        private GameItem()
+        {
+
+        }
+
         public GameItem(BaseItem item, string texture, Rectangle? source)
         {
             baseItem = item;
@@ -67,6 +72,20 @@ namespace MGRpgLibrary.ItemClasses
         public void Draw(SpriteBatch spriteBatch, Rectangle destination)
         {
             spriteBatch.Draw(TextureManager.GetTexture(Image), destination, sourceRectangle, Color.White);
+        }
+
+        public object Clone()
+        {
+            GameItem item = new GameItem()
+            {
+                baseItem = this.baseItem,
+                Position = this.Position,
+                image = this.image,
+                sourceRectangle = this.sourceRectangle,
+                type = this.type
+            };
+
+            return item;
         }
 
         #endregion

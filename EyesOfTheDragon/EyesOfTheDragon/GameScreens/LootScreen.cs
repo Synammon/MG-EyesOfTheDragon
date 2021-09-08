@@ -60,6 +60,8 @@ namespace EyesOfTheDragon.GameScreens
             {
                 StateManager.PopState();
             }
+
+            ControlManager.Update(gameTime, PlayerIndex.One);
         }
 
         public override void Draw(GameTime gameTime)
@@ -67,6 +69,8 @@ namespace EyesOfTheDragon.GameScreens
             base.Draw(gameTime);
 
             GameRef.SpriteBatch.Begin();
+
+            ControlManager.Draw(GameRef.SpriteBatch);
 
             Rectangle destination = new Rectangle(50, 50, 32, 32);
             Point mouse = InputHandler.MouseAsPoint;
