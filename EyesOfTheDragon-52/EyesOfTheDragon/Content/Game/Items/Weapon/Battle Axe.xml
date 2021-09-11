@@ -1,0 +1,27 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<XnaContent xmlns:ItemClasses="RpgLibrary.ItemClasses">
+  <Asset Type="ItemClasses:WeaponData">
+    <Name>Battle Axe</Name>
+    <Type>Health</Type>
+    <Price>50</Price>
+    <Weight>25</Weight>
+    <Equipped>false</Equipped>
+    <NumberHands>Both</NumberHands>
+    <AttackValue>12</AttackValue>
+    <AttackModifier>0</AttackModifier>
+    <DamageEffectData>
+      <Item>
+        <Name Null="true" />
+		  <TargetType>Enemy</TargetType>
+		  <DamageType>Slashing</DamageType>
+        <AttackType>Health</AttackType>
+        <DieType>D8</DieType>
+        <NumberOfDice>2</NumberOfDice>
+        <Modifier>0</Modifier>
+      </Item>
+    </DamageEffectData>
+    <AllowableClasses>
+      <Item>Fighter</Item>
+    </AllowableClasses>
+  </Asset>
+</XnaContent>
