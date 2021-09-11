@@ -158,6 +158,7 @@ namespace EyesOfTheDragon.GameScreens
                             {
                                 StateManager.PopState();
                                 StateManager.PushState(GameRef.LootScreen);
+                                GameRef.LootScreen.Gold = _mob.GoldDrop;
 
                                 foreach (var i in _mob.Drops)
                                 {
@@ -172,22 +173,23 @@ namespace EyesOfTheDragon.GameScreens
                         }
                         else
                         {
-                            _descriptions.Enqueue($"The {_mob.Entity.EntityClass} attacks you.");
-                            _mob.DoAttack(GamePlayScreen.Player.Character.Entity);
-                            _descriptions.Enqueue($"You attack the {_mob.Entity.EntityClass}.");
-                            _mob.Attack(GamePlayScreen.Player.Character.Entity);
+                                _descriptions.Enqueue($"The {_mob.Entity.EntityClass} attacks you.");
+                                _mob.DoAttack(GamePlayScreen.Player.Character.Entity);
+                                _descriptions.Enqueue($"You attack the {_mob.Entity.EntityClass}.");
+                                _mob.Attack(GamePlayScreen.Player.Character.Entity);
 
-                            if (_mob.Entity.Health.CurrentValue <= 0)
-                            {
-                                StateManager.PopState();
-                                StateManager.PushState(GameRef.LootScreen);
-
-                                foreach (var i in _mob.Drops)
+                                if (_mob.Entity.Health.CurrentValue <= 0)
                                 {
-                                    GameRef.LootScreen.Items.Add(i);
-                                }
+                                    StateManager.PopState();
+                                    StateManager.PushState(GameRef.LootScreen);
 
-                                return;
+                                    GamePlayScreen.Player.Character.Entity.AddExperience(_mob.XPValue);
+                                    foreach (var i in _mob.Drops)
+                                    {
+                                        GameRef.LootScreen.Items.Add(i);
+                                    }
+
+                                    return;
                             }
                         }
                         break;
@@ -281,7 +283,6 @@ namespace EyesOfTheDragon.GameScreens
                     }
                 }
             }
-            
 
             base.Update(gameTime);
         }
@@ -358,8 +359,11 @@ namespace EyesOfTheDragon.GameScreens
 
             if (_mob.Entity.Health.CurrentValue <= 0)
             {
+                GameRef.LootScreen.Gold = _mob.GoldDrop;
                 StateManager.PopState();
                 StateManager.PushState(GameRef.LootScreen);
+
+                GamePlayScreen.Player.Character.Entity.AddExperience(_mob.XPValue);
 
                 foreach (var i in _mob.Drops)
                 {

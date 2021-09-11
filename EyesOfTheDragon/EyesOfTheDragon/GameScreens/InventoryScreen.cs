@@ -87,6 +87,12 @@ namespace EyesOfTheDragon.GameScreens
                     if (_backpackDestinations[i].Contains(InputHandler.MouseAsPoint))
                     {
                         GamePlayScreen.Player.Character.Entity.Equip(GamePlayScreen.Player.Backpack.Items[i]);
+
+                        if (GamePlayScreen.Player.Backpack.Items[i].Item is Potion)
+                        {
+                            GamePlayScreen.Player.Backpack.Items.RemoveAt(i);
+                            break;
+                        }
                         break;
                     }
                 }

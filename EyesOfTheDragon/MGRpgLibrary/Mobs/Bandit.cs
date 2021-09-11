@@ -12,6 +12,9 @@ namespace MGRpgLibrary.Mobs
         public Bandit(Entity entity, AnimatedSprite sprite) 
             : base(entity, sprite)
         {
+            _minGold = 20;
+            _maxGold = 50;
+            _xpValue = 100;
         }
 
         public override void Attack(Entity source)

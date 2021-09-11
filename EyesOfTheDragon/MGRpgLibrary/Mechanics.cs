@@ -62,6 +62,9 @@ namespace RpgLibrary
         #endregion
 
         #region Property Region
+
+        public static Random Random => random;
+
         #endregion
 
         #region Constructor Region

@@ -15,6 +15,7 @@ namespace EyesOfTheDragon.GameScreens
         public readonly List<GameItem> Items;
         private bool _over;
         private int _index;
+        public int Gold { get; set; }
 
         public LootScreen(Game game, GameStateManager manager) : base(game, manager)
         {
@@ -42,6 +43,7 @@ namespace EyesOfTheDragon.GameScreens
 
         private void LinkLabel_Selected(object sender, EventArgs e)
         {
+            GamePlayScreen.Player.Gold += Gold;
             StateManager.PopState();
         }
 
@@ -58,6 +60,7 @@ namespace EyesOfTheDragon.GameScreens
 
             if (InputHandler.KeyReleased(Keys.Escape))
             {
+                GamePlayScreen.Player.Gold += Gold;
                 StateManager.PopState();
             }
 
@@ -71,6 +74,8 @@ namespace EyesOfTheDragon.GameScreens
             GameRef.SpriteBatch.Begin();
 
             ControlManager.Draw(GameRef.SpriteBatch);
+
+            GameRef.SpriteBatch.DrawString(FontManager.GetFont("testfont"), $"Found {Gold} gold!", Vector2.One * 10, Color.Yellow);
 
             Rectangle destination = new Rectangle(50, 50, 32, 32);
             Point mouse = InputHandler.MouseAsPoint;

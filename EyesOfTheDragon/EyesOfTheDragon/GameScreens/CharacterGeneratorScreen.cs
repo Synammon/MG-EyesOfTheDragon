@@ -19,6 +19,7 @@ using RpgLibrary.SkillClasses;
 using MGRpgLibrary.ConversationComponents;
 using System.IO;
 using MGRpgLibrary.Mobs;
+using RpgLibrary;
 
 namespace EyesOfTheDragon.GameScreens
 {
@@ -344,20 +345,29 @@ namespace EyesOfTheDragon.GameScreens
             ((CharacterLayer)world.Levels[world.CurrentLevel].Map.Layers.Find(x => x is CharacterLayer)).Characters.Add(new Point(10, 0), m);
             GamePlayScreen.World = world;
 
-            ed = new EntityData("Bandit", 1, 10, 12, 12, 10, 10, 10, "20|CON|10", "12|WIL|12", "0|0|0");
+            for (int i = 0; i < 25; i++)
+            {
+                ed = new EntityData("Bandit", 1, 10, 12, 12, 10, 10, 10, "20|CON|10", "12|WIL|12", "0|0|0");
 
-            e = new Entity("Bandit", ed, EntityGender.Male, EntityType.Monster);
+                e = new Entity("Bandit", ed, EntityGender.Male, EntityType.Monster);
 
-            s = new AnimatedSprite(
-                GameRef.Content.Load<Texture2D>(@"PlayerSprites/malerogue"),
-                AnimationManager.Instance.Animations);
+                s = new AnimatedSprite(
+                    GameRef.Content.Load<Texture2D>(@"PlayerSprites/malerogue"),
+                    AnimationManager.Instance.Animations);
 
-            Mob mob = new Bandit(e, s);
-            
-            ((MobLayer)world.Levels[world.CurrentLevel].Map.Layers.Find(x => x is MobLayer)).Mobs.Add(new Rectangle(0, 512, 32, 32), mob);
-            
-            mob.Entity.Equip(GameItemManager.GetItem("Short Sword"));
-            mob.Drops.Add(GameItemManager.GetItem("Short Sword"));
+                Mob mob = new Bandit(e, s);
+                
+                Rectangle r = new Rectangle(Mechanics.Random.Next(10, 20) * 32, Mechanics.Random.Next(10, 20) * 32, 32, 32);
+
+                if (!mobLayer.Mobs.ContainsKey(r))
+                {
+                    mobLayer.Mobs.Add(r, mob);
+                }
+
+                mob.Entity.Equip(GameItemManager.GetItem("Short Sword"));
+                mob.Drops.Add(GameItemManager.GetItem("Short Sword"));
+                mob.Drops.Add(GameItemManager.GetItem("Minor Healing Potion"));
+            }
         }
 
         private void CreatePlayer()

@@ -147,6 +147,54 @@ namespace EyesOfTheDragon
                 ItemManager.AddWeapon(new Weapon(weaponData));
             }
 
+            PotionData potionData = new PotionData
+            {
+                Name = "Minor Healing Potion",
+                Type = "Potion",
+                Target = "Health",
+                Price = 100,
+                Weight = .25f,
+                Minimum = 6,
+                Maximum = 13,
+                AllowableClasses = new[] { "Fighter", "Wizard", "Rogue", "Priest" }
+            };
+
+            Potion potion = new Potion(potionData);
+
+            ItemManager.AddPotion(potion);
+
+            potionData = new PotionData
+            {
+                Name = "Minor Mana Potion",
+                Type = "Potion",
+                Target = "Mana",
+                Price = 100,
+                Weight = .25f,
+                Minimum = 6,
+                Maximum = 13,
+                AllowableClasses = new[] { "Wizard", "Priest" }
+            };
+
+            potion = new Potion(potionData);
+
+            ItemManager.AddPotion(potion);
+
+            potionData = new PotionData
+            {
+                Name = "Minor Stamina Potion",
+                Type = "Potion",
+                Target = "Stamina",
+                Price = 100,
+                Weight = .25f,
+                Minimum = 6,
+                Maximum = 13,
+                AllowableClasses = new[] { "Fighter", "Rogue" }
+            };
+
+            potion = new Potion(potionData);
+
+            ItemManager.AddPotion(potion);
+
             GameItemManager.AddItem("Long Sword", new GameItem(ItemManager.GetWeapon("Long Sword"), "FullSheet", new Rectangle(1696, 1408, 32, 32)));
             GameItemManager.AddItem("Short Sword", new GameItem(ItemManager.GetWeapon("Short Sword"), "FullSheet", new Rectangle(800, 1504, 32, 32)));
             GameItemManager.AddItem("Apprentice Staff", new GameItem(ItemManager.GetWeapon("Apprentice Staff"), "FullSheet", new Rectangle(224, 1408, 32, 32)));
@@ -156,6 +204,9 @@ namespace EyesOfTheDragon
             GameItemManager.AddItem("Studded Leather Armor", new GameItem(ItemManager.GetArmor("Studded Leather Armor"), "FullSheet", new Rectangle(1984, 1120, 32, 32)));
             GameItemManager.AddItem("Light Robes", new GameItem(ItemManager.GetArmor("Light Robes"), "FullSheet", new Rectangle(992, 1216, 32, 32)));
             GameItemManager.AddItem("Medium Robes", new GameItem(ItemManager.GetArmor("Medium Robes"), "FullSheet", new Rectangle(1024, 1216, 32, 32)));
+            GameItemManager.AddItem("Minor Healing Potion", new GameItem(ItemManager.GetPotion("Minor Healing Potion"), "FullSheet", new Rectangle(832, 1344, 32, 32)));
+            GameItemManager.AddItem("Minor Mana Potion", new GameItem(ItemManager.GetPotion("Minor Mana Potion"), "FullSheet", new Rectangle(576, 1344, 32, 32)));
+            GameItemManager.AddItem("Minor Stamina Potion", new GameItem(ItemManager.GetPotion("Minor Stamina Potion"), "FullSheet", new Rectangle(704, 1344, 32, 32)));
         }
 
         protected override void Update(GameTime gameTime)
@@ -188,6 +239,11 @@ namespace EyesOfTheDragon
                 frameCount = 0;
                 timeSinceLastUpdate -= updateInterval;
             }
+        }
+
+        protected override void UnloadContent()
+        {
+            base.UnloadContent();
         }
     }
 }

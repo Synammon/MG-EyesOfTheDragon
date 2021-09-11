@@ -1,4 +1,5 @@
-﻿using System;
+﻿using MGRpgLibrary.ItemClasses;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -12,6 +13,7 @@ namespace RpgLibrary.ItemClasses
         static readonly Dictionary<string, Weapon> weapons = new Dictionary<string, Weapon>();
         static readonly Dictionary<string, Armor> armors = new Dictionary<string, Armor>();
         static readonly Dictionary<string, Shield> shields = new Dictionary<string, Shield>();
+        static readonly Dictionary<string, Potion> potions = new Dictionary<string, Potion>();
 
         #endregion
 
@@ -30,6 +32,11 @@ namespace RpgLibrary.ItemClasses
         public static Dictionary<string, Shield>.KeyCollection ShieldKeys
         {
             get { return shields.Keys; }
+        }
+
+        public static Dictionary<string, Potion>.KeyCollection PotionKeys
+        {
+            get { return potions.Keys; }
         }
 
         #endregion
@@ -118,6 +125,33 @@ namespace RpgLibrary.ItemClasses
         public static bool ContainsShield(string name)
         {
             return shields.ContainsKey(name);
+        }
+
+        #endregion
+
+        #region Potion Methods
+
+        public static void AddPotion(Potion Potion)
+        {
+            if (!potions.ContainsKey(Potion.Name))
+            {
+                potions.Add(Potion.Name, Potion);
+            }
+        }
+
+        public static Potion GetPotion(string name)
+        {
+            if (potions.ContainsKey(name))
+            {
+                return (Potion)potions[name].Clone();
+            }
+
+            return null;
+        }
+
+        public static bool ContainsPotion(string name)
+        {
+            return potions.ContainsKey(name);
         }
 
         #endregion

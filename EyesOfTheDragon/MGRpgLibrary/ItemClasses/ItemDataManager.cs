@@ -1,4 +1,5 @@
-﻿using System;
+﻿using MGRpgLibrary.ItemClasses;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -26,6 +27,9 @@ namespace RpgLibrary.ItemClasses
 
         readonly Dictionary<string, ChestData> chestData = new 
             Dictionary<string, ChestData>();
+
+        readonly Dictionary<string, PotionData> potionData = new
+            Dictionary<string, PotionData>();
 
         #endregion
         
@@ -59,6 +63,11 @@ namespace RpgLibrary.ItemClasses
         public Dictionary<string, ChestData> ChestData
         {
             get { return chestData; }
+        }
+        
+        public Dictionary<string, PotionData> PotionData
+        {
+            get { return potionData; }
         }
 
         #endregion

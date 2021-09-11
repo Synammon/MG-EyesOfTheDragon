@@ -41,7 +41,7 @@ namespace MGRpgLibrary.ItemClasses
 
         public GameItem GetItem(string name)
         {
-            GameItem item = (GameItem)items.Find(x => x.Item.Name == name).Clone();
+            GameItem item = items.Find(x => x.Item.Name == name);
 
             if (item != null)
             {

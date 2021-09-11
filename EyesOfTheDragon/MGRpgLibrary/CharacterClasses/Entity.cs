@@ -386,6 +386,11 @@ namespace RpgLibrary.CharacterClasses
                 return;
             }
 
+            if (item.Item is Potion potion)
+            {
+                potion.Apply(this);
+            }
+
             if (item.Item is Weapon weapon)
             {
                 if (mainHand == null)
@@ -526,6 +531,10 @@ namespace RpgLibrary.CharacterClasses
             }
         }
 
+        public void AddExperience(int experience)
+        {
+            Experience += experience;
+        }
         #endregion
     }
 }

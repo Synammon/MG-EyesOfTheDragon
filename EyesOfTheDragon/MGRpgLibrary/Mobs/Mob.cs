@@ -2,6 +2,7 @@
 using MGRpgLibrary.SpriteClasses;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
+using RpgLibrary;
 using RpgLibrary.CharacterClasses;
 using System;
 using System.Collections.Generic;
@@ -21,6 +22,7 @@ namespace MGRpgLibrary.Mobs
 
         protected Entity entity;
         protected AnimatedSprite sprite;
+        protected int _xpValue;
 
         #endregion
 
@@ -34,6 +36,11 @@ namespace MGRpgLibrary.Mobs
         public AnimatedSprite Sprite
         {
             get { return sprite; }
+        }
+
+        public int XPValue
+        {
+            get { return _xpValue; }
         }
 
         #endregion
@@ -56,6 +63,18 @@ namespace MGRpgLibrary.Mobs
         protected List<GameItem> _drops = new List<GameItem>();
 
         public List<GameItem> Drops { get => _drops; }
+
+        #endregion
+
+        #region Money Drop Region
+
+        protected int _minGold;
+        protected int _maxGold;
+
+        public int GoldDrop
+        {
+            get { return Mechanics.Random.Next(_minGold, _maxGold); }
+        }
 
         #endregion
 
