@@ -319,6 +319,10 @@ namespace RpgLibrary.CharacterClasses
             Magic = entityData.Magic;
             Constitution = entityData.Constitution;
 
+            HealthCalculation = entityData.HealthFormula;
+            StaminaCalculation = entityData.StaminaFormula;
+            ManaCalculation = entityData.MagicFormula;
+
             if (!string.IsNullOrEmpty(entityData.HealthFormula))
             {
                 health = new AttributePair(CalculateAttribute(entityData.HealthFormula));
@@ -539,6 +543,32 @@ namespace RpgLibrary.CharacterClasses
         public void LevelUp()
         {
             Level++;
+
+            string[] parts = HealthCalculation.Split('|');
+
+            int amount = int.Parse(parts[0]) + Mechanics.RollDie((DieType)int.Parse(parts[2]));
+
+            Health.SetMaximum(amount + Health.MaximumValue);
+            Health.Heal((ushort)amount);
+
+            if (Mana.MaximumValue > 0)
+            {
+                parts = ManaCalculation.Split('|');
+
+                amount = int.Parse(parts[0]) + Mechanics.RollDie((DieType)int.Parse(parts[2]));
+
+                Mana.SetMaximum(amount + Mana.MaximumValue);
+                Mana.Heal((ushort)amount);
+            }
+            else
+            {
+                parts = StaminaCalculation.Split('|');
+
+                amount = int.Parse(parts[0]) + Mechanics.RollDie((DieType)int.Parse(parts[2]));
+
+                Stamina.SetMaximum(amount + Stamina.MaximumValue);
+                Stamina.Heal((ushort)amount);
+            }
         }
 
         public void AdjustAttribut(string attribute, int amount)
