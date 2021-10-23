@@ -70,6 +70,14 @@ namespace MGRpgLibrary.SpriteClasses
             get { return texture; }
         }
 
+        public Rectangle Bounds
+        {
+            get 
+            {
+                return new Rectangle((int)Position.X, (int)Position.Y, Width, Height); 
+            }
+        }
+
         #endregion
 
         #region Constructor Region

@@ -13,6 +13,7 @@ using MGRpgLibrary.WorldClasses;
 using MGRpgLibrary.CharacterClasses;
 using MGRpgLibrary.Mobs;
 using RpgLibrary;
+using RpgLibrary.ItemClasses;
 
 namespace EyesOfTheDragon.GameScreens
 {
@@ -23,7 +24,17 @@ namespace EyesOfTheDragon.GameScreens
         Engine engine = new Engine(32, 32);
         static Player player;
         static World world;
-        
+
+        Texture2D swordUp;
+        Texture2D swordRight;
+        Texture2D swordDown;
+        Texture2D swordLeft;
+
+        Rectangle playerSword;
+        bool playerAttacking = false;
+        double playerTimer = 0;
+        int attackDirection = -1;
+
         #endregion
         
         #region Property Region
@@ -60,6 +71,11 @@ namespace EyesOfTheDragon.GameScreens
 
         protected override void LoadContent()
         {
+            swordUp = GameRef.Content.Load<Texture2D>("ObjectSprites/Sword-Up");
+            swordRight = GameRef.Content.Load<Texture2D>("ObjectSprites/Sword-Right");
+            swordDown = GameRef.Content.Load<Texture2D>("ObjectSprites/Sword-Down");
+            swordLeft = GameRef.Content.Load<Texture2D>("ObjectSprites/Sword-Left");
+
             base.LoadContent();
         }
 
@@ -110,24 +126,93 @@ namespace EyesOfTheDragon.GameScreens
 
             MobLayer mobLayer = World.Levels[World.CurrentLevel].Map.Layers.Find(x => x is MobLayer) as MobLayer;
 
+            if (playerAttacking)
+            {
+                foreach (var mob in mobLayer.Mobs.Values)
+                {
+                    if (playerSword.Intersects(mob.Sprite.Bounds))
+                    {
+                        if (player.Character.Entity.MainHand != null &&
+                            player.Character.Entity.MainHand.Item is Weapon)
+                        {
+                            mob.Entity.ApplyDamage(player.Character.Entity.MainHand);
+                            playerAttacking = false;
+
+                            if (mob.Entity.Health.CurrentValue <= 0)
+                            {
+                                StateManager.PushState(GameRef.LootScreen);
+                                GamePlayScreen.Player.Character.Entity.AddExperience(mob.XPValue);
+                                GameRef.LootScreen.Gold = mob.GoldDrop;
+
+                                foreach (var i in mob.Drops)
+                                {
+                                    GameRef.LootScreen.Items.Add(i);
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+
             foreach (var mob in mobLayer.Mobs.Where(kv => kv.Value.Entity.Health.CurrentValue <= 0).ToList())
             {
                 mobLayer.Mobs.Remove(mob.Key);
             }
 
-            foreach (Rectangle r in mobLayer.Mobs.Keys)
+            foreach (var mob in mobLayer.Mobs.Values)
             {
-                float distance = Vector2.Distance(mobLayer.Mobs[r].Sprite.Center, player.Sprite.Center);
+                float distance = Vector2.Distance(player.Sprite.Center, mob.Sprite.Center);
 
-                if (distance < Mob.AttackRadius)
+                if (distance < mob.Sprite.Width * 4)
                 {
-                    GameRef.CombatScreen.SetMob(mobLayer.Mobs[r]);
+                    Vector2 motion = Vector2.Zero;
 
-                    StateManager.PushState(GameRef.CombatScreen);
-                    Visible = true;
+                    if (mob.Sprite.Position.X < player.Sprite.Position.X)
+                    {
+                        motion.X = 1;
+                        mob.Sprite.CurrentAnimation = AnimationKey.Right;
+                    }
+
+                    if (mob.Sprite.Position.X > player.Sprite.Position.X)
+                    {
+                        motion.X = -1;
+                        mob.Sprite.CurrentAnimation = AnimationKey.Left;
+                    }
+
+                    if (mob.Sprite.Position.Y < player.Sprite.Position.Y)
+                    {
+                        motion.Y = 1;
+                        mob.Sprite.CurrentAnimation = AnimationKey.Down;
+                    }
+
+                    if (mob.Sprite.Position.Y > player.Sprite.Position.Y)
+                    {
+                        motion.Y = -1;
+                        mob.Sprite.CurrentAnimation = AnimationKey.Up;
+                    }
+
+                    if (motion != Vector2.Zero)
+                    {
+                        motion.Normalize();
+                    }
+
+                    float speed = 200f;
+
+                    motion *= speed * (float)gameTime.ElapsedGameTime.TotalSeconds;
+
+                    mob.Sprite.Position += motion;
+                    mob.Sprite.IsAnimating = true;
+
+                    if (mob.Sprite.Bounds.Intersects(player.Sprite.Bounds))
+                    {
+                        mob.Sprite.Position -= motion;
+                    }
+                }
+                else
+                {
+                    mob.Sprite.IsAnimating = false;
                 }
             }
-
             if (InputHandler.KeyReleased(Keys.I))
             {
                 StateManager.PushState(GameRef.InventoryScreen);
@@ -149,6 +234,35 @@ namespace EyesOfTheDragon.GameScreens
                 }
             }
 
+            if (InputHandler.CheckMousePress(MouseButton.Left) && playerTimer > 0.25 && !playerAttacking)
+            {
+                playerAttacking = true;
+                playerTimer = 0;
+
+                if (player.Sprite.CurrentAnimation == AnimationKey.Up)
+                {
+                    attackDirection = 0;
+                }
+                else if (player.Sprite.CurrentAnimation == AnimationKey.Right)
+                {
+                    attackDirection = 1;
+                }
+                else if (player.Sprite.CurrentAnimation == AnimationKey.Down)
+                {
+                    attackDirection = 2;
+                }
+                else
+                {
+                    attackDirection = 3;
+                }
+            }
+
+            if (playerTimer >= 0.25)
+            {
+                playerAttacking = false;
+            }
+            playerTimer += gameTime.ElapsedGameTime.TotalSeconds;
+
             base.Update(gameTime);
         }
 
@@ -166,10 +280,51 @@ namespace EyesOfTheDragon.GameScreens
             base.Draw(gameTime);
 
             world.DrawLevel(gameTime, GameRef.SpriteBatch, player.Camera);
+
+            if (playerAttacking)
+            {
+                switch (attackDirection)
+                {
+                    case 0:
+                        playerSword = new Rectangle(
+                            (int)player.Sprite.Position.X + (32 - swordUp.Width) / 2, 
+                            (int)player.Sprite.Position.Y - swordUp.Height,
+                            swordUp.Width, 
+                            swordUp.Height);
+                        GameRef.SpriteBatch.Draw(swordUp, playerSword, Color.White);
+                        break;
+                    case 2:
+                        playerSword = new Rectangle(
+                            (int)player.Sprite.Position.X + (32 - swordDown.Width) / 2,
+                            (int)player.Sprite.Position.Y + 32,
+                            swordDown.Width,
+                            swordDown.Height);
+                        GameRef.SpriteBatch.Draw(swordDown, playerSword, Color.White);
+                        break;
+                    case 1:
+                        playerSword = new Rectangle(
+                            (int)player.Sprite.Position.X + 32,
+                            (int)player.Sprite.Position.Y + (32 - swordRight.Height) / 2,
+                            swordRight.Width,
+                            swordRight.Height);
+                        GameRef.SpriteBatch.Draw(swordRight, playerSword, Color.White);
+                        break;
+                    case 3:
+                        playerSword = new Rectangle(
+                            (int)player.Sprite.Position.X - swordLeft.Width,
+                            (int)player.Sprite.Position.Y + (32 - swordLeft.Height) / 2,
+                            swordLeft.Width,
+                            swordLeft.Height);
+                        GameRef.SpriteBatch.Draw(swordLeft, playerSword, Color.White);
+                        break;
+                }
+            }
+
             player.Draw(gameTime, GameRef.SpriteBatch);
 
             GameRef.SpriteBatch.End();
         }
+
         #endregion
 
         #region Abstract Method Region

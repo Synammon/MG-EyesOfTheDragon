@@ -357,7 +357,9 @@ namespace EyesOfTheDragon.GameScreens
 
                 Mob mob = new Bandit(e, s);
                 
-                Rectangle r = new Rectangle(Mechanics.Random.Next(10, 20) * 32, Mechanics.Random.Next(10, 20) * 32, 32, 32);
+                Rectangle r = new Rectangle(Mechanics.Random.Next(10, 50) * 32, Mechanics.Random.Next(10, 50) * 32, 32, 32);
+
+                mob.Sprite.Position = new Vector2(r.X, r.Y);
 
                 if (!mobLayer.Mobs.ContainsKey(r))
                 {

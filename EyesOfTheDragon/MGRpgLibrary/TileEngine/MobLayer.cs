@@ -17,7 +17,7 @@ namespace MGRpgLibrary.TileEngine
         {
             foreach (Rectangle r in _mobs.Keys)
             {
-                _mobs[r].Sprite.Position = new Vector2(r.X, r.Y);
+                //_mobs[r].Sprite.Position = new Vector2(r.X, r.Y);
                 _mobs[r].Draw(new GameTime(), spriteBatch);
             }
         }
