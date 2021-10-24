@@ -1,0 +1,27 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<XnaContent xmlns:ItemClasses="RpgLibrary.ItemClasses">
+  <Asset Type="ItemClasses:WeaponData">
+    <Name>Acolyte Staff</Name>
+    <Type>Health</Type>
+    <Price>440</Price>
+    <Weight>8</Weight>
+    <Equipped>false</Equipped>
+    <NumberHands>Both</NumberHands>
+    <AttackValue>8</AttackValue>
+    <AttackModifier>0</AttackModifier>
+    <DamageEffectData>
+      <Item>
+        <Name Null="true" />
+        <TargetType>Enemy</TargetType>
+        <DamageType>Magic</DamageType>
+        <AttackType>Health</AttackType>
+        <DieType>D8</DieType>
+        <NumberOfDice>1</NumberOfDice>
+        <Modifier>0</Modifier>
+      </Item>
+    </DamageEffectData>
+    <AllowableClasses>
+      <Item>Wizard</Item>
+    </AllowableClasses>
+  </Asset>
+</XnaContent>
