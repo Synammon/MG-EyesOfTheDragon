@@ -2,12 +2,13 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using MGRpgLibrary;
 using RpgLibrary.CharacterClasses;
 using RpgLibrary.EffectClasses;
 
 namespace RpgLibrary.TalentClasses
 {
-    public class Talent
+    public class Talent : Activation
     {
         #region Field Region
 
@@ -18,7 +19,7 @@ namespace RpgLibrary.TalentClasses
         int levelRequirement;
         TalentType talentType;
         int activationCost;
-        int coolDown;
+        double coolDown;
         List<BaseEffect> effects;
 
         #endregion
@@ -60,7 +61,7 @@ namespace RpgLibrary.TalentClasses
             get { return activationCost; }
         }
 
-        public int CoolDown
+        public double CoolDown
         {
             get { return coolDown; }
         }
@@ -94,7 +95,11 @@ namespace RpgLibrary.TalentClasses
                 levelRequirement = data.LevelRequirement,
                 talentType = data.TalentType,
                 activationCost = data.ActivationCost,
-                coolDown = data.CoolDown
+                coolDown = data.CoolDown,
+                Range = data.Range,
+                AreaOfEffect = data.AreaOfEffect,
+                AngleOfEffect = data.AngleOfEffect,
+                CastTime = data.CastTime
             };
 
             foreach (string s in data.AllowedClasses)

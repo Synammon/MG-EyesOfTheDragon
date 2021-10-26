@@ -2,12 +2,13 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using MGRpgLibrary;
 using RpgLibrary.CharacterClasses;
 using RpgLibrary.EffectClasses;
 
 namespace RpgLibrary.SpellClasses
 {
-    public class Spell
+    public class Spell : Activation
     {
         #region Field Region
 
@@ -18,7 +19,7 @@ namespace RpgLibrary.SpellClasses
         int levelRequirement;
         SpellType spellType;
         int activationCost;
-        int coolDown;
+        double coolDown;
         List<BaseEffect> effects;
 
         #endregion
@@ -60,7 +61,7 @@ namespace RpgLibrary.SpellClasses
             get { return activationCost; }
         }
 
-        public int CoolDown
+        public double CoolDown
         {
             get { return coolDown; }
         }
@@ -94,7 +95,11 @@ namespace RpgLibrary.SpellClasses
                 levelRequirement = data.LevelRequirement,
                 spellType = data.SpellType,
                 activationCost = data.ActivationCost,
-                coolDown = data.CoolDown
+                coolDown = data.CoolDown,
+                Range = data.Range,
+                AreaOfEffect = data.AreaOfEffect,
+                AngleOfEffect = data.AngleOfEffect,
+                CastTime = data.CastTime
             };
 
             foreach (string s in data.AllowedClasses)

@@ -436,6 +436,18 @@
 /processorParam:TextureFormat=Color
 /build:GUI/StopBar.png
 
+#begin GUI/target.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:GUI/target.png
+
 #begin ObjectSprites/containers.png
 /importer:TextureImporter
 /processor:TextureProcessor

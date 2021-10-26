@@ -1,4 +1,5 @@
-﻿using RpgLibrary.EffectClasses;
+﻿using Microsoft.Xna.Framework;
+using RpgLibrary.EffectClasses;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -46,7 +47,13 @@ namespace RpgLibrary.SpellClasses
                 LevelRequirement = 1,
                 ActivationCost = 8,
                 AllowedClasses = new string[] { "Wizard" },
-                AttributeRequirements = new Dictionary<string, int>() { { "Magic", 10 } }
+                AttributeRequirements = new Dictionary<string, int>() { { "Magic", 10 } },
+                AreaOfEffect = 32,
+                AngleOfEffect = MathHelper.TwoPi,
+                CastTime = 0,
+                Duration = 0,
+                CoolDown = 2,
+                Range = 128,
             };
 
             BaseEffect effect = DamageEffect.FromDamageEffectData(new DamageEffectData
@@ -72,7 +79,12 @@ namespace RpgLibrary.SpellClasses
                 LevelRequirement = 1,
                 ActivationCost = 6,
                 AllowedClasses = new string[] { "Priest" },
-                AttributeRequirements = new Dictionary<string, int>() { { "Magic", 10 } }
+                AttributeRequirements = new Dictionary<string, int>() { { "Magic", 10 } },
+                Range = 0,
+                AreaOfEffect = 0,
+                AngleOfEffect = 0,
+                CastTime = 0,
+                CoolDown = 2
             };
 
             BaseEffect healEffect = HealEffect.FromHealEffectData(new HealEffectData

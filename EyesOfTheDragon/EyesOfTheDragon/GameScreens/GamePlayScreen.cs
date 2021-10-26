@@ -30,10 +30,20 @@ namespace EyesOfTheDragon.GameScreens
         Texture2D swordDown;
         Texture2D swordLeft;
 
+        Texture2D target;
+
+        bool targeting;
+        double castTime;
+
+        Activation currentActivation;
+        public readonly static Activation[] HotKeys = new Activation[10];
+
         Rectangle playerSword;
         bool playerAttacking = false;
         double playerTimer = 0;
         int attackDirection = -1;
+
+        double _healthTimer;
 
         #endregion
         
@@ -75,55 +85,113 @@ namespace EyesOfTheDragon.GameScreens
             swordRight = GameRef.Content.Load<Texture2D>("ObjectSprites/Sword-Right");
             swordDown = GameRef.Content.Load<Texture2D>("ObjectSprites/Sword-Down");
             swordLeft = GameRef.Content.Load<Texture2D>("ObjectSprites/Sword-Left");
+            target = GameRef.Content.Load<Texture2D>("GUI/target");
 
             base.LoadContent();
         }
 
         public override void Update(GameTime gameTime)
         {
+            if (targeting)
+            {
+                if (InputHandler.KeyPressed(Keys.Escape))
+                {
+                    targeting = false;
+                }
+
+                if (InputHandler.CheckMousePress(MouseButton.Left))
+                {
+                    castTime = 0;
+                }
+
+                return;
+            }
+
             world.Update(gameTime);
             player.Update(gameTime);
+
             player.Camera.LockToSprite(player.Sprite);
-        
-            if (InputHandler.KeyReleased(Keys.Space) ||
-                InputHandler.ButtonReleased(Buttons.A, PlayerIndex.One))
+
+            HandleHotKeyInput();
+
+            HandleConversation();
+
+            HandleMobs(gameTime);
+
+            if (InputHandler.KeyReleased(Keys.I))
             {
-                foreach (ILayer layer in World.Levels[World.CurrentLevel].Map.Layers)
+                StateManager.PushState(GameRef.InventoryScreen);
+            }
+
+            if (InputHandler.KeyReleased(Keys.C))
+            {
+                StateManager.PushState(GameRef.StatsScreen);
+                Visible = true;
+            }
+
+            if (Player.Character.Entity.Level < Mechanics.Experiences.Length)
+            {
+                if (Player.Character.Entity.Experience >= Mechanics.Experiences[Player.Character.Entity.Level])
                 {
-                    if (layer is CharacterLayer)
-                    {
-                        foreach (Character c in ((CharacterLayer)layer).Characters.Values)
-                        {
-                            float distance = Vector2.Distance(
-                                player.Sprite.Center,
-                                c.Sprite.Center);
-
-                            if (distance < Character.SpeakingRadius && c is NonPlayerCharacter)
-                            {
-                                NonPlayerCharacter npc = (NonPlayerCharacter)c;
-
-                                if (npc.HasConversation)
-                                {
-                                    StateManager.PushState(GameRef.ConversationScreen);
-
-                                    GameRef.ConversationScreen.SetConversation(
-                                        player,
-                                        npc,
-                                        npc.CurrentConversation);
-
-                                    GameRef.ConversationScreen.StartConversation();
-                                }
-                            }
-                            else if (distance < Character.SpeakingRadius && c is Merchant)
-                            {
-                                StateManager.PushState(GameRef.ShopScreen);
-                                GameRef.ShopScreen.SetMerchant(c as Merchant);
-                            }
-                        }
-                    }
+                    Player.Character.Entity.LevelUp();
+                    StateManager.PushState(GameRef.LevelScreen);
+                    Visible = true;
                 }
             }
 
+            if (InputHandler.CheckMousePress(MouseButton.Left) && playerTimer > 0.25 && !playerAttacking)
+            {
+                playerAttacking = true;
+                playerTimer = 0;
+
+                if (player.Sprite.CurrentAnimation == AnimationKey.Up)
+                {
+                    attackDirection = 0;
+                }
+                else if (player.Sprite.CurrentAnimation == AnimationKey.Right)
+                {
+                    attackDirection = 1;
+                }
+                else if (player.Sprite.CurrentAnimation == AnimationKey.Down)
+                {
+                    attackDirection = 2;
+                }
+                else
+                {
+                    attackDirection = 3;
+                }
+            }
+
+            if (playerTimer >= 0.25)
+            {
+                playerAttacking = false;
+            }
+
+            playerTimer += gameTime.ElapsedGameTime.TotalSeconds;
+
+            if (player.Character.Entity.Health.CurrentValue <= 0)
+            {
+                StateManager.PushState(GameRef.GameOverScreen);
+            }
+
+            if (player.Character.Entity.Health.CurrentValue < player.Character.Entity.Health.MaximumValue)
+            {
+                _healthTimer += gameTime.ElapsedGameTime.TotalSeconds;
+
+                if (_healthTimer > 1)
+                {
+                    _healthTimer = 0;
+                    player.Character.Entity.Health.Heal(2);
+                    player.Character.Entity.Mana.Heal(2);
+                    player.Character.Entity.Stamina.Heal(2);
+                }
+            }
+
+            base.Update(gameTime);
+        }
+
+        private void HandleMobs(GameTime gameTime)
+        {
             MobLayer mobLayer = World.Levels[World.CurrentLevel].Map.Layers.Find(x => x is MobLayer) as MobLayer;
 
             if (playerAttacking)
@@ -157,6 +225,12 @@ namespace EyesOfTheDragon.GameScreens
             foreach (var mob in mobLayer.Mobs.Where(kv => kv.Value.Entity.Health.CurrentValue <= 0).ToList())
             {
                 mobLayer.Mobs.Remove(mob.Key);
+            }
+
+            foreach (var mob in mobLayer.Mobs.Values)
+            {
+                mob.DoAttack(player.Sprite, player.Character.Entity);
+                mob.ShouldAttack(player.Sprite);
             }
 
             foreach (var mob in mobLayer.Mobs.Values)
@@ -213,57 +287,181 @@ namespace EyesOfTheDragon.GameScreens
                     mob.Sprite.IsAnimating = false;
                 }
             }
-            if (InputHandler.KeyReleased(Keys.I))
-            {
-                StateManager.PushState(GameRef.InventoryScreen);
-            }
+        }
 
-            if (InputHandler.KeyReleased(Keys.C))
+        private void HandleConversation()
+        {
+            if (InputHandler.KeyReleased(Keys.Space) ||
+                InputHandler.ButtonReleased(Buttons.A, PlayerIndex.One))
             {
-                StateManager.PushState(GameRef.StatsScreen);
-                Visible = true;
-            }
-
-            if (Player.Character.Entity.Level < Mechanics.Experiences.Length)
-            {
-                if (Player.Character.Entity.Experience >= Mechanics.Experiences[Player.Character.Entity.Level])
+                foreach (ILayer layer in World.Levels[World.CurrentLevel].Map.Layers)
                 {
-                    Player.Character.Entity.LevelUp();
-                    StateManager.PushState(GameRef.LevelScreen);
-                    Visible = true;
+                    if (layer is CharacterLayer)
+                    {
+                        foreach (Character c in ((CharacterLayer)layer).Characters.Values)
+                        {
+                            float distance = Vector2.Distance(
+                                player.Sprite.Center,
+                                c.Sprite.Center);
+
+                            if (distance < Character.SpeakingRadius && c is NonPlayerCharacter)
+                            {
+                                NonPlayerCharacter npc = (NonPlayerCharacter)c;
+
+                                if (npc.HasConversation)
+                                {
+                                    StateManager.PushState(GameRef.ConversationScreen);
+
+                                    GameRef.ConversationScreen.SetConversation(
+                                        player,
+                                        npc,
+                                        npc.CurrentConversation);
+
+                                    GameRef.ConversationScreen.StartConversation();
+                                }
+                            }
+                            else if (distance < Character.SpeakingRadius && c is Merchant)
+                            {
+                                StateManager.PushState(GameRef.ShopScreen);
+                                GameRef.ShopScreen.SetMerchant(c as Merchant);
+                            }
+                        }
+                    }
+                }
+            }
+        }
+
+        private void HandleHotKeyInput()
+        {
+            if (InputHandler.KeyPressed(Keys.D1))
+            {
+                if (HotKeys[0] != null)
+                {
+                    if (HotKeys[0].Range > 0)
+                    {
+                        targeting = true;
+                        currentActivation = HotKeys[0];
+                        castTime = 0;
+                    }
                 }
             }
 
-            if (InputHandler.CheckMousePress(MouseButton.Left) && playerTimer > 0.25 && !playerAttacking)
+            if (InputHandler.KeyPressed(Keys.D2))
             {
-                playerAttacking = true;
-                playerTimer = 0;
-
-                if (player.Sprite.CurrentAnimation == AnimationKey.Up)
+                if (HotKeys[1] != null)
                 {
-                    attackDirection = 0;
-                }
-                else if (player.Sprite.CurrentAnimation == AnimationKey.Right)
-                {
-                    attackDirection = 1;
-                }
-                else if (player.Sprite.CurrentAnimation == AnimationKey.Down)
-                {
-                    attackDirection = 2;
-                }
-                else
-                {
-                    attackDirection = 3;
+                    if (HotKeys[1].Range > 0)
+                    {
+                        targeting = true;
+                        currentActivation = HotKeys[1];
+                        castTime = 0;
+                    }
                 }
             }
 
-            if (playerTimer >= 0.25)
+            if (InputHandler.KeyPressed(Keys.D3))
             {
-                playerAttacking = false;
+                if (HotKeys[2] != null)
+                {
+                    if (HotKeys[2].Range > 0)
+                    {
+                        targeting = true;
+                        currentActivation = HotKeys[2];
+                        castTime = 0;
+                    }
+                }
             }
-            playerTimer += gameTime.ElapsedGameTime.TotalSeconds;
 
-            base.Update(gameTime);
+            if (InputHandler.KeyPressed(Keys.D4))
+            {
+                if (HotKeys[3] != null)
+                {
+                    if (HotKeys[3].Range > 0)
+                    {
+                        targeting = true;
+                        currentActivation = HotKeys[3];
+                        castTime = 0;
+                    }
+                }
+            }
+
+            if (InputHandler.KeyPressed(Keys.D5))
+            {
+                if (HotKeys[4] != null)
+                {
+                    if (HotKeys[4].Range > 0)
+                    {
+                        targeting = true;
+                        currentActivation = HotKeys[4];
+                        castTime = 0;
+                    }
+                }
+            }
+
+            if (InputHandler.KeyPressed(Keys.D6))
+            {
+                if (HotKeys[5] != null)
+                {
+                    if (HotKeys[5].Range > 0)
+                    {
+                        targeting = true;
+                        currentActivation = HotKeys[5];
+                        castTime = 0;
+                    }
+                }
+            }
+
+            if (InputHandler.KeyPressed(Keys.D7))
+            {
+                if (HotKeys[6] != null)
+                {
+                    if (HotKeys[6].Range > 0)
+                    {
+                        targeting = true;
+                        currentActivation = HotKeys[6];
+                        castTime = 0;
+                    }
+                }
+            }
+
+            if (InputHandler.KeyPressed(Keys.D8))
+            {
+                if (HotKeys[7] != null)
+                {
+                    if (HotKeys[7].Range > 0)
+                    {
+                        targeting = true;
+                        currentActivation = HotKeys[7];
+                        castTime = 0;
+                    }
+                }
+            }
+
+            if (InputHandler.KeyPressed(Keys.D9))
+            {
+                if (HotKeys[8] != null)
+                {
+                    if (HotKeys[8].Range > 0)
+                    {
+                        targeting = true;
+                        currentActivation = HotKeys[8];
+                        castTime = 0;
+                    }
+                }
+            }
+
+            if (InputHandler.KeyPressed(Keys.D0))
+            {
+                if (HotKeys[9] != null)
+                {
+                    if (HotKeys[9].Range > 0)
+                    {
+                        targeting = true;
+                        currentActivation = HotKeys[9];
+                        castTime = 0;
+                    }
+                }
+            }
         }
 
         public override void Draw(GameTime gameTime)
@@ -322,6 +520,28 @@ namespace EyesOfTheDragon.GameScreens
 
             player.Draw(gameTime, GameRef.SpriteBatch);
 
+            if (targeting)
+            {
+                Vector2 targetPosition = Player.Camera.Position + InputHandler.MouseAsVector2;
+                Color tint = Color.White;
+                float scale = (float)currentActivation.AreaOfEffect / target.Width;
+
+                if (Vector2.Distance(Player.Sprite.Center, targetPosition) > currentActivation.Range)
+                {
+                    tint = Color.Black;
+                }
+
+                GameRef.SpriteBatch.Draw(
+                    target, 
+                    targetPosition, 
+                    null,
+                    tint,
+                    0f,
+                    new Vector2(),
+                    scale,
+                    SpriteEffects.None,
+                    1f);
+            }
             GameRef.SpriteBatch.End();
         }
 

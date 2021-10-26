@@ -1,4 +1,5 @@
-﻿using RpgLibrary.EffectClasses;
+﻿using Microsoft.Xna.Framework;
+using RpgLibrary.EffectClasses;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -44,7 +45,12 @@ namespace RpgLibrary.TalentClasses
                 TalentType = TalentType.Activated,
                 ActivationCost = 5,
                 AllowedClasses = new string[] { "Fighter" },
-                AttributeRequirements = new Dictionary<string, int>() { { "Strength", 10 } }                
+                AttributeRequirements = new Dictionary<string, int>() { { "Strength", 10 } },
+                AreaOfEffect = 8,
+                AngleOfEffect = MathHelper.TwoPi,
+                Range = 48,
+                CastTime = 0,
+                CoolDown = 1.5
             };
 
             DamageEffect effect = DamageEffect.FromDamageEffectData(new DamageEffectData
@@ -70,7 +76,12 @@ namespace RpgLibrary.TalentClasses
                 TalentType = TalentType.Activated,
                 ActivationCost = 5,
                 AllowedClasses = new string[] { "Rogue" },
-                AttributeRequirements = new Dictionary<string, int>() { { "Dexterity", 10 } }
+                AttributeRequirements = new Dictionary<string, int>() { { "Dexterity", 10 } },
+                AreaOfEffect = 8,
+                AngleOfEffect = MathHelper.TwoPi,
+                Range = 48,
+                CastTime = 0,
+                CoolDown = 1.5
             };
 
             effect = DamageEffect.FromDamageEffectData(new DamageEffectData()

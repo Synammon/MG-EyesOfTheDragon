@@ -19,12 +19,19 @@ namespace RpgLibrary.TalentClasses
         public int LevelRequirement;
         public TalentType TalentType;
         public int ActivationCost;
-        public int CoolDown;
+        public double CoolDown;
         public List<BaseEffect> Effects = new List<BaseEffect>();
 
         #endregion
 
         #region Property Region
+
+        public double CastTime { get; set; }
+        public double Duration { get; set; }
+        public double Range { get; set; }
+        public double AreaOfEffect { get; set; }
+        public double AngleOfEffect { get; set; }
+
         #endregion
 
         #region Constructor Region

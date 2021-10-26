@@ -20,6 +20,8 @@ using MGRpgLibrary.ConversationComponents;
 using System.IO;
 using MGRpgLibrary.Mobs;
 using RpgLibrary;
+using RpgLibrary.SpellClasses;
+using RpgLibrary.TalentClasses;
 
 namespace EyesOfTheDragon.GameScreens
 {
@@ -355,7 +357,7 @@ namespace EyesOfTheDragon.GameScreens
                     GameRef.Content.Load<Texture2D>(@"PlayerSprites/malerogue"),
                     AnimationManager.Instance.Animations);
 
-                Mob mob = new Bandit(e, s);
+                Mob mob = new Bandit(e, s, GameRef);
                 
                 Rectangle r = new Rectangle(Mechanics.Random.Next(10, 50) * 32, Mechanics.Random.Next(10, 50) * 32, 32, 32);
 
@@ -411,6 +413,35 @@ namespace EyesOfTheDragon.GameScreens
             {
                 Gold = 200
             };
+
+            if (GamePlayScreen.Player.Character.Entity.Mana.MaximumValue > 0)
+            {
+                foreach (SpellData s in DataManager.SpellData.SpellData.Values)
+                {
+                    foreach (string c in s.AllowedClasses)
+                    {
+                        if (c == entity.EntityClass && entity.Level >= s.LevelRequirement)
+                        {
+                            GamePlayScreen.HotKeys[0] = Spell.FromSpellData(s);
+                            break;
+                        }
+                    }
+                }
+            }
+            else
+            {
+                foreach (TalentData s in DataManager.TalentData.TalentData.Values)
+                {
+                    foreach (string c in s.AllowedClasses)
+                    {
+                        if (c == entity.EntityClass && entity.Level >= s.LevelRequirement)
+                        {
+                            GamePlayScreen.HotKeys[0] = Talent.FromTalentData(s);
+                            break;
+                        }
+                    }
+                }
+            }
         }
 
         private void CreateWorld()

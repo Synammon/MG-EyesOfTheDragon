@@ -23,6 +23,9 @@ namespace MGRpgLibrary.Mobs
         protected Entity entity;
         protected AnimatedSprite sprite;
         protected int _xpValue;
+        protected double attackTimer;
+        protected bool isAttacking;
+        protected int attackingDirection;
 
         #endregion
 
@@ -80,7 +83,7 @@ namespace MGRpgLibrary.Mobs
 
         #region Constructor Region
 
-        public Mob(Entity entity, AnimatedSprite sprite)
+        public Mob(Entity entity, AnimatedSprite sprite, Game game)
         {
             this.entity = entity;
             this.sprite = sprite;
@@ -110,6 +113,8 @@ namespace MGRpgLibrary.Mobs
 
         public abstract void Attack(Entity source);
         public abstract void DoAttack(Entity target);
+        public abstract void ShouldAttack(AnimatedSprite sprite);
+        public abstract void DoAttack(AnimatedSprite sprite, Entity entity);
 
         #endregion
     }
