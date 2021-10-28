@@ -14,6 +14,9 @@ using MGRpgLibrary.CharacterClasses;
 using MGRpgLibrary.Mobs;
 using RpgLibrary;
 using RpgLibrary.ItemClasses;
+using RpgLibrary.SpellClasses;
+using RpgLibrary.TalentClasses;
+using RpgLibrary.EffectClasses;
 
 namespace EyesOfTheDragon.GameScreens
 {
@@ -94,6 +97,17 @@ namespace EyesOfTheDragon.GameScreens
         {
             if (targeting)
             {
+                List<BaseEffect> effects = currentActivation is Spell
+                    ? ((Spell)currentActivation).Effects
+                    : ((Talent)currentActivation).Effects;
+
+                if (effects[0].TargetType == TargetType.Self)
+                {
+                    targeting = false;
+                    ActivateSelfEffect(effects);
+                    return;
+                }
+
                 if (InputHandler.KeyPressed(Keys.Escape))
                 {
                     targeting = false;
@@ -102,6 +116,30 @@ namespace EyesOfTheDragon.GameScreens
                 if (InputHandler.CheckMousePress(MouseButton.Left))
                 {
                     castTime = 0;
+
+                    if (castTime >= currentActivation.CastTime)
+                    {
+                        MobLayer mobLayer = (MobLayer)World.CurrentMap.Layers.Find(x => x is MobLayer);
+                        Vector2 mouse = InputHandler.MouseAsVector2;
+                        float scale = (float)currentActivation.AreaOfEffect / target.Width;
+
+                        Vector2 targetPosition = Player.Camera.Position + InputHandler.MouseAsVector2;
+
+                        foreach (Mob m in mobLayer.Mobs.Values)
+                        {
+                            float distance = Vector2.Distance(targetPosition, m.Sprite.Center);
+
+                            if (distance > currentActivation.AreaOfEffect / 2)
+                            {
+                                continue;
+                            }
+
+                            ActivateEnemyEffect(effects, m);
+
+                            targeting = false;
+                        }
+
+                    }
                 }
 
                 return;
@@ -188,6 +226,22 @@ namespace EyesOfTheDragon.GameScreens
             }
 
             base.Update(gameTime);
+        }
+
+        private void ActivateEnemyEffect(List<BaseEffect> effects, Mob m)
+        {
+            foreach (BaseEffect e in effects)
+            {
+                e.Apply(m.Entity);
+            }
+        }
+
+        private void ActivateSelfEffect(List<BaseEffect> effects)
+        {
+            foreach (BaseEffect e in effects)
+            {
+                e.Apply(Player.Character.Entity);
+            }
         }
 
         private void HandleMobs(GameTime gameTime)
@@ -466,6 +520,8 @@ namespace EyesOfTheDragon.GameScreens
 
         public override void Draw(GameTime gameTime)
         {
+            GameRef.IsMouseVisible = !targeting;
+
             GameRef.SpriteBatch.Begin(
                 SpriteSortMode.Deferred,
                 BlendState.AlphaBlend,
@@ -522,9 +578,11 @@ namespace EyesOfTheDragon.GameScreens
 
             if (targeting)
             {
-                Vector2 targetPosition = Player.Camera.Position + InputHandler.MouseAsVector2;
                 Color tint = Color.White;
                 float scale = (float)currentActivation.AreaOfEffect / target.Width;
+                
+                Vector2 targetPosition = Player.Camera.Position + InputHandler.MouseAsVector2;
+                targetPosition -= new Vector2(target.Width, target.Height) * scale / 2;
 
                 if (Vector2.Distance(Player.Sprite.Center, targetPosition) > currentActivation.Range)
                 {
