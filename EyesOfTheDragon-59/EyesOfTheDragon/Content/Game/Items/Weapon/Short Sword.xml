@@ -1,0 +1,28 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<XnaContent xmlns:ItemClasses="RpgLibrary.ItemClasses">
+  <Asset Type="ItemClasses:WeaponData">
+    <Name>Short Sword</Name>
+    <Type>Health</Type>
+    <Price>20</Price>
+    <Weight>10</Weight>
+    <Equipped>false</Equipped>
+    <NumberHands>Main</NumberHands>
+    <AttackValue>8</AttackValue>
+    <AttackModifier>0</AttackModifier>
+    <DamageEffectData>
+      <Item>
+        <Name Null="true" />
+		  <TargetType>Enemy</TargetType>
+		  <DamageType>Piercing</DamageType>
+        <AttackType>Health</AttackType>
+        <DieType>D8</DieType>
+        <NumberOfDice>1</NumberOfDice>
+        <Modifier>0</Modifier>
+      </Item>
+    </DamageEffectData>
+    <AllowableClasses>
+      <Item>Fighter</Item>
+      <Item>Rogue</Item>
+    </AllowableClasses>
+  </Asset>
+</XnaContent>
