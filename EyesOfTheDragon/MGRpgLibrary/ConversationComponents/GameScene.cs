@@ -25,10 +25,13 @@ namespace MGRpgLibrary.ConversationComponents
         protected Vector2 textPosition;
         protected static Texture2D selected;
         protected Vector2 menuPosition = new Vector2(50, 475);
+        protected bool isOver;
 
         #endregion
 
         #region Property Region
+
+        public bool IsOver { get; private set; }
 
         public string Text
         {
@@ -223,9 +226,19 @@ namespace MGRpgLibrary.ConversationComponents
                 Color.White);
             
             Vector2 position = menuPosition;
-            
+            Vector2 mouse = InputHandler.MouseAsVector2;
+            Rectangle dest = new Rectangle(0, 0, 1280, font.LineSpacing);
+
             for (int i = 0; i < options.Count; i++)
             {
+                dest.Y = (int)position.Y;
+
+                if (dest.Contains(mouse))
+                {
+                    selectedIndex = i;
+                    IsOver = true;
+                }
+
                 if (i == SelectedIndex)
                 {
                     myColor = HighLightColor;
@@ -240,7 +253,7 @@ namespace MGRpgLibrary.ConversationComponents
                     options[i].OptionText,
                     position,
                     myColor);
-                
+
                 position.Y += font.LineSpacing + 5;
             }
         }

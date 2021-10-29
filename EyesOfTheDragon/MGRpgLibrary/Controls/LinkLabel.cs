@@ -37,6 +37,7 @@ namespace MGRpgLibrary.Controls
 
         public override void Update(GameTime gameTime)
         {
+            size = SpriteFont.MeasureString(Text);
         }
 
         public override void Draw(SpriteBatch spriteBatch)
@@ -58,15 +59,8 @@ namespace MGRpgLibrary.Controls
 
             if (InputHandler.CheckMouseReleased(MouseButton.Left))
             {
-                size = SpriteFont.MeasureString(Text);
 
-                Rectangle r = new Rectangle(
-                    (int)Position.X, 
-                    (int)Position.Y, 
-                    (int)size.X, 
-                    (int)size.Y);
-                
-                if (r.Contains(InputHandler.MouseAsPoint))
+                if (GetBounds().Contains(InputHandler.MouseAsPoint))
                     base.OnSelected(null);
             }
         }

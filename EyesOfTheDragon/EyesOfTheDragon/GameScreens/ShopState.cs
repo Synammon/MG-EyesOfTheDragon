@@ -87,7 +87,6 @@ namespace EyesOfTheDragon.GameScreens
                         }
                     }
 
-
                     if (InputHandler.KeyReleased(Keys.Space) ||
                         InputHandler.KeyReleased(Keys.Enter) ||
                         (InputHandler.CheckMouseReleased(MouseButton.Left) && mouseOver))
@@ -117,6 +116,7 @@ namespace EyesOfTheDragon.GameScreens
                         isFirst = false;
                         break;
                     }
+
                     if (InputHandler.KeyReleased(Keys.Down) ||
                         InputHandler.KeyReleased(Keys.S))
                     {
@@ -138,7 +138,6 @@ namespace EyesOfTheDragon.GameScreens
                         }
                     }
 
-
                     if ((InputHandler.KeyReleased(Keys.Space) ||
                         InputHandler.KeyReleased(Keys.Enter) ||
                         (InputHandler.CheckMouseReleased(MouseButton.Left) && mouseOver)))
@@ -153,7 +152,8 @@ namespace EyesOfTheDragon.GameScreens
                     break;
                 case ShopStateType.Talk:
                     if (InputHandler.KeyReleased(Keys.Space) ||
-                        InputHandler.KeyReleased(Keys.Enter))
+                        InputHandler.KeyReleased(Keys.Enter) ||
+                        (InputHandler.CheckMouseReleased(MouseButton.Left) && scene.IsOver))
                     {
                         if (scene.SelectedIndex == 0)
                         {
@@ -186,6 +186,9 @@ namespace EyesOfTheDragon.GameScreens
                     case ShopStateType.Buy:
                     case ShopStateType.Sell:
                         State = ShopStateType.Talk;
+                        break;
+                    case ShopStateType.Talk:
+                        StateManager.PopState();
                         break;
                 }
             }

@@ -81,12 +81,27 @@ namespace MGRpgLibrary.Controls
                 InputHandler.KeyPressed(Keys.Down))
                 NextControl();
         }
+
         public void Draw(SpriteBatch spriteBatch)
         {
+            Vector2 mouse = InputHandler.MouseAsVector2;
+
             foreach (Control c in this)
             {
                 if (c.Visible)
+                {
                     c.Draw(spriteBatch);
+
+                    if (c.GetBounds().Contains(mouse))
+                    {
+                        foreach (Control control in this)
+                        {
+                            control.HasFocus = false;
+                        }
+
+                        c.HasFocus = true;
+                    }
+                }
             }
         }
 

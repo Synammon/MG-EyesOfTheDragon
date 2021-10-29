@@ -138,6 +138,12 @@ namespace MGRpgLibrary.Controls
                 Selected(this, e);
             }
         }
+
+        public virtual Rectangle GetBounds()
+        {
+            return new Rectangle((int)position.X, (int)position.Y, (int)size.X, (int)size.Y);
+        }
+
         #endregion
     }
 }

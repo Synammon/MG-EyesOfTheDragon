@@ -39,7 +39,8 @@ namespace EyesOfTheDragon.GameScreens
             conversation.Update(gameTime);
     
             if (InputHandler.KeyReleased(Keys.Enter) || InputHandler.KeyReleased(Keys.Space) ||
-                InputHandler.ButtonReleased(Buttons.A, PlayerIndex.One))
+                InputHandler.ButtonReleased(Buttons.A, PlayerIndex.One) ||
+                (InputHandler.CheckMouseReleased(MouseButton.Left) && conversation.CurrentScene.IsOver))
             {
                 InputHandler.Flush();
                 SceneAction action = conversation.CurrentScene.OptionAction;
