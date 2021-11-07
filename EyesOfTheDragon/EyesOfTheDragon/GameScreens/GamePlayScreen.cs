@@ -17,6 +17,9 @@ using RpgLibrary.ItemClasses;
 using RpgLibrary.SpellClasses;
 using RpgLibrary.TalentClasses;
 using RpgLibrary.EffectClasses;
+using RpgLibrary.QuestClasses;
+using MGRpgLibrary.QuestClasses;
+using MGRpgLibrary.ItemClasses;
 
 namespace EyesOfTheDragon.GameScreens
 {
@@ -278,6 +281,14 @@ namespace EyesOfTheDragon.GameScreens
 
             foreach (var mob in mobLayer.Mobs.Where(kv => kv.Value.Entity.Health.CurrentValue <= 0).ToList())
             {
+                foreach (Quest q in Player.Quests)
+                {
+                    foreach (QuestStep s in q.Steps)
+                    {
+                        s.Update(mob.Value.Entity.EntityName);
+                    }
+                }
+
                 mobLayer.Mobs.Remove(mob.Key);
             }
 
@@ -345,22 +356,32 @@ namespace EyesOfTheDragon.GameScreens
 
         private void HandleConversation()
         {
-            if (InputHandler.KeyReleased(Keys.Space) ||
+            if (InputHandler.KeyReleased(Keys.F) ||
                 InputHandler.ButtonReleased(Buttons.A, PlayerIndex.One))
             {
                 foreach (ILayer layer in World.Levels[World.CurrentLevel].Map.Layers)
                 {
-                    if (layer is CharacterLayer)
+                    if (layer is CharacterLayer layer1)
                     {
-                        foreach (Character c in ((CharacterLayer)layer).Characters.Values)
+                        foreach (Character c in layer1.Characters.Values)
                         {
                             float distance = Vector2.Distance(
                                 player.Sprite.Center,
                                 c.Sprite.Center);
 
-                            if (distance < Character.SpeakingRadius && c is NonPlayerCharacter)
+                            if (distance < Character.SpeakingRadius && c is NonPlayerCharacter character)
                             {
-                                NonPlayerCharacter npc = (NonPlayerCharacter)c;
+                                NonPlayerCharacter npc = character;
+
+                                if (npc.Quests.Count > 0 && npc.Quests[0].Finished)
+                                {
+                                    Reward r = npc.Quests[0].Reward;
+
+                                    player.Gold += r.Gold;
+                                    player.Character.Entity.AddExperience(r.Experience);
+
+                                    npc.Quests.RemoveAt(0);
+                                }
 
                                 if (npc.HasConversation)
                                 {

@@ -63,7 +63,7 @@
             <BaseItem Null="true" />
             <Type Null="true" />
           </OffHand>
-          <Quests />
+          <Quests Null="true" />
           <CurrentConversation Null="true" />
           <CurrentQuest Null="true" />
         </Value>

@@ -46,6 +46,8 @@ namespace MGRpgLibrary.Mobs
             get { return _xpValue; }
         }
 
+        public string Name { get; protected set; }
+
         #endregion
 
         #region Money Region
@@ -105,6 +107,15 @@ namespace MGRpgLibrary.Mobs
         public virtual void Draw(GameTime gameTime, SpriteBatch spriteBatch)
         {
             sprite.Draw(gameTime, spriteBatch);
+
+            SpriteFont font = FontManager.GetFont("testfont");
+
+            Vector2 size = font.MeasureString(Name);
+            Vector2 position = new Vector2(
+                Sprite.Bounds.X + (Sprite.Bounds.Width - size.X) / 2,
+                Sprite.Bounds.Y - font.LineSpacing);
+
+            spriteBatch.DrawString(font, Name, position, Color.Red);
         }
 
         #endregion

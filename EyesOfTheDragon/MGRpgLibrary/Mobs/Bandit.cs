@@ -26,6 +26,8 @@ namespace MGRpgLibrary.Mobs
             _maxGold = 50;
             _xpValue = 100;
 
+            Name = "Bandit";
+
             if (_game == null)
             {
                 _game = game;

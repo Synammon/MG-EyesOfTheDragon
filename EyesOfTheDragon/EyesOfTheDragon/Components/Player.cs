@@ -11,6 +11,7 @@ using MGRpgLibrary.SpriteClasses;
 using MGRpgLibrary.CharacterClasses;
 using EyesOfTheDragon.GameScreens;
 using MGRpgLibrary.ItemClasses;
+using RpgLibrary.QuestClasses;
 
 namespace EyesOfTheDragon.Components
 {
@@ -46,6 +47,7 @@ namespace EyesOfTheDragon.Components
         public Backpack Backpack { get => backpack; set => backpack = value; }
 
         public int Gold { get; set; }
+        public List<Quest> Quests { get; internal set; } = new List<Quest>();
 
         #endregion
 

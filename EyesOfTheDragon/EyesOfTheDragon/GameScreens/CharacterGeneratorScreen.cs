@@ -22,6 +22,8 @@ using MGRpgLibrary.Mobs;
 using RpgLibrary;
 using RpgLibrary.SpellClasses;
 using RpgLibrary.TalentClasses;
+using MGRpgLibrary.QuestClasses;
+using RpgLibrary.QuestClasses;
 
 namespace EyesOfTheDragon.GameScreens
 {
@@ -230,6 +232,7 @@ namespace EyesOfTheDragon.GameScreens
 
             CreatePlayer();
             LoadWorld();
+            CreateConversation();
 
             GameRef.SkillScreen.SkillPoints = 10;
 
@@ -318,8 +321,9 @@ namespace EyesOfTheDragon.GameScreens
 
             NonPlayerCharacter npc = new NonPlayerCharacter(e, s);
 
-            npc.SetConversation("eliza1");
-            //world.Levels[world.CurrentLevel].Characters.Add(npc);
+            npc.SetConversation("brenda1");
+            ((CharacterLayer)world.Levels[world.CurrentLevel].Map.Layers.Find(x => x is CharacterLayer)).Characters.Add(new Point(0, 5), npc);
+            world.Levels[world.CurrentLevel].Characters.Add(npc);
 
             s = new AnimatedSprite(
                 GameRef.Content.Load<Texture2D>(@"SpriteSheets\Eliza"),
@@ -333,6 +337,7 @@ namespace EyesOfTheDragon.GameScreens
             e = new Entity("Barbra", ed, EntityGender.Female, EntityType.Merchant);
 
             Merchant m = new Merchant(e, s);
+
             Texture2D items = Game.Content.Load<Texture2D>("ObjectSprites/roguelikeitems");
             m.Backpack.AddItem(GameItemManager.GetItem("Long Sword"));
             m.Backpack.AddItem(GameItemManager.GetItem("Short Sword"));
@@ -372,6 +377,26 @@ namespace EyesOfTheDragon.GameScreens
                 mob.Drops.Add(GameItemManager.GetItem("Short Sword"));
                 mob.Drops.Add(GameItemManager.GetItem("Minor Healing Potion"));
             }
+
+            QuestStepData step = new QuestStepData()
+            {
+                StepType = QuestStepType.Fight,
+                Level = 1,
+                Source = "Eliza",
+                Target = "Bandit"
+            };
+
+            List<QuestStepData> steps = new List<QuestStepData>
+            {
+                step
+            };
+
+            Reward reward = new Reward { Experience = 1000, Gold = 1000 };
+            reward.Items.Add("Minor Healing Potion");
+
+            Quest q = new Quest("Eliza", steps, reward);
+
+            npc.Quests.Add(q);
         }
 
         private void CreatePlayer()
@@ -498,13 +523,14 @@ namespace EyesOfTheDragon.GameScreens
 
         private void CreateConversation()
         {
+            ConversationManager.Instance.ConversationList.Clear();
             Conversation c = new Conversation("eliza1", "welcome");
             GameScene scene = new GameScene(
-            GameRef,
-            "basic_scene",
-            "The unthinkable has happened. A thief has stolen the eyes of the village guardian." +
-            " With out his eyes the dragon will not animated if the village is attacked.",
-            new List<SceneOption>());
+                GameRef,
+                "basic_scene",
+                "The unthinkable has happened. A thief has stolen the eyes of the village guardian." +
+                " With out his eyes the dragon will not animated if the village is attacked.",
+                new List<SceneOption>());
 
             SceneAction action = new SceneAction
             {
@@ -533,7 +559,7 @@ namespace EyesOfTheDragon.GameScreens
             
             action = new SceneAction
             {
-                Action = ActionType.Talk,
+                Action = ActionType.Quest,
                 Parameter = "none"
             };
             
@@ -599,6 +625,107 @@ namespace EyesOfTheDragon.GameScreens
             c.AddScene("thankyou2", scene);
 
             ConversationManager.Instance.AddConversation("eliza2", c);
+
+            c = new Conversation("brenda1", "bandits");
+            scene = new GameScene(
+                GameRef,
+                "basic_scene",
+                "With the eyes gone. The bandits are getting bolder. Will you please help thin their numbers." +
+                " Even killing two of them would be helpful.",
+                new List<SceneOption>());
+
+            action = new SceneAction
+            {
+                Action = ActionType.Talk,
+                Parameter = "none"
+            };
+
+            option = new SceneOption("Continue", "bandits2", action);
+            scene.Options.Add(option);
+            c.AddScene("bandits", scene);
+
+            scene = new GameScene(
+                GameRef,
+                "basic_scene",
+                "Will you help with the bandits?",
+                new List<SceneOption>());
+
+            action = new SceneAction
+            {
+                Action = ActionType.Quest,
+                Parameter = "none"
+            };
+
+            option = new SceneOption("Yes", "brenda2", action);
+            scene.Options.Add(option);
+
+            action = new SceneAction
+            {
+                Action = ActionType.Talk,
+                Parameter = "none"
+            };
+
+            option = new SceneOption("No", "pleasehelp", action);
+            scene.Options.Add(option);
+
+            c.AddScene("bandits2", scene);
+
+            scene = new GameScene(
+                GameRef,
+                "basic_scene",
+                "Please, you are the only one that can help us. If you change your mind " +
+                "come back and see me.",
+                new List<SceneOption>());
+
+            action = new SceneAction
+            {
+                Action = ActionType.End,
+                Parameter = "none"
+            };
+
+            option = new SceneOption("Bye", "welcome2", action);
+            scene.Options.Add(option);
+
+            c.AddScene("pleasehelp", scene);
+
+            ConversationManager.Instance.AddConversation("brenda1", c);
+
+            c = new Conversation("brenda2", "thankyou");
+
+            scene = new GameScene(
+                GameRef,
+                "basic_scene",
+                "Thank you for agreeing to help us! The bandits are south of the village.",
+                new List<SceneOption>());
+
+            action = new SceneAction
+            {
+                Action = ActionType.End,
+                Parameter = "none"
+            };
+
+            option = new SceneOption("Continue", "thankyou2", action);
+            scene.Options.Add(option);
+
+            c.AddScene("thankyou", scene);
+
+            scene = new GameScene(
+                GameRef,
+                "basic_scene",
+                "Return to me once you've dealt with the bandits.",
+                new List<SceneOption>());
+            action = new SceneAction
+            {
+                Action = ActionType.End,
+                Parameter = "none"
+            };
+
+            option = new SceneOption("Good Bye", "thankyou2", action);
+            scene.Options.Add(option);
+
+            c.AddScene("thankyou2", scene);
+
+            ConversationManager.Instance.AddConversation("brenda2", c);
         }
         #endregion
     }

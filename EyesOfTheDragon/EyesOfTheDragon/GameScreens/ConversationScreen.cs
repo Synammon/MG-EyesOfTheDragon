@@ -51,7 +51,14 @@ namespace EyesOfTheDragon.GameScreens
                         conversation.ChangeScene(conversation.CurrentScene.OptionScene);
                         break;
                     case ActionType.Quest:
-                        conversation.ChangeScene(conversation.CurrentScene.OptionScene);
+                        if (npc.HasQuest && npc.Quests[0].Steps[0].Level <= player.Character.Entity.Level)
+                        {
+                            npc.Quests[0].Steps[0].Start();
+                            GamePlayScreen.Player.Quests.Add(npc.Quests[0]);
+                        }
+                        conversation =
+                        conversations.GetConversation(conversation.CurrentScene.OptionScene);
+                        conversation.StartConversation();
                         break;
                     case ActionType.Change:
                         conversation =

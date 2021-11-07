@@ -72,6 +72,19 @@ namespace MGRpgLibrary.CharacterClasses
         public override void Draw(GameTime gameTime, SpriteBatch spriteBatch)
         {
             base.Draw(gameTime, spriteBatch);
+
+            SpriteFont font = FontManager.GetFont("testfont");
+
+            if (HasConversation || HasQuest)
+            {
+                spriteBatch.DrawString(
+                    font,
+                    "F",
+                    new Vector2(
+                        Sprite.Bounds.X + (Sprite.Bounds.Width - font.MeasureString("F").X) / 2,
+                        Sprite.Bounds.Y - font.LineSpacing),
+                    Color.Yellow);
+            }
         }
         
         public void SetConversation(string conversation)
