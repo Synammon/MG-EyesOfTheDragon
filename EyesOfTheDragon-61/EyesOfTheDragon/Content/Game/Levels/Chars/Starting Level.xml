@@ -1,0 +1,73 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<XnaContent xmlns:TileEngine="MGRpgLibrary.TileEngine" xmlns:CharacterClasses="MGRpgLibrary.CharacterClasses">
+  <Asset Type="TileEngine:CharacterLayerData">
+    <Characters>
+      <Item>
+        <Key>11 9</Key>
+        <Value Type="CharacterClasses:NonPlayerCharacterData">
+          <Name>Eliza</Name>
+          <Gender>Female</Gender>
+          <EntityData>
+            <EntityName>Eliza</EntityName>
+            <Level>1</Level>
+            <Strength>10</Strength>
+            <Dexterity>10</Dexterity>
+            <Cunning>10</Cunning>
+            <Willpower>10</Willpower>
+            <Magic>10</Magic>
+            <Constitution>10</Constitution>
+            <HealthFormula></HealthFormula>
+            <StaminaFormula></StaminaFormula>
+            <MagicFormula></MagicFormula>
+          </EntityData>
+          <TextureName>C:\Users\cynth\Documents\GitHub\MG-EyesOfTheDragon\EyesOfTheDragon\EyesOfTheDragon\Content\SpriteSheets\Eliza.png</TextureName>
+          <Head>
+            <Position>0 0</Position>
+            <TextureName Null="true" />
+            <SourceRectangle Null="true" />
+            <BaseItem Null="true" />
+            <Type Null="true" />
+          </Head>
+          <Torso>
+            <Position>0 0</Position>
+            <TextureName Null="true" />
+            <SourceRectangle Null="true" />
+            <BaseItem Null="true" />
+            <Type Null="true" />
+          </Torso>
+          <Hands>
+            <Position>0 0</Position>
+            <TextureName Null="true" />
+            <SourceRectangle Null="true" />
+            <BaseItem Null="true" />
+            <Type Null="true" />
+          </Hands>
+          <Feet>
+            <Position>0 0</Position>
+            <TextureName Null="true" />
+            <SourceRectangle Null="true" />
+            <BaseItem Null="true" />
+            <Type Null="true" />
+          </Feet>
+          <MainHand>
+            <Position>0 0</Position>
+            <TextureName Null="true" />
+            <SourceRectangle Null="true" />
+            <BaseItem Null="true" />
+            <Type Null="true" />
+          </MainHand>
+          <OffHand>
+            <Position>0 0</Position>
+            <TextureName Null="true" />
+            <SourceRectangle Null="true" />
+            <BaseItem Null="true" />
+            <Type Null="true" />
+          </OffHand>
+          <Quests Null="true" />
+          <CurrentConversation Null="true" />
+          <CurrentQuest Null="true" />
+        </Value>
+      </Item>
+    </Characters>
+  </Asset>
+</XnaContent>
