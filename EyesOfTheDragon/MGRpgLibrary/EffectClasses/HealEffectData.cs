@@ -28,6 +28,18 @@ namespace RpgLibrary.EffectClasses
         #endregion
 
         #region Virtual Method Region
+
+        public override string ToString()
+        {
+            string toString = Name + ", ";
+            toString += HealType.ToString() + ", ";
+            toString += DieType.ToString() + ", ";
+            toString += NumberOfDice.ToString() + ", ";
+            toString += Modifier.ToString();
+
+            return toString;
+        }
+
         #endregion
     }
 }

@@ -113,8 +113,18 @@ namespace RpgLibrary.SpellClasses
             foreach (string s in data.SpellPrerequisites)
                 spell.SpellPrerequisites.Add(s);
 
-            foreach (BaseEffect s in data.Effects)
-                spell.Effects.Add(s);
+            foreach (BaseEffectData s in data.Effects)
+            {
+                if (s is DamageEffectData damage)
+                {
+                    spell.Effects.Add(DamageEffect.FromDamageEffectData(damage));
+                }
+
+                if (s is HealEffectData heal)
+                {
+                    spell.Effects.Add(HealEffect.FromHealEffectData(heal));
+                }
+            }
 
             return spell;
         }

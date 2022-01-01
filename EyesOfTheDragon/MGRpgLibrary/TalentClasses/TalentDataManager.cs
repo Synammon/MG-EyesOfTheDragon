@@ -53,7 +53,7 @@ namespace RpgLibrary.TalentClasses
                 CoolDown = 1.5
             };
 
-            DamageEffect effect = DamageEffect.FromDamageEffectData(new DamageEffectData
+            BaseEffectData effect = (new DamageEffectData
             {
                 TargetType = SpellClasses.TargetType.Enemy,
                 AttackType = AttackType.Health,
@@ -84,7 +84,7 @@ namespace RpgLibrary.TalentClasses
                 CoolDown = 1.5
             };
 
-            effect = DamageEffect.FromDamageEffectData(new DamageEffectData()
+            effect = (new DamageEffectData()
             {
                 TargetType = SpellClasses.TargetType.Enemy,
                 AttackType = AttackType.Health,

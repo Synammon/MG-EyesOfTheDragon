@@ -10,6 +10,7 @@ using System.Windows.Forms;
 using RpgLibrary.ItemClasses;
 using RpgLibrary.CharacterClasses;
 using RpgLibrary.SkillClasses;
+using RpgLibrary.SpellClasses;
 
 namespace RpgEditor
 {
@@ -20,10 +21,15 @@ namespace RpgEditor
         protected static ItemDataManager itemManager;
         protected static EntityDataManager entityDataManager;
         protected static SkillDataManager skillManager;
-
+        
         #endregion
 
         #region Property Region
+
+        public static SpellDataManager SpellDataManager
+        {
+            get; protected set;
+        }
 
         public static ItemDataManager ItemManager
         {
@@ -55,6 +61,11 @@ namespace RpgEditor
             if (FormDetails.EntityDataManager == null)
                 EntityDataManager = new EntityDataManager();
             this.FormClosing += new FormClosingEventHandler(FormDetails_FormClosing);
+
+            if (SpellDataManager == null)
+            {
+                SpellDataManager = new SpellDataManager();
+            }
         }
 
         #endregion

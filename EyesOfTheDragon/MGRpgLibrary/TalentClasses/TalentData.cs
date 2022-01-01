@@ -20,7 +20,7 @@ namespace RpgLibrary.TalentClasses
         public TalentType TalentType;
         public int ActivationCost;
         public double CoolDown;
-        public List<BaseEffect> Effects = new List<BaseEffect>();
+        public List<BaseEffectData> Effects = new List<BaseEffectData>();
 
         #endregion
 
@@ -58,15 +58,16 @@ namespace RpgLibrary.TalentClasses
             foreach (string s in AttributeRequirements.Keys)
                 toString += ", " + s + "+" + AttributeRequirements[s].ToString();
 
-            foreach (string s in TalentPrerequisites)
-                toString += ", " + s;
+            if (TalentPrerequisites != null)
+                foreach (string s in TalentPrerequisites)
+                    toString += ", " + s;
 
             toString += ", " + LevelRequirement.ToString();
             toString += ", " + TalentType.ToString();
             toString += ", " + ActivationCost.ToString();
             toString += ", " + CoolDown.ToString();
 
-            foreach (BaseEffect s in Effects)
+            foreach (BaseEffectData s in Effects)
                 toString += ", " + s.ToString();
 
             return toString;

@@ -1,15 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
 using System.Windows.Forms;
 using System.IO;
 using RpgLibrary;
-using RpgLibrary.CharacterClasses;
-using RpgLibrary.ItemClasses;
 
 namespace RpgEditor
 {
@@ -25,6 +17,9 @@ namespace RpgEditor
         FormKey frmKey;
         FormChest frmChest;
         FormSkill frmSkill;
+        FormSpell frmSpell;
+
+        public static string SpellPath { get; private set; }
 
         static string gamePath = "";
         static string classPath = "";
@@ -88,6 +83,7 @@ namespace RpgEditor
             keysToolStripMenuItem.Click += new EventHandler(keysToolStripMenuItem_Click);
             chestsToolStripMenuItem.Click += new EventHandler(chestsToolStripMenuItem_Click);
             skillsToolStripMenuItem.Click += new EventHandler(skillsToolStripMenuItem_Click);
+            spellsToolStripMenuItem.Click += SpellsToolStripMenuItem_Click;
         }
 
         void skillsToolStripMenuItem_Click(object sender, EventArgs e)
@@ -143,7 +139,8 @@ namespace RpgEditor
                             keyPath = Path.Combine(gamePath, "Keys");
                             chestPath = Path.Combine(gamePath, "Chests");
                             skillPath = Path.Combine(gamePath, "Skills");
-                            
+                            SpellPath = Path.Combine(gamePath, "Spells");
+
                             if (Directory.Exists(gamePath))
                                 throw new Exception("Selected directory already exists.");
     
@@ -155,6 +152,7 @@ namespace RpgEditor
                             Directory.CreateDirectory(keyPath);
                             Directory.CreateDirectory(chestPath);
                             Directory.CreateDirectory(skillPath);
+                            Directory.CreateDirectory(SpellPath);
 
                             rolePlayingGame = frmNewGame.RolePlayingGame;
 
@@ -172,6 +170,7 @@ namespace RpgEditor
                         keysToolStripMenuItem.Enabled = true;
                         chestsToolStripMenuItem.Enabled = true;
                         skillsToolStripMenuItem.Enabled = true;
+                        spellsToolStripMenuItem.Enabled = true;
                     }
                 }
             }
@@ -326,6 +325,20 @@ namespace RpgEditor
             frmKey.BringToFront();
         }
 
+        private void SpellsToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (frmSpell == null)
+            {
+                frmSpell = new FormSpell
+                {
+                    MdiParent = this
+                };
+            }
+
+            frmSpell.Show();
+            frmSpell.BringToFront();
+        }
+
         #endregion
 
         #region Method Region
@@ -338,7 +351,8 @@ namespace RpgEditor
             keyPath = Path.Combine(gamePath, "Keys");
             chestPath = Path.Combine(gamePath, "Chests");            
             skillPath = Path.Combine(gamePath, "Skills");
-            
+            SpellPath = Path.Combine(gamePath, "Spells");
+
             if (!Directory.Exists(keyPath))
             {
                 Directory.CreateDirectory(keyPath);
@@ -424,11 +438,20 @@ namespace RpgEditor
 
             frmSkill.FillListBox();
 
+            if (frmSpell == null)
+            {
+                frmSpell = new FormSpell();
+                frmSpell.MdiParent = this;
+            }
+
+            frmSpell.FillListBox();
+
             classesToolStripMenuItem.Enabled = true;
             itemsToolStripMenuItem.Enabled = true;
             keysToolStripMenuItem.Enabled = true;
             chestsToolStripMenuItem.Enabled = true;
             skillsToolStripMenuItem.Enabled = true;
+            spellsToolStripMenuItem.Enabled = true;
         }
 
         #endregion

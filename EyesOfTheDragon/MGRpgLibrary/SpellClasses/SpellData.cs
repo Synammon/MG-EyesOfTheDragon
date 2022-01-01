@@ -21,7 +21,7 @@ namespace RpgLibrary.SpellClasses
         public SpellType SpellType;
         public int ActivationCost;
         public double CoolDown;
-        public List<BaseEffect> Effects;
+        public List<BaseEffectData> Effects;
 
         #endregion
 
@@ -40,7 +40,7 @@ namespace RpgLibrary.SpellClasses
         public SpellData()
         {
             AttributeRequirements = new Dictionary<string, int>();
-            Effects = new List<BaseEffect>();
+            Effects = new List<BaseEffectData>();
         }
 
         #endregion
@@ -60,15 +60,16 @@ namespace RpgLibrary.SpellClasses
             foreach (string s in AttributeRequirements.Keys)
                 toString += ", " + s + "+" + AttributeRequirements[s].ToString();
 
-            foreach (string s in SpellPrerequisites)
-                toString += ", " + s;
+            if (SpellPrerequisites != null)
+                foreach (string s in SpellPrerequisites)
+                    toString += ", " + s;
 
             toString += ", " + LevelRequirement.ToString();
             toString += ", " + SpellType.ToString();
             toString += ", " + ActivationCost.ToString();
             toString += ", " + CoolDown.ToString();
 
-            foreach (BaseEffect e in Effects)
+            foreach (BaseEffectData e in Effects)
                 toString += ", " + e.ToString();
 
             return toString;

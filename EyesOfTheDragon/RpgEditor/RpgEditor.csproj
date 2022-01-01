@@ -114,6 +114,12 @@
     <Compile Include="FormArmorDetails.Designer.cs">
       <DependentUpon>FormArmorDetails.cs</DependentUpon>
     </Compile>
+    <Compile Include="FormBaseEffect.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormBaseEffect.Designer.cs">
+      <DependentUpon>FormBaseEffect.cs</DependentUpon>
+    </Compile>
     <Compile Include="FormChest.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -137,6 +143,12 @@
     </Compile>
     <Compile Include="FormDetails.Designer.cs">
       <DependentUpon>FormDetails.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FormEffect.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormEffect.Designer.cs">
+      <DependentUpon>FormEffect.cs</DependentUpon>
     </Compile>
     <Compile Include="FormEntityData.cs">
       <SubType>Form</SubType>
@@ -221,6 +233,9 @@
     <Compile Include="XnaSerializer.cs" />
     <EmbeddedResource Include="FormArmor.resx">
       <DependentUpon>FormArmor.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormBaseEffect.resx">
+      <DependentUpon>FormBaseEffect.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="FormChest.resx">
       <DependentUpon>FormChest.cs</DependentUpon>

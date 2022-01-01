@@ -113,11 +113,22 @@ namespace RpgLibrary.TalentClasses
             foreach (string s in data.TalentPrerequisites)
                 talent.talentPrerequisites.Add(s);
 
-            foreach (BaseEffect s in data.Effects)
-                talent.Effects.Add(s);
-            return talent;
+            foreach (BaseEffectData s in data.Effects)
+            {
+                if (s is DamageEffectData damage)
+                {
+                    talent.Effects.Add(DamageEffect.FromDamageEffectData(damage));
+                }
 
+                if (s is HealEffectData heal)
+                {
+                    talent.Effects.Add(HealEffect.FromHealEffectData(heal));
+                }
+            }
+
+            return talent;
         }
+
         public static bool CanLearn(Entity entity, Talent talent)
         {
             bool canLearn = true;

@@ -56,7 +56,7 @@ namespace RpgLibrary.SpellClasses
                 Range = 128,
             };
 
-            BaseEffect effect = DamageEffect.FromDamageEffectData(new DamageEffectData
+            BaseEffectData effect = (new DamageEffectData
             {
                 Name = "Spark Jolt",
                 TargetType = TargetType.Enemy,
@@ -87,7 +87,7 @@ namespace RpgLibrary.SpellClasses
                 CoolDown = 2
             };
 
-            BaseEffect healEffect = HealEffect.FromHealEffectData(new HealEffectData
+            BaseEffectData healEffect = (new HealEffectData
             {
                 Name = "Mend",
                 TargetType = TargetType.Self,
